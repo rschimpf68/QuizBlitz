@@ -1,5 +1,5 @@
 import { Category } from '@prisma/client'
-import prisma from '.'
+import prisma from '../../src/app/libs/prismadb'
 
 export async function getCategories() {
    try {

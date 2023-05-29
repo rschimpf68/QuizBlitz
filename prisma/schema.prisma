@@ -23,10 +23,18 @@ model Category {
 }
 
 model Question {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
-  answers  Json
   category String
+  answers  Answer[]
+}
+
+model Answer {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  answer     String
+  correct    Boolean
+  idQuestion String   @db.ObjectId
+  question   Question @relation(fields: [idQuestion], references: [id])
 }
 
 model Game {
