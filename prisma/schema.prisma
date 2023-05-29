@@ -11,7 +11,28 @@ datasource db {
 }
 
 model User {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String   @unique
+  GameIds String[] @db.ObjectId
+  Game    Game[]
+}
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Question {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  email    String @unique
-  username String
+  question String
+  answers  Json
+  category String
+}
+
+model Game {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  PlayerId String @db.ObjectId
+  Player   User   @relation(fields: [PlayerId], references: [id])
+  rounds   Json
+  userId   String @db.ObjectId
 }
