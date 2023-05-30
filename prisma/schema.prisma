@@ -7,31 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type QuestionAnswers {
-  answer  String
-  correct Boolean
-}
-
-model Answer {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-}
-
 model Category {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
-}
-
-model Game {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String     @unique
+  Question Question[]
 }
 
 model Question {
-  id       String            @id @default(auto()) @map("_id") @db.ObjectId
-  answers  QuestionAnswers[]
-  category String
-  question String
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  question   String
+  idCategory String   @db.ObjectId
+  answers    Answer[]
+  category   Category @relation(fields: [idCategory], references: [id])
 }
 
+model Answer {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  answer     String
+  correct    Boolean
+  idQuestion String   @db.ObjectId
+  question   Question @relation(fields: [idQuestion], references: [id])
+}
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId

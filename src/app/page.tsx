@@ -1,17 +1,31 @@
 import { User } from "@prisma/client";
 import Link from "next/link";
-import client from "../../lib/prisma";
-import UserSession from "./components/UserSession"
+import client from "./libs/prismadb";
 
 export default async function Home() {
-
-
   const users: User[] = await client.user.findMany();
-  // console.log(users);
-  
+
   return (
-    <section>
-      <h1>Home page!</h1>
-    </section>
+    <div className="flex items-start justify-center h-screen bg-blue-200">
+      <div className="flex flex-col items-center bg-white w-1/4 h-full">
+        <div className="w-full p-4 flex justify-between items-center">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+            ☰
+          </button>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+            ♫
+          </button>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl font-bold mb-52">QuizBlitz</h1>
+          <a
+            href="./game"
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded block text-center"
+          >
+            Play
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
