@@ -48,7 +48,7 @@ const QuestionAndAnswers: React.FC<QNA> = ({ questions }) => {
             </div>
           </div>
           <div className="w-full h-auto flex-col justify-center items-center mt-20 ">
-            <div className="mb-5 flex h-auto w-full justify-center text-center text-3xl font-bold">
+            <div className="mb-10 flex h-auto w-full justify-center text-center text-3xl font-bold">
               {question.question}
             </div>
             <div className="w-full">
