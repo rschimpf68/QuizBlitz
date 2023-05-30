@@ -31,8 +31,9 @@ function Randomize(arr: any[], count: number): any[] {
 
 export default async function Game() {
   let categories = await client.category.findMany();
-
-  categories = Randomize(categories, 5);
+  const QuestionsPerCategorie = 3;
+  const CategoriePerGame = 5;
+  categories = Randomize(categories, CategoriePerGame);
 
   const questions: questionInterface[][] = [];
   for (const cat of categories) {
@@ -46,16 +47,16 @@ export default async function Game() {
         category: true,
       },
     });
-    newQuestions = Randomize(newQuestions, 1);
+    newQuestions = Randomize(newQuestions, QuestionsPerCategorie);
 
     for (const NQ of newQuestions) {
-      NQ.answers = Randomize(NQ.answers, 3);
+      NQ.answers = Randomize(NQ.answers, 4);
     }
     questions.push(newQuestions);
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
       <QuestionAndAnswers questions={questions} />
     </main>
   );

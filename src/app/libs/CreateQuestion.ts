@@ -1,4 +1,9 @@
-import { CreateQuestion } from "../game/page";
+
+export interface CreateQuestion {
+   question: string;
+   category: string;
+   answer: string[];
+}
 // const createQuestions = CreateQuestion;
 
 // for (const quest of createQuestions) {

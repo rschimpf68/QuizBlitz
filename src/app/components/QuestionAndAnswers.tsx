@@ -41,29 +41,31 @@ const QuestionAndAnswers: React.FC<QNA> = ({ questions }) => {
   return (
     <>
       {!finished ? (
-        <div className="flex min-h-screen w-5/12 flex-col justify-center bg-gray-100 px-10 py-0">
-          <div className="mb-5 flex h-auto w-full justify-center">
-            <div className="h-auto w-full border-lime-100 bg-red-200 text-center text-6xl text-white">
+        <div className="flex min-h-screen w-4/12 flex-col  bg-white px-10">
+          <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5">
+            <div className="h-auto w-full border-lime-100 bg-red-200 flex justify-center text-6xl text-white">
               {question.category.name}
             </div>
           </div>
-          <div className="mb-5 flex h-auto w-full items-center justify-center text-lg">
-            {question.question}
-          </div>
-          <div className="w-full">
-            {question.answers.map((answer) => {
-              return (
-                <AnswerComponent
-                  text={answer.answer}
-                  correct={answer.correct}
-                  onAnswered={changeQuestion}
-                />
-              );
-            })}
+          <div className="w-full h-auto flex-col justify-center items-center mt-20 ">
+            <div className="mb-5 flex h-auto w-full justify-center text-center text-3xl font-bold">
+              {question.question}
+            </div>
+            <div className="w-full">
+              {question.answers.map((answer) => {
+                return (
+                  <AnswerComponent
+                    text={answer.answer}
+                    correct={answer.correct}
+                    onAnswered={changeQuestion}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (
-        <h1>Contestate {CorrectQuestions}</h1>
+        <h1>Contestate {CorrectQuestions} preguntas correctamente</h1>
       )}
     </>
   );
