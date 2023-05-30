@@ -50,13 +50,13 @@ export default async function Game() {
     newQuestions = Randomize(newQuestions, QuestionsPerCategorie);
 
     for (const NQ of newQuestions) {
-      NQ.answers = Randomize(NQ.answers, 3);
+      NQ.answers = Randomize(NQ.answers, 4);
     }
     questions.push(newQuestions);
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
       <QuestionAndAnswers questions={questions} />
     </main>
   );

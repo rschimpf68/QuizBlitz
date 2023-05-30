@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">
-      <div className="flex flex-col items-center bg-white w-1/4 h-full">
+      <div className="flex flex-col items-center bg-white w-4/12 h-full">
         <div className="w-full p-4 flex justify-between items-center">
           <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
             ☰
@@ -22,7 +22,7 @@ export default async function Home() {
             href="./game"
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded block text-center"
           >
-            Play
+            Play Now
           </a>
         </div>
       </div>
