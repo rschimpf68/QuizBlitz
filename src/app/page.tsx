@@ -2,7 +2,7 @@ import { User } from "@prisma/client";
 import Link from "next/link";
 import client from "../../lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { authOptions } from "./api/auth/[...nextauth]"
 import UserSession from "./components/UserSession"
 
 export default async function Home() {
