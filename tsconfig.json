@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"
-, "src/app/components/UserSession.jsx", "src/app/components/UserSession.jsx", "src/app/page.tsx/[...nextauth].jsx"  ],
+, "src/app/components/UserSession.jsx", "src/app/components/UserSession.jsx", "src/app/page.jsx/[...nextauth].jsx", "src/app/api/auth/[...nextauth]/route.jsx"  ],
   
   "exclude": [
     "node_modules"
