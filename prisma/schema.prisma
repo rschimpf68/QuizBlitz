@@ -18,15 +18,17 @@ model User {
 }
 
 model Category {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String     @unique
+  Question Question[]
 }
 
 model Question {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  question String
-  category String
-  answers  Answer[]
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  question   String
+  idCategory String   @db.ObjectId
+  answers    Answer[]
+  category   Category @relation(fields: [idCategory], references: [id])
 }
 
 model Answer {
