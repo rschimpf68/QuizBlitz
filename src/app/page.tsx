@@ -8,13 +8,13 @@ import { redirect } from "next/navigation";
 
 
 export default async function Home() {
-  const users: User[] = await client.user.findMany();
+  // const users: User[] = await client.user.findMany();
 
   const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect('/login')
-  }
+  } 
 
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">
