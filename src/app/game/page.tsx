@@ -1,11 +1,12 @@
 import { Answer, Category } from "@prisma/client";
 import QuestionAndAnswers from "../components/QuestionAndAnswers";
 import client from "../libs/prismadb";
-
+import GameCard from "../components/GameCard";
+import { Randomize } from "@/utils/utils";
 export interface questionInterface {
   id: string;
   question: string;
-  category: Category;
+
   answers: Answer[];
 }
 export interface CreateQuestion {
@@ -13,51 +14,24 @@ export interface CreateQuestion {
   category: string;
   answer: string[];
 }
-function Randomize(arr: any[], count: number): any[] {
-  const randomItems: any[] = [];
-
-  const copyArray = [...arr];
-  if (count > copyArray.length) {
-    throw new Error("Count cannot be greater than the array length");
-  }
-  // Select random items until the desired count is reached
-  while (randomItems.length < count) {
-    const randomIndex = Math.floor(Math.random() * copyArray.length);
-    const randomItem = copyArray.splice(randomIndex, 1)[0];
-    randomItems.push(randomItem);
-  }
-  return randomItems;
-}
 
 export default async function Game() {
-  let categories = await client.category.findMany();
-  const QuestionsPerCategorie = 3;
-  const CategoriePerGame = 5;
-  categories = Randomize(categories, CategoriePerGame);
+  const QuestionsPerGame = 10;
+  let questions: questionInterface[] = await client.question.findMany({
+    include: {
+      answers: true,
+    },
+  });
 
-  const questions: questionInterface[][] = [];
-  for (const cat of categories) {
-    let newQuestions: questionInterface[] = await client.question.findMany({
-      where: {
-        idCategory: cat.id,
-      },
+  questions = Randomize(questions, QuestionsPerGame);
 
-      include: {
-        answers: true,
-        category: true,
-      },
-    });
-    newQuestions = Randomize(newQuestions, QuestionsPerCategorie);
-
-    for (const NQ of newQuestions) {
-      NQ.answers = Randomize(NQ.answers, 4);
-    }
-    questions.push(newQuestions);
+  for (const q of questions) {
+    q.answers = Randomize(q.answers, 4);
   }
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
-      <QuestionAndAnswers questions={questions} />
+      <GameCard questions={questions} />
     </main>
   );
 }
