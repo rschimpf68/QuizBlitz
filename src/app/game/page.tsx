@@ -3,35 +3,37 @@ import QuestionAndAnswers from "../components/QuestionAndAnswers";
 import client from "../libs/prismadb";
 import GameCard from "../components/GameCard";
 import { Randomize } from "@/utils/utils";
-export interface questionInterface {
-  id: string;
-  question: string;
-
-  answers: Answer[];
-}
-export interface CreateQuestion {
-  question: string;
-  category: string;
-  answer: string[];
-}
 
 export default async function Game() {
   const QuestionsPerGame = 10;
-  let questions: questionInterface[] = await client.question.findMany({
+  const questions = await client.question.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  const questionsId = Randomize(
+    questions.map((x) => x.id),
+    QuestionsPerGame
+  );
+
+  const finalQuestions = await client.question.findMany({
+    where: {
+      id: { in: questionsId },
+    },
     include: {
       answers: true,
     },
   });
 
-  questions = Randomize(questions, QuestionsPerGame);
-
-  for (const q of questions) {
+  for (const q of finalQuestions) {
     q.answers = Randomize(q.answers, 4);
   }
+  finalQuestions;
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
-      <GameCard questions={questions} />
+      {<GameCard questions={finalQuestions} />}
     </main>
   );
 }

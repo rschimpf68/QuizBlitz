@@ -1,14 +1,13 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { questionInterface } from "../game/page";
 import AnswerComponent from "./Answer";
 import Timer from "./Timer";
 import { Answer } from "@prisma/client";
 interface Props {
   question: string;
   answers: Answer[];
-  onAnswer: (arg0: boolean, arg1: number) => void;
+  onAnswer: (arg1: number) => void;
 }
 const QuestionAndAnswers: React.FC<Props> = ({
   question,
@@ -25,6 +24,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
           return (
             <AnswerComponent
               key={index}
+              index={index}
               text={answer.answer}
               correct={answer.correct}
               onAnswered={onAnswer}

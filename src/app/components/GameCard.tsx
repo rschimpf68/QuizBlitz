@@ -1,39 +1,54 @@
 "use client";
 import { useCallback, useState } from "react";
 
-import { questionInterface } from "../game/page";
 import AnswerComponent from "./Answer";
 import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
+import { Answer, Question } from "@prisma/client";
 
-interface QNA {
-  questions: questionInterface[];
+interface Props {
+  questions: (Question & { answers: Answer[] })[];
+}
+interface AnsweredQuestion {
+  question: string;
+  selectedAnswer: string;
+  correct: boolean;
+  correctAnswer?: string;
 }
 
-const GameCard: React.FC<QNA> = ({ questions }) => {
+const GameCard: React.FC<Props> = ({ questions }) => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [CorrectQuestions, setCorrectQuestions] = useState(0);
-  let question = questions[questionCounter];
-
-  const changeQuestion = useCallback(
-    (answer: boolean, index: number) => {
-      answer && setCorrectQuestions((CorrectQuestions) => CorrectQuestions + 1);
-      if (questionCounter == questions.length - 1) {
-        setFinished(true);
-      } else {
-        setQuestionCounter((questionCounter) => questionCounter + 1);
-      }
-    },
-    [
-      questionCounter,
-      setQuestionCounter,
-      setFinished,
-      CorrectQuestions,
-      setCorrectQuestions,
-      questions,
-    ]
+  const [AnsweredQuestions, setAnsweredQuestions] = useState(
+    Array(questions.length).fill(null)
   );
+  const question = questions[questionCounter];
+
+  if (finished) {
+    console.log(AnsweredQuestions);
+  }
+
+  const changeQuestion = (index: number) => {
+    //Add Answer to the Answer Array
+    const answeredQuestion: AnsweredQuestion = {
+      question: question.question,
+      selectedAnswer: question.answers[index].answer,
+      correct: question.answers[index].correct,
+      correctAnswer: question.answers.find((answer) => answer.correct)?.answer,
+    };
+    //Copy of the original Array.
+    const newAnsweredQuestion = [...AnsweredQuestions];
+    newAnsweredQuestion[questionCounter] = answeredQuestion;
+    setAnsweredQuestions(newAnsweredQuestion);
+
+    if (questionCounter == questions.length - 1) {
+      //NO question more questions? -> Finish game
+      setFinished(true);
+    } else {
+      // Go to the next Question
+      setQuestionCounter((questionCounter) => questionCounter + 1);
+    }
+  };
   const gameOver = () => {
     setFinished(true);
   };
@@ -56,7 +71,22 @@ const GameCard: React.FC<QNA> = ({ questions }) => {
           </div>
         </div>
       ) : (
-        <h1>Contestate {CorrectQuestions} preguntas correctamente</h1>
+        <main>
+          {/* {AnsweredQuestions.map((answer: AnsweredQuestion, index: number) => {
+            return (
+              <h1>
+                {index +
+                  " - " +
+                  answer.question +
+                  " - " +
+                  (answer.selectedAnswer == answer.correctAnswer
+                    ? answer.selectedAnswer
+                    : answer.selectedAnswer + " - " + answer.correctAnswer) +
+                  " - "}
+              </h1>
+            );
+          })} */}
+        </main>
       )}
     </>
   );

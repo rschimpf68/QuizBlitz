@@ -8,17 +8,15 @@ datasource db {
 }
 
 model Category {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String     @unique
-  Question Question[]
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
 }
 
 model Question {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  question   String
-  idCategory String   @db.ObjectId
-  answers    Answer[]
-  category   Category @relation(fields: [idCategory], references: [id])
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+
+  answers Answer[]
 }
 
 model Answer {
