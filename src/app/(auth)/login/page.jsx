@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Example() {
+  const session = useSession()
+  const router = useRouter()
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    if (session?.status === 'authenticated') {
+      router.push('/')
+    }
+    
+  })
   const loginUser = (e) => {
     e.preventDefault();
     signIn("credentials", { ...data }).then(() =>
