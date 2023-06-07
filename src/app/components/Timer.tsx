@@ -5,7 +5,7 @@ type Props = {
   gameOver: () => void;
 };
 const Timer: FunctionComponent<Props> = ({ gameOver }) => {
-  const [count, setCount] = useState(15);
+  const [count, setCount] = useState(30);
   if (count == 0) {
     gameOver();
   }
