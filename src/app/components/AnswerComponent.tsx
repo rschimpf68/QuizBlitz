@@ -3,23 +3,28 @@ import { useCallback, useState } from "react";
 
 interface Props {
   index: number;
+  idAnswer: string;
   text: string;
   correct: boolean;
-  onAnswered: (arg1: number) => void;
+  onAnswered: (arg1: number, arg2: boolean) => void;
 }
 const AnswerComponent: React.FC<Props> = ({
   index,
+  idAnswer,
   text,
   correct,
   onAnswered,
 }) => {
   const [answered, setAnswered] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const response = await fetch(`/api/checkAnswer?id=${idAnswer}`);
+    const correct = await response.json;
+    console.log(correct);
     setAnswered(true);
     setTimeout(() => {
       setAnswered(false);
-      onAnswered(index);
+      onAnswered(index, true);
     }, 200);
   };
 

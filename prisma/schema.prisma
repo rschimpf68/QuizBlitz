@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "C:\\Users\\Hoid\\Desktop\\.env"
+  url      = env("DATABASE_URL")
 }
 
 model Category {

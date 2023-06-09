@@ -31,7 +31,7 @@ const GameCard: React.FC<Props> = ({ questions }) => {
   const question = questions[questionCounter];
 
   //Function ejectued when player selects an answer
-  const changeQuestion = (index: number) => {
+  const changeQuestion = (index: number, correct: boolean) => {
     //Add Answer to the Answer Array
     const answeredQuestion: AnsweredQuestion = {
       question: question.question,

@@ -7,7 +7,7 @@ import { Answer } from "@prisma/client";
 interface Props {
   question: string;
   answers: Answer[];
-  onAnswer: (arg1: number) => void;
+  onAnswer: (arg1: number, arg2: boolean) => void;
 }
 const QuestionAndAnswers: React.FC<Props> = ({
   question,
@@ -25,6 +25,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
             <AnswerComponent
               key={index}
               index={index}
+              idAnswer={answer.id}
               text={answer.answer}
               correct={answer.correct}
               onAnswered={onAnswer}

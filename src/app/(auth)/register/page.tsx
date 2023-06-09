@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -9,12 +10,13 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const router = useRouter();
 
-  const registerUser = async (e) => {
+  const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
       .post("/api/register", data)
-      .then(() => alert("[+] User succesfully created"))
+      .then(() => router.push("/login"))
       .catch(() => alert("[-] An error occurred"));
   };
 
