@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-import AnswerComponent from "./Answer";
+import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import { Answer } from "@prisma/client";
 interface Props {

@@ -7,16 +7,21 @@ interface Props {
   correct: boolean;
   onAnswered: (arg1: number) => void;
 }
-const Pregunta: React.FC<Props> = ({ index, text, correct, onAnswered }) => {
+const AnswerComponent: React.FC<Props> = ({
+  index,
+  text,
+  correct,
+  onAnswered,
+}) => {
   const [answered, setAnswered] = useState(false);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = () => {
     setAnswered(true);
     setTimeout(() => {
       setAnswered(false);
       onAnswered(index);
-    }, 150);
-  }, [answered, onAnswered, index]);
+    }, 200);
+  };
 
   return (
     <div className="bg-white">
@@ -31,4 +36,4 @@ const Pregunta: React.FC<Props> = ({ index, text, correct, onAnswered }) => {
     </div>
   );
 };
-export default Pregunta;
+export default AnswerComponent;

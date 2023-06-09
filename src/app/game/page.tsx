@@ -29,7 +29,6 @@ export default async function Game() {
   for (const q of finalQuestions) {
     q.answers = Randomize(q.answers, 4);
   }
-  finalQuestions;
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
