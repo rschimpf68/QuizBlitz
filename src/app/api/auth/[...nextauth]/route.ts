@@ -8,16 +8,18 @@ import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 // import bcrypt from 'bcrypt'
 
-export const authOptions = {
+
+
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -31,7 +33,7 @@ export const authOptions = {
         },
       },
       async authorize(credentials) {
-        if (!credentials.email || !credentials.password) {
+        if (!credentials?.email || !credentials.password) {
           throw new Error("Please enter an email and password");
         }
 

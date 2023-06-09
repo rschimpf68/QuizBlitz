@@ -6,8 +6,8 @@ export default async function Home() {
 
   return (
     <section>
+      
       <pre>{JSON.stringify(session)}</pre>
-
       <UserSession />
     </section>
   );
