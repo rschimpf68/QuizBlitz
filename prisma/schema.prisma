@@ -19,6 +19,17 @@ model Question {
   answers Answer[]
 }
 
+model Game {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1 String @db.ObjectId
+  Player1   User   @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2 String @db.ObjectId
+  Player2   User   @relation(fields: [idPlayer2], references: [id], name: "player2")
+  PointsP1  Int
+  PointsP2  Int
+  Turn      Int
+}
+
 model Answer {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   answer     String
@@ -37,7 +48,9 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  accounts Account[]
+  accounts    Account[]
+  GameAsPlay1 Game[]    @relation(name: "player1")
+  GameAsPlay2 Game[]    @relation(name: "player2")
 }
 
 model Account {
