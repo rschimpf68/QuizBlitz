@@ -1,10 +1,11 @@
 "use client";
 import { useCallback, useState } from "react";
 
-import AnswerComponent from "./Answer";
+import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
 import { Answer, Question } from "@prisma/client";
+import { time } from "console";
 
 interface Props {
   questions: (Question & { answers: Answer[] })[];
@@ -17,18 +18,20 @@ interface AnsweredQuestion {
 }
 
 const GameCard: React.FC<Props> = ({ questions }) => {
+  //React States
+  //Current question
   const [questionCounter, setQuestionCounter] = useState(0);
+  //GameOver
   const [finished, setFinished] = useState(false);
+  //Array of Answered questions by player
   const [AnsweredQuestions, setAnsweredQuestions] = useState(
     Array(questions.length).fill(null)
   );
+  //Question currently displayed
   const question = questions[questionCounter];
 
-  if (finished) {
-    console.log(AnsweredQuestions);
-  }
-
-  const changeQuestion = (index: number) => {
+  //Function ejectued when player selects an answer
+  const changeQuestion = (index: number, correct: boolean) => {
     //Add Answer to the Answer Array
     const answeredQuestion: AnsweredQuestion = {
       question: question.question,
@@ -59,7 +62,7 @@ const GameCard: React.FC<Props> = ({ questions }) => {
         <div className="flex min-h-screen w-4/12 flex-col  bg-white px-10">
           <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5">
             <div className="h-auto w-full border-lime-100 bg-red-200 flex justify-center text-6xl text-white">
-              <Timer gameOver={gameOver} />
+              <Timer gameOver={gameOver} time={30} />
             </div>
           </div>
           <div className="w-full h-auto flex-col justify-center items-center mt-20 ">
