@@ -6,7 +6,10 @@ import Timer from "./Timer";
 import { Answer } from "@prisma/client";
 interface Props {
   question: string;
-  answers: Answer[];
+  answers: {
+    answer: string;
+    id: string;
+  }[];
   onAnswer: (arg1: number, arg2: boolean) => void;
 }
 const QuestionAndAnswers: React.FC<Props> = ({
@@ -27,7 +30,6 @@ const QuestionAndAnswers: React.FC<Props> = ({
               index={index}
               idAnswer={answer.id}
               text={answer.answer}
-              correct={answer.correct}
               onAnswered={onAnswer}
             />
           );

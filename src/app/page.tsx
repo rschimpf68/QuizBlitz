@@ -6,15 +6,14 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
 
-
 export default async function Home() {
   // const users: User[] = await client.user.findMany();
 
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/login')
-  } 
+    redirect("/login");
+  }
 
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">
@@ -29,6 +28,7 @@ export default async function Home() {
         </div>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold mb-52">QuizBlitz</h1>
+
           <a
             href="./game"
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded block text-center"
