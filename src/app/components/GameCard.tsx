@@ -17,6 +17,7 @@ interface Props {
     id: string;
   }[];
   updateTurn: (game: Game, points: number) => Promise<void>;
+  checkAnswer: (idAnswer: string) => Promise<boolean>;
   game: Game;
 }
 interface AnsweredQuestion {
@@ -25,7 +26,12 @@ interface AnsweredQuestion {
   correct: boolean;
 }
 
-const GameCard: React.FC<Props> = ({ questions, updateTurn, game }) => {
+const GameCard: React.FC<Props> = ({
+  questions,
+  updateTurn,
+  game,
+  checkAnswer,
+}) => {
   //React States
   //Current question
   const [questionCounter, setQuestionCounter] = useState(0);
@@ -83,6 +89,7 @@ const GameCard: React.FC<Props> = ({ questions, updateTurn, game }) => {
               question={question.question}
               answers={question.answers}
               onAnswer={changeQuestion}
+              checkAnswer={checkAnswer}
             />
           </div>
         </div>

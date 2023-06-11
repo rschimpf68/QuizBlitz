@@ -2,8 +2,9 @@ import { Answer, Category, Game } from "@prisma/client";
 import QuestionAndAnswers from "../../components/QuestionAndAnswers";
 import client from "../../libs/prismadb";
 import GameCard from "../../components/GameCard";
-import { Randomize } from "@/utils/utils";
+import { Randomize } from "../../../utils/utils";
 import { useParams } from "next/navigation";
+import React from "react";
 
 async function updateGame(game: Game, points: number) {
   "use server";
@@ -18,7 +19,19 @@ async function updateGame(game: Game, points: number) {
           where: { id: game?.id },
           data: { TurnId: game.idPlayer1, PointsP2: points },
         });
-  console.log(update);
+}
+async function checkAnswer(answerId: string) {
+  "use server";
+
+  const answerIsCorrect = await client.answer.findUnique({
+    select: {
+      correct: true,
+    },
+    where: {
+      id: answerId as string,
+    },
+  });
+  return answerIsCorrect?.correct as boolean;
 }
 
 export default async function GamePage({ params }: { params: { id: string } }) {
@@ -66,6 +79,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
         <GameCard
           questions={finalQuestions}
           updateTurn={updateGame}
+          checkAnswer={checkAnswer}
           game={game as Game}
         />
       }

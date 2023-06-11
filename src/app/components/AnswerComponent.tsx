@@ -5,6 +5,7 @@ interface Props {
   index: number;
   idAnswer: string;
   text: string;
+  checkAnswer: (idAnswer: string) => Promise<boolean>;
 
   onAnswered: (arg1: number, arg2: boolean) => void;
 }
@@ -13,21 +14,22 @@ const AnswerComponent: React.FC<Props> = ({
   idAnswer,
   text,
   onAnswered,
+  checkAnswer,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState(false);
 
   const handleSubmit = async () => {
     //Check if Answer is the correct one
-    const response = await fetch(`/api/checkAnswer?id=${idAnswer}`);
-    const isCorrect: boolean = await response.json();
+
+    const isCorrect: boolean = await checkAnswer(idAnswer);
 
     setCorrect(isCorrect);
     setAnswered(true);
     setTimeout(() => {
       setAnswered(false);
       onAnswered(index, isCorrect);
-    }, 200);
+    }, 150);
   };
 
   return (
