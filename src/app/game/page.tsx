@@ -50,18 +50,27 @@ export default async function PreGame() {
     where: { id: gameId },
     include: { Player1: true, Player2: true },
   });
+  const PlayerIsPlayer1 = game?.Player1.id == playerId?.id;
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
       <section className="flex flex-col items-center justify-center bg-white w-4/12 min-h-screen">
         <div className="h-auto w-auto mb-5">
-          <UserGameDescription username={game?.Player1.name} />
+          <UserGameDescription
+            username={
+              PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
+            }
+          />
         </div>
         <div>
           <h1>VS</h1>
         </div>
         <div className="h-auto w-auto mt-5">
-          <UserGameDescription username={game?.Player2?.name} />
+          <UserGameDescription
+            username={
+              !PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
+            }
+          />
         </div>
         <Link
           href={`/game/${game?.id}`}

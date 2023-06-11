@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
+import Link from "next/link";
 import { Answer, Game, Question } from "@prisma/client";
 import { time } from "console";
 
@@ -94,22 +95,14 @@ const GameCard: React.FC<Props> = ({
           </div>
         </div>
       ) : (
-        <main>
-          {/* {AnsweredQuestions.map((answer: AnsweredQuestion, index: number) => {
-            return (
-              <h1>
-                {index +
-                  " - " +
-                  answer.question +
-                  " - " +
-                  (answer.selectedAnswer == answer.correctAnswer
-                    ? answer.selectedAnswer
-                    : answer.selectedAnswer + " - " + answer.correctAnswer) +
-                  " - "}
-              </h1>
-            );
-          })} */}
-        </main>
+        <div className="flex min-h-screen w-4/12 flex-col  bg-white px-10 justify-center items-center">
+          <h1 className="text-lg ">
+            Respondiste {playerPoints} preguntas correctamente
+          </h1>
+          <Link href={"/"} className="mt-10 w-40 bg-red-600 text-center">
+            Continuar
+          </Link>
+        </div>
       )}
     </>
   );
