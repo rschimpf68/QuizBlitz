@@ -39,8 +39,10 @@ const ModuleShowGame: FunctionComponent<Props> = ({
       </div>
 
       <div className={"w-full h-full bg-white rounded-lg"}>
-        {games.map((game, index) => {
-          return <ShowGameResume game={game} userId={userId} type={type} />;
+        {games.map((game, key) => {
+          return (
+            <ShowGameResume key={key} game={game} userId={userId} type={type} />
+          );
         })}
       </div>
     </div>
