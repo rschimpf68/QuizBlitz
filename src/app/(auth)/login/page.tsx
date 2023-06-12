@@ -17,18 +17,16 @@ export default function Example() {
   useEffect(() => {
     if (session?.status === "authenticated") {
       toast.success("Logeado exitosamente!")
-      router.push("/");
-    }
+      router.push("/ShowSession");
+    } 
   });
+
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signIn("credentials", { ...data }).then((callback) => {
       if (callback?.error) {
         toast.error(callback.error)
       }
-      
-        toast.success("Logeado exitosamente!")
-      
     });
   };
 
