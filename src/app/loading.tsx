@@ -1,4 +1,4 @@
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
 export default function Loading() {
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">

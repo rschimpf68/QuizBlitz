@@ -41,6 +41,7 @@ export default async function PreGame() {
         TurnId: playerId?.id as string,
         PointsP1: 0,
         PointsP2: 0,
+        Over: false,
       },
     });
 

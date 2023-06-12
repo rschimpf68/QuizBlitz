@@ -13,7 +13,7 @@ async function updateGame(game: Game, points: number) {
     game?.TurnId == game?.idPlayer1
       ? await client.game.update({
           where: { id: game?.id },
-          data: { TurnId: game.idPlayer2, PointsP1: points },
+          data: { TurnId: game.idPlayer2, PointsP1: points, Over: true },
         })
       : await client.game.update({
           where: { id: game?.id },
