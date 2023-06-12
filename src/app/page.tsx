@@ -31,9 +31,15 @@ export default async function Home() {
 
           <Link
             href="./game"
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded block text-center"
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 w-40 px-4 rounded block text-center mb-10"
           >
             Play Now
+          </Link>
+          <Link
+            href="./currentGames"
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded block text-center w-40"
+          >
+            Games
           </Link>
         </div>
       </div>

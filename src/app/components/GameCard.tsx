@@ -51,7 +51,6 @@ const GameCard: React.FC<Props> = ({
     //Add Answer to the Answer Array
     if (correct) {
       setPlayerPoints((playerPoints) => playerPoints + 1);
-      console.log("+1");
     }
     const answeredQuestion: AnsweredQuestion = {
       question: question.question,

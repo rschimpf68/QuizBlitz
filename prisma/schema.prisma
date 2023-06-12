@@ -29,6 +29,7 @@ model Game {
   TurnPlayer User?   @relation(fields: [TurnId], references: [id], name: "PlayerTurn")
   PointsP1   Int
   PointsP2   Int
+  Over       Boolean
 }
 
 model Answer {
