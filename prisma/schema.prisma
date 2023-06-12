@@ -8,17 +8,28 @@ datasource db {
 }
 
 model Category {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String     @unique
-  Question Question[]
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
 }
 
 model Question {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  question   String
-  idCategory String   @db.ObjectId
-  answers    Answer[]
-  category   Category @relation(fields: [idCategory], references: [id])
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+
+  answers Answer[]
+}
+
+model Game {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1  String  @db.ObjectId
+  Player1    User    @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2  String? @db.ObjectId
+  Player2    User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
+  TurnId     String? @db.ObjectId
+  TurnPlayer User?   @relation(fields: [TurnId], references: [id], name: "PlayerTurn")
+  PointsP1   Int
+  PointsP2   Int
+  Over       Boolean
 }
 
 model Answer {
@@ -39,7 +50,10 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  accounts Account[]
+  accounts    Account[]
+  GameAsPlay1 Game[]    @relation(name: "player1")
+  GameAsPlay2 Game[]    @relation(name: "player2")
+  Game        Game[]    @relation(name: "PlayerTurn")
 }
 
 model Account {

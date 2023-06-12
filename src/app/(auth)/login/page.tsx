@@ -1,15 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Example() {
+  const session = useSession();
+  const router = useRouter();
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  const loginUser = (e) => {
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/");
+    }
+  });
+  const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signIn("credentials", { ...data }).then(() =>
       alert("[+] User has been logged!")
@@ -20,11 +29,6 @@ export default function Example() {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
@@ -102,20 +106,20 @@ export default function Example() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
+            No estás registrado?{" "}
             <a
-              href="#"
+              href="/register"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Start a 14 day free trial
+              Registrate
             </a>
           </p>
           <button
-            class="bg-gray-800 text-white hover:bg-gray-700 py-2 px-4 rounded w-full"
+            className="bg-gray-800 text-white hover:bg-gray-700 py-2 px-4 rounded w-full"
             onClick={() => signIn("github")}
           >
             <svg
-              class="w-5 h-5 inline-block mr-2"
+              className="w-5 h-5 inline-block mr-2"
               viewBox="0 0 16 16"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +133,7 @@ export default function Example() {
           </button>
 
           <button
-            class="bg-red-600 text-white hover:bg-red-500 py-2 px-4 rounded w-full flex items-center justify-center"
+            className="bg-red-600 text-white hover:bg-red-500 py-2 px-4 rounded w-full flex items-center justify-center"
             onClick={() => signIn("google")}
           >
             <svg
@@ -137,7 +141,7 @@ export default function Example() {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-google"
+              className="bi bi-google"
               viewBox="0 0 16 16"
             >
               {" "}

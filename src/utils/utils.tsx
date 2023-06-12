@@ -2,6 +2,7 @@ export function Randomize(arr: any[], count: number): any[] {
   const randomItems: any[] = [];
 
   const copyArray = [...arr];
+
   if (count > copyArray.length) {
     throw new Error("Count cannot be greater than the array length");
   }

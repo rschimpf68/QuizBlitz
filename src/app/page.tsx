@@ -1,14 +1,27 @@
 import { User } from "@prisma/client";
 import Link from "next/link";
 import client from "./libs/prismadb";
+
 import PlayButton from "./components/B-Play";
 import SoundButton from "./components/B-Mute";
 import DropdownMenu from "./components/B-Menu";
 
+  
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import NextAuth from "next-auth/next";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const users: User[] = await client.user.findMany();
   
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/login");
+  }
+
+
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">
       <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full" style={{ backgroundImage: 'url("/images/background.gif")', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -30,6 +43,7 @@ export default async function Home() {
             pressedImageUrl="/images/Push.png"
             href="/game"
           />
+
         </div>
       </div>
     </div>

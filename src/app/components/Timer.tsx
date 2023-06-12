@@ -3,9 +3,10 @@ import { FunctionComponent, useEffect, useState } from "react";
 
 type Props = {
   gameOver: () => void;
+  time: number;
 };
-const Timer: FunctionComponent<Props> = ({ gameOver }) => {
-  const [count, setCount] = useState(15);
+const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
+  const [count, setCount] = useState(time);
   if (count == 0) {
     gameOver();
   }
