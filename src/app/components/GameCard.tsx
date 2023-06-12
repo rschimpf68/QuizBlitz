@@ -81,7 +81,9 @@ const GameCard: React.FC<Props> = ({
         <div className="flex min-h-screen w-4/12 flex-col  bg-white px-10">
           <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5">
             <div className="h-auto w-full border-lime-100 bg-red-200 flex justify-center text-6xl text-white">
+
               <Timer gameOver={gameOver} time={30} />
+
             </div>
           </div>
           <div className="w-full h-auto flex-col justify-center items-center mt-20 ">

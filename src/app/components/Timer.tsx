@@ -13,7 +13,7 @@ const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount((count) => count - 1);
+      //setCount((count) => count - 1);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
