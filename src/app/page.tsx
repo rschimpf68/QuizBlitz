@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default async function Home() {
   // const users: User[] = await client.user.findMany();
@@ -14,7 +15,7 @@ export default async function Home() {
   if (!session) {
     redirect("/login");
   }
-
+  
   return (
     <div className="flex items-start justify-center h-screen bg-blue-200">
       <div className="flex flex-col items-center bg-white w-4/12 h-full">

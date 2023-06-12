@@ -33,6 +33,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
+        
         if (!credentials?.email || !credentials.password) {
           throw new Error("Please enter an email and password");
         }
@@ -64,11 +65,16 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
   debug: process.env.NODE_ENV === "development",
+  pages: {
+    signIn: '/login',
+    error: '/login', // Error code passed in query string as ?error=
+  },
+
 };
 const handler = NextAuth(authOptions);
 export { handler as POST, handler as GET };
