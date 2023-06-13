@@ -1,4 +1,4 @@
-import { Answer, Category, Game } from "@prisma/client";
+import { Answer, Category, Game, Round } from "@prisma/client";
 import QuestionAndAnswers from "../../components/QuestionAndAnswers";
 import client from "../../libs/prismadb";
 import GameCard from "../../components/GameCard";
@@ -6,36 +6,11 @@ import { Randomize } from "../../../utils/utils";
 import { useParams } from "next/navigation";
 import React from "react";
 
-async function updateGame(game: Game, points: number) {
-  "use server";
-
-  const update =
-    game?.TurnId == game?.idPlayer1
-      ? await client.game.update({
-          where: { id: game?.id },
-          data: { TurnId: game.idPlayer2, PointsP1: points, Over: true },
-        })
-      : await client.game.update({
-          where: { id: game?.id },
-          data: { TurnId: game.idPlayer1, PointsP2: points },
-        });
-}
-async function checkAnswer(answerId: string) {
-  "use server";
-
-  const answerIsCorrect = await client.answer.findUnique({
-    select: {
-      correct: true,
-    },
-    where: {
-      id: answerId as string,
-    },
-  });
-  return answerIsCorrect?.correct as boolean;
-}
-
 export default async function GamePage({ params }: { params: { id: string } }) {
-  const game = await client.game.findUnique({ where: { id: params.id } });
+  const game = await client.game.findUnique({
+    where: { id: params.id },
+    include: { Rounds: true },
+  });
 
   const idPlayer =
     game?.TurnId == game?.idPlayer1 ? game?.idPlayer1 : game?.idPlayer2;
@@ -78,9 +53,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       {
         <GameCard
           questions={finalQuestions}
-          updateTurn={updateGame}
-          checkAnswer={checkAnswer}
-          game={game as Game}
+          game={game as Game & { Rounds: Round[] }}
         />
       }
     </main>

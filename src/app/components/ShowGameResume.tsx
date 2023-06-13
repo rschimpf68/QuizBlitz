@@ -1,4 +1,4 @@
-import { Game, User } from "@prisma/client";
+import { Game, Round, User } from "@prisma/client";
 import Link from "next/link";
 import { FunctionComponent } from "react";
 import { ModuleType } from "./ModuleShowGame";
@@ -8,6 +8,7 @@ type Props = {
   game: Game & {
     Player1: User;
     Player2: User | null;
+    Rounds: Round[];
   };
   userId?: string;
   type: ModuleType;
@@ -50,9 +51,9 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
         {OtherPlayer ? OtherPlayer.name : "Random Oponent"}
       </div>
       <div>
-        {isPlayerOne
-          ? game.PointsP1 + " - " + game.PointsP2
-          : game.PointsP2 + " - " + game.PointsP1}
+        {game.Rounds.map((round) => {
+          return <>{` (${round.PointsP1}-${round.PointsP2}) `}</>;
+        })}
       </div>
       {classes[type]}
     </div>
