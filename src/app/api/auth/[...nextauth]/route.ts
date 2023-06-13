@@ -6,6 +6,8 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
+import { JWT } from "next-auth/jwt";
+import { use } from "react";
 // import bcrypt from 'bcrypt'
 
 
@@ -68,12 +70,25 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 24, 
+    updateAge: 86400, 
   },
   debug: process.env.NODE_ENV === "development",
   pages: {
     signIn: '/login',
     error: '/login', // Error code passed in query string as ?error=
   },
+  callbacks: {
+    jwt: async ({token, user}) => {
+      token.role = "admin";
+      return token;
+    },
+    session: async ({session, token}) => {
+      session.user = token
+  
+      return session;
+    }
+  }
 
 };
 const handler = NextAuth(authOptions);
