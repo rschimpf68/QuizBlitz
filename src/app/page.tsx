@@ -19,8 +19,8 @@ export default async function Home() {
     redirect("/login");
   }
   // const deleteGame = await client.game.deleteMany({
-  //   where: { idPlayer1: "6485f060b33350a4c2f7b17b" },
-  // });
+  //   where: { idPlayer1: "6483752c70bbd538d654c6f9" },
+  // // });
 
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
@@ -51,13 +51,13 @@ export default async function Home() {
             pressedImageUrl="/images/Push.png"
             href="/game"
           />
-
-          <Link
-            href={"./currentGames"}
-            className="w-32 h-10 mt-5 bg-[#8FDE5D] flex justify-center items-center text-lg text-white font-bold border-4 border-white "
-          >
-            Games
-          </Link>
+          <div className="mt-5 w-auto h-auto">
+            <PlayButton
+              unpressedImageUrl="/images/Game_RE.png"
+              pressedImageUrl="/images/Game_PR.png"
+              href="./currentGames"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -18,6 +18,11 @@ const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return <div> {count}</div>;
+  return (
+    <div className={`${count < 5 ? " text-red-700" : "text-inherit"}`}>
+      {" "}
+      {count}
+    </div>
+  );
 };
 export default Timer;
