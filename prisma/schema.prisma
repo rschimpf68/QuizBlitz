@@ -20,16 +20,24 @@ model Question {
 }
 
 model Game {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  idPlayer1  String  @db.ObjectId
-  Player1    User    @relation(fields: [idPlayer1], references: [id], name: "player1")
-  idPlayer2  String? @db.ObjectId
-  Player2    User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
-  TurnId     String? @db.ObjectId
-  TurnPlayer User?   @relation(fields: [TurnId], references: [id], name: "PlayerTurn")
-  PointsP1   Int
-  PointsP2   Int
-  Over       Boolean
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1 String  @db.ObjectId
+  Player1   User    @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2 String? @db.ObjectId
+  Player2   User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
+  TurnId    String?
+
+  Over     Boolean
+  Rounds   Round[]
+  WinnerId String?
+}
+
+model Round {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  PointsP1 Int
+  PointsP2 Int
+  idGame   String @db.ObjectId
+  Game     Game   @relation(fields: [idGame], references: [id])
 }
 
 model Answer {
@@ -49,11 +57,9 @@ model User {
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-
-  accounts    Account[]
-  GameAsPlay1 Game[]    @relation(name: "player1")
-  GameAsPlay2 Game[]    @relation(name: "player2")
-  Game        Game[]    @relation(name: "PlayerTurn")
+  accounts       Account[]
+  GameAsPlay1    Game[]    @relation(name: "player1")
+  GameAsPlay2    Game[]    @relation(name: "player2")
 }
 
 model Account {

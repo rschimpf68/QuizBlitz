@@ -1,11 +1,11 @@
 "use client";
 import { useCallback, useState } from "react";
+import { checkAnswer } from "./ServerComponetnsFunctions";
 
 interface Props {
   index: number;
   idAnswer: string;
   text: string;
-  checkAnswer: (idAnswer: string) => Promise<boolean>;
 
   onAnswered: (arg1: number, arg2: boolean) => void;
 }
@@ -14,7 +14,6 @@ const AnswerComponent: React.FC<Props> = ({
   idAnswer,
   text,
   onAnswered,
-  checkAnswer,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState(false);

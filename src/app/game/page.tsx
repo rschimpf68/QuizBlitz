@@ -42,8 +42,6 @@ export default async function PreGame() {
       data: {
         idPlayer1: playerId?.id as string,
         TurnId: playerId?.id as string,
-        PointsP1: 0,
-        PointsP2: 0,
         Over: false,
       },
     });

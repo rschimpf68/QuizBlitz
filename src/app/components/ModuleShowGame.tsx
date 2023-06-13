@@ -1,4 +1,4 @@
-import { Game, User } from "@prisma/client";
+import { Game, Round, User } from "@prisma/client";
 import { type } from "os";
 import { FunctionComponent } from "react";
 import ShowGameResume from "./ShowGameResume";
@@ -18,6 +18,7 @@ type Props = {
   games: (Game & {
     Player1: User;
     Player2: User | null;
+    Rounds: Round[];
   })[];
   text: string;
   type: ModuleType;
