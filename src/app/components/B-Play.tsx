@@ -26,7 +26,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           src={isPressed ? pressedImageUrl : unpressedImageUrl}
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}
           width={144}
-          height={88}
+          height={75}
           className="mt-22"
         />
       </div>
@@ -65,6 +65,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           onDragStart={handleDragStart}
           onMouseLeave={handleMouseLeave}
           draggable="false"
+          prefetch={true}
           className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
         >
           {body()}

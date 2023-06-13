@@ -6,6 +6,8 @@ import { Randomize } from "../../../utils/utils";
 import { useParams } from "next/navigation";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
 export default async function GamePage({ params }: { params: { id: string } }) {
   const game = await client.game.findUnique({
     where: { id: params.id },
@@ -49,7 +51,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
+    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
       {
         <GameCard
           questions={finalQuestions}
