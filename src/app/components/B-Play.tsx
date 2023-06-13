@@ -1,21 +1,37 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface PlayButtonProps {
   unpressedImageUrl: string;
   pressedImageUrl: string;
   href: string;
   onClick?: () => void;
+  useLink?: boolean;
 }
 
 const PlayButton: React.FC<PlayButtonProps> = ({
   unpressedImageUrl,
   pressedImageUrl,
   href,
-  onClick
+  onClick,
+  useLink = true,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
-
+  const body = () => {
+    return (
+      <div className="w-full h-5/6 flex items-center">
+        <Image
+          src={isPressed ? pressedImageUrl : unpressedImageUrl}
+          alt={isPressed ? "Pressed Button" : "Unpressed Button"}
+          width={144}
+          height={88}
+          className="mt-22"
+        />
+      </div>
+    );
+  };
   const handleMouseDown = () => {
     setIsPressed(true);
   };
@@ -39,25 +55,35 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   };
 
   return (
-    <a
-      href={href}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onClick={handleClick}
-      onDragStart={handleDragStart}
-      onMouseLeave={handleMouseLeave}
-      draggable="false"
-      className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
-    >
-    <div className="w-full h-5/6 flex items-center">
-      <img
-        src={isPressed ? pressedImageUrl : unpressedImageUrl}
-        alt={isPressed ? "Pressed Button" : "Unpressed Button"}
-        className="w-36 h-22 mt-22"
-        draggable="false"
-      />
-    </div>
-    </a>
+    <>
+      {useLink ? (
+        <Link
+          href={href}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onClick={handleClick}
+          onDragStart={handleDragStart}
+          onMouseLeave={handleMouseLeave}
+          draggable="false"
+          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+        >
+          {body()}
+        </Link>
+      ) : (
+        <a
+          href={href}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onClick={handleClick}
+          onDragStart={handleDragStart}
+          onMouseLeave={handleMouseLeave}
+          draggable="false"
+          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+        >
+          {body()}
+        </a>
+      )}
+    </>
   );
 };
 
