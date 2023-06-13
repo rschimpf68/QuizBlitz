@@ -22,16 +22,10 @@ export default async function Home() {
   // });
 
   return (
-    <div className="flex items-start justify-center h-screen bg-blue-200">
-      <div
-        className="relative bg-white w-full md:w-4/12 flex flex-col h-full"
-        style={{
-          backgroundImage: 'url("/images/background.gif")',
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
+
+    <div className="flex items-start justify-center h-screen bg-BlueBG">
+      <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full" style={{ backgroundImage: 'url("/images/background.gif")', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+
         <div className="w-full p-4 flex justify-between items-start absolute top-0">
           <DropdownMenu
             collapsedImageUrl="/images/MenuClose.png"
@@ -44,11 +38,9 @@ export default async function Home() {
           />
         </div>
         <div className="flex flex-col items-center justify-center flex-grow">
-          <img
-            src="/images/QBTitle.png"
-            alt="QuizBlitz"
-            className="w-64 h-auto  mb-56"
-          />
+
+          <img src="/images/QBTitle.png" alt="QuizBlitz" className="w-80 h-auto  mb-56" />
+
           <PlayButton
             unpressedImageUrl="/images/Normal.png"
             pressedImageUrl="/images/Push.png"
