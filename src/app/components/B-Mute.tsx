@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface SoundButtonProps {
   initialImageUrl: string;
@@ -10,7 +11,7 @@ interface SoundButtonProps {
 const SoundButton: React.FC<SoundButtonProps> = ({
   initialImageUrl,
   transitionImageUrl,
-  finalImageUrl
+  finalImageUrl,
 }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(initialImageUrl);
@@ -28,7 +29,7 @@ const SoundButton: React.FC<SoundButtonProps> = ({
       const timeout = setTimeout(() => {
         setIsTransitioning(false);
         setCurrentImageUrl(finalImageUrl);
-      }, 70); // Cambiar la imagen a finalImageUrl después de 500 milisegundos (0.5 segundos)
+      }, 50); // Cambiar la imagen a finalImageUrl después de 500 milisegundos (0.5 segundos)
 
       return () => clearTimeout(timeout); // Limpiar el timeout cuando el componente se desmonte o se actualice
     } else {
@@ -39,7 +40,7 @@ const SoundButton: React.FC<SoundButtonProps> = ({
         const timeout = setTimeout(() => {
           setIsTransitioning(false);
           setCurrentImageUrl(initialImageUrl);
-        }, 70); // Cambiar la imagen a initialImageUrl después de 500 milisegundos (0.5 segundos)
+        }, 50); // Cambiar la imagen a initialImageUrl después de 500 milisegundos (0.5 segundos)
 
         return () => clearTimeout(timeout); // Limpiar el timeout cuando el componente se desmonte o se actualice
       }
@@ -51,18 +52,18 @@ const SoundButton: React.FC<SoundButtonProps> = ({
       className="bg-transparent border-none outline-none cursor-pointer relative"
       onClick={handleClick}
     >
-      <img
+      <Image
         src={transitionImageUrl}
-        alt="Transition Image"
-        className={`w-16 h-8 absolute transition-opacity duration-500 ${
+        alt="Sound On"
+        width={64}
+        height={32}
+        className={`absolute transition-opacity duration-500 ${
           isTransitioning ? "opacity-100" : "opacity-0"
         }`}
+        draggable="false"
       />
-      <img
-        src={currentImageUrl}
-        alt="Sound Button"
-        className="w-16 h-8"
-      />
+
+      <Image src={currentImageUrl} alt="Sound Mute" width={64} height={32} />
     </button>
   );
 };

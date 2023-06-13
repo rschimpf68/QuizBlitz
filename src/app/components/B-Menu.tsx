@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface DropdownMenuProps {
   collapsedImageUrl: string;
@@ -8,7 +9,7 @@ interface DropdownMenuProps {
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   collapsedImageUrl,
-  expandedImageUrl
+  expandedImageUrl,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clientSide, setClientSide] = useState(false);
@@ -27,10 +28,12 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         className="bg-transparent border-none outline-none cursor-pointer"
         onClick={toggleMenu}
       >
-        <img
+        <Image
           src={isOpen ? expandedImageUrl : collapsedImageUrl}
-          alt="Dropdown Menu"
-          className="w-20 h-10"
+          alt="Menu desplegable"
+          width={80}
+          height={40}
+          draggable="false"
         />
       </button>
 
