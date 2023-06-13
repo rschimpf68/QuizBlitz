@@ -6,7 +6,7 @@ import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
 import Link from "next/link";
 import { Answer, Game, Question, Round } from "@prisma/client";
-import { updateGame } from "./ServerComponetnsFunctions";
+import { updateGame } from "../game/[id]/action";
 
 interface Props {
   questions: {
