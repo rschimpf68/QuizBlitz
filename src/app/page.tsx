@@ -24,7 +24,7 @@ export default async function Home() {
 
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
-      <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/background.gif)] bg-cover bg-no-repeat bg-center">
+      <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
         <div className="w-full p-4 flex justify-between items-start absolute top-0">
           <DropdownMenu
             collapsedImageUrl="/images/MenuClose.png"

@@ -44,7 +44,7 @@ export default async function PreGame() {
   return (
     <main className="w-full  flex flex-col justify-center items-center bg-blue-300 min-h-screen">
       <section className="min-h-screen w-4/12 bg-white px-2 flex flex-col items-center justify-center">
-        <Link href={"Link"} className="bg-[#8FDE5D] w-5 h-5">
+        <Link href={"/"} className="bg-[#8FDE5D] w-5 h-5">
           {"<-"}
         </Link>
         {pendingGames.length > 0 && (
