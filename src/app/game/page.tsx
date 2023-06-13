@@ -8,6 +8,8 @@ import Link from "next/link";
 import Image from "next/image";
 import StartButton from "../components/B-Play";
 import "tailwindcss/tailwind.css";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../public/fonts/upheavtt.ttf" });
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -62,6 +64,7 @@ export default async function PreGame() {
             username={
               PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
+            font={myFont}
           />
         </div>
         <div>
@@ -72,6 +75,7 @@ export default async function PreGame() {
             username={
               !PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
+            font={myFont}
           />
         </div>
 

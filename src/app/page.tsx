@@ -21,15 +21,16 @@ export default async function Home() {
   // const deleteGame = await client.game.deleteMany({
   //   where: { idPlayer1: "6483752c70bbd538d654c6f9" },
   // // });
+  // const deleteG = await client.game.deleteMany({});
 
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
       <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
         <div className="w-full p-4 flex justify-between items-start absolute top-0">
-          <DropdownMenu
+          {/* <DropdownMenu
             collapsedImageUrl="/images/MenuClose.png"
             expandedImageUrl="/images/MenuOpen.png"
-          />
+          /> */}
           <SoundButton
             initialImageUrl="/images/MusicOn.png"
             transitionImageUrl="/images/MusicTransition2.png"
@@ -41,7 +42,7 @@ export default async function Home() {
             src="/images/QBTitle.png"
             alt="QuizBlitz"
             width={320}
-            height={160}
+            height={67}
             className="mb-56"
             draggable="false"
           />
@@ -51,13 +52,13 @@ export default async function Home() {
             pressedImageUrl="/images/Push.png"
             href="/game"
           />
-          <div className="mt-5 w-auto h-auto">
+          {/* <div className="mt-5 w-auto h-auto">
             <PlayButton
               unpressedImageUrl="/images/Game_RE.png"
               pressedImageUrl="/images/Game_PR.png"
               href="./currentGames"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
