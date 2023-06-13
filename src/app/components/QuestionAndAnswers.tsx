@@ -11,13 +11,11 @@ interface Props {
     id: string;
   }[];
   onAnswer: (arg1: number, arg2: boolean) => void;
-  checkAnswer: (idAnswer: string) => Promise<boolean>;
 }
 const QuestionAndAnswers: React.FC<Props> = ({
   question,
   answers,
   onAnswer,
-  checkAnswer,
 }) => {
   return (
     <main>
@@ -33,7 +31,6 @@ const QuestionAndAnswers: React.FC<Props> = ({
               idAnswer={answer.id}
               text={answer.answer}
               onAnswered={onAnswer}
-              checkAnswer={checkAnswer}
             />
           );
         })}
