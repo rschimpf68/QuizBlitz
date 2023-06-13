@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
-import { checkAnswer } from "./ServerComponetnsFunctions";
+import { checkAnswer } from "../game/[id]/action";
 
 interface Props {
   index: number;
