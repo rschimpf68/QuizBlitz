@@ -7,10 +7,10 @@ import { Game, Round } from "@prisma/client";
 import Link from "next/link";
 import ModuleShowGame, {
   ModuleType,
-} from "../components/(ShowCurrentGames))/ModuleShowGame";
+} from "../components/(ShowCurrentGames)/ModuleShowGame";
 import { Module } from "module";
 import Image from "next/image";
-import AllModulesShowGame from "../components/(ShowCurrentGames))/AllModulesShowGame";
+import AllModulesShowGame from "../components/(ShowCurrentGames)/AllModulesShowGame";
 import NavBarMenu from "../components/(NavBar)/NavBarMenu";
 import { GetGamesByPlayerId } from "./action";
 import { SWRConfig } from "swr";
