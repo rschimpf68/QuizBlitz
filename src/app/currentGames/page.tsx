@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { User, getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import client from "../libs/prismadb";
 import Email from "next-auth/providers/email";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import ModuleShowGame, { ModuleType } from "../components/ModuleShowGame";
 import { Module } from "module";
 import Image from "next/image";
+import AllModulesShowGame from "../components/AllModulesShowGame";
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -59,31 +60,7 @@ export default async function PreGame() {
           </Link>
         </div>
         <div className="flex flex-1 flex-col justify-center items-center">
-          {pendingGames.length > 0 && (
-            <ModuleShowGame
-              text="Tu Turno"
-              games={pendingGames}
-              type={ModuleType.your}
-              userId={playerId?.id}
-            />
-          )}
-
-          {waitingGames.length > 0 && (
-            <ModuleShowGame
-              text="Su Turno"
-              games={waitingGames}
-              type={ModuleType.their}
-              userId={playerId?.id}
-            />
-          )}
-          {finishedGames.length > 0 && (
-            <ModuleShowGame
-              text="Juegos Terminados"
-              games={finishedGames}
-              type={ModuleType.finished}
-              userId={playerId?.id}
-            />
-          )}
+          <AllModulesShowGame PlayerId={playerId?.id} />
         </div>
       </section>
     </main>
