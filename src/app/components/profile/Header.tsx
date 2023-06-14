@@ -2,14 +2,14 @@
 
 import React, { useContext } from "react";
 import Link from "next/link";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 import Image from "next/image";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 
 const Header =  () => {
    
-   const { data: session } = useSession()
+  const { data: session } = useSession()
   return (
     <header className="bg-white py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -52,7 +52,7 @@ const Header =  () => {
                 <img
                   className="w-10 h-10 rounded-full"
                   
-                  src={session.user?.image || "/img.png"} 
+                  src={session.user?.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT48Ke_Q2uphy_MQect9sVe9j0zRyea2Kp26g"} 
                 />
                 <div className="space-y-1 font-medium">
                   <p>
