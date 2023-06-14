@@ -10,10 +10,11 @@ export async function updateGame(
 
    if (game?.TurnId == game?.idPlayer1) {
       const idPlayer2 = game.idPlayer2 ? game.idPlayer2 : null;
+      console.log(idPlayer2);
       const update = await client.game.update({
          where: { id: game?.id },
          data: {
-            TurnId: idPlayer2,
+            TurnId: "6485f060b33350a4c2f7b17b",
             Rounds: {
                create: {
                   PointsP1: points,
