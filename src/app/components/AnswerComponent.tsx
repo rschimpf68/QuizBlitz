@@ -28,7 +28,7 @@ const AnswerComponent: React.FC<Props> = ({
     setTimeout(() => {
       setAnswered(false);
       onAnswered(index, isCorrect);
-    }, 150);
+    }, 200);
   };
 
   return (
@@ -36,7 +36,7 @@ const AnswerComponent: React.FC<Props> = ({
       <button
         onClick={handleSubmit}
         className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
-          answered ? (correct ? "bg-green-100" : "bg-red-100") : "bg-white"
+          answered ? (correct ? "bg-green-200" : "bg-red-200") : "bg-white"
         }`}
       >
         {text}

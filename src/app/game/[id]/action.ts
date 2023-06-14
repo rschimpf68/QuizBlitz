@@ -7,13 +7,13 @@ export async function updateGame(
    game: Game & { Rounds: Round[] },
    points: number
 ) {
-   const currentRound = game.Rounds[game.Rounds.length - 1];
+
 
    if (game?.TurnId == game?.idPlayer1) {
       const update = await client.game.update({
          where: { id: game?.id },
          data: {
-            TurnId: game.idPlayer2,
+            TurnId: game?.idPlayer2,
             Rounds: {
                create: {
                   PointsP1: points,
@@ -23,7 +23,9 @@ export async function updateGame(
          },
       });
    } else {
+
       game.Rounds[game.Rounds.length - 1].PointsP2 = points;
+      const currentRound = game.Rounds[game.Rounds.length - 1];
       const winner =
          game.Rounds.length > 2
             ? checkWhoWon(game.Rounds, game.idPlayer1, game.idPlayer2 as string)
