@@ -19,10 +19,10 @@ const QuestionAndAnswers: React.FC<Props> = ({
 }) => {
   return (
     <main>
-      <div className="mb-10 flex h-auto w-full justify-center text-center text-3xl font-bold">
+      <div className="mb-8 mt-4 flex h-auto w-4/5 mx-auto justify-center text-center text-2xl font-bold">
         {question}
       </div>
-      <div className="w-full">
+      <div className="w-4/5 justify-center mx-auto">
         {answers.map((answer, index) => {
           return (
             <AnswerComponent

@@ -32,7 +32,7 @@ const AnswerComponent: React.FC<Props> = ({
   };
 
   return (
-    <div className="bg-white">
+    <div>
       <button
         onClick={handleSubmit}
         className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
