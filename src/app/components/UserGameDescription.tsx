@@ -1,21 +1,30 @@
 import { FunctionComponent } from "react";
 import Image from "next/image";
+import { NextFont } from "@next/font";
 
 type Props = {
   username?: string | null;
   image?: string;
+  font: NextFont;
 };
-const Timer: FunctionComponent<Props> = ({
+
+const UserGameDescription: FunctionComponent<Props> = ({
   username,
-  image = "https://avatars.githubusercontent.com/u/127883061?v=4",
+  image = "/images/Banner.png",
+  font,
 }) => {
   return (
-    <div className="flex w-auto h-20  items-center justify-center">
-      {
-        //<Image src={image} width={500} height={500} alt={""} />
-      }
-      <h1 className=" text-2xl">{username ? username : "Random Oponent"}</h1>
+    <div className="flex w-auto h-20 items-center justify-center">
+      <div className="relative">
+        <Image src={image} width={500} height={100} alt="" />
+        <h1
+          className={`${font.className} text-2xl absolute inset-0 flex items-center justify-center text-white top-[-25%]`}
+        >
+          {username ? username : "Random Opponent"}
+        </h1>
+      </div>
     </div>
   );
 };
-export default Timer;
+
+export default UserGameDescription;

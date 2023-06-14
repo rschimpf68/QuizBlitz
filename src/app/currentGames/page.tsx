@@ -7,6 +7,7 @@ import { Game } from "@prisma/client";
 import Link from "next/link";
 import ModuleShowGame, { ModuleType } from "../components/ModuleShowGame";
 import { Module } from "module";
+import Image from "next/image";
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -15,34 +16,7 @@ export default async function PreGame() {
     where: { email: session?.user?.email as string },
     select: { id: true },
   });
-  // const newGame = await client.game.createMany({
-  //   data: [
-  //     {
-  //       idPlayer1: "6483752c70bbd538d654c6f9",
-  //       idPlayer2: "64761c3da19ef284404a7e6c",
-  //       TurnId: "6483752c70bbd538d654c6f9",
-  //       PointsP1: 5,
-  //       PointsP2: 5,
-  //       Over: false,
-  //     },
-  //     {
-  //       idPlayer1: "6483752c70bbd538d654c6f9",
-  //       idPlayer2: "64761c3da19ef284404a7e6c",
-  //       TurnId: "64761c3da19ef284404a7e6c",
-  //       PointsP1: 4,
-  //       PointsP2: 3,
-  //       Over: false,
-  //     },
-  //     {
-  //       idPlayer1: "6483752c70bbd538d654c6f9",
-  //       idPlayer2: "64761c3da19ef284404a7e6c",
-  //       TurnId: "64761c3da19ef284404a7e6c",
-  //       PointsP1: 9,
-  //       PointsP2: 10,
-  //       Over: true,
-  //     },
-  //   ],
-  // });
+
   const games = await client.game.findMany({
     where: {
       OR: [
@@ -57,6 +31,7 @@ export default async function PreGame() {
     include: {
       Player1: true,
       Player2: true,
+      Rounds: true,
     },
   });
   const finishedGames = games.filter((game) => game.Over === true);
@@ -68,33 +43,48 @@ export default async function PreGame() {
     (game) => game.TurnId !== playerId?.id
   );
   return (
-    <main className="min-h-full w-full  flex flex-col justify-center items-center bg-blue-300">
-      <section className="h-full w-4/12 bg-white px-2">
-        {pendingGames.length > 0 && (
-          <ModuleShowGame
-            text="Tu Turno"
-            games={pendingGames}
-            type={ModuleType.your}
-            userId={playerId?.id}
-          />
-        )}
+    <main className="w-full  flex flex-col justify-center items-center bg-BlueBG min-h-screen">
+      <section className="min-h-screen w-4/12 bg-[url(/images/Background.gif)] px-2 flex flex-col  py-5">
+        <div className="w-full h-auto flex justify-start">
+          <Link
+            href={"/"}
+            className=" w-auto h-auto  items-center hover:scale-105  "
+          >
+            <Image
+              src={"/images/LeftArrow.png"}
+              width={40}
+              height={60}
+              alt="arrow"
+            />
+          </Link>
+        </div>
+        <div className="flex flex-1 flex-col justify-center items-center">
+          {pendingGames.length > 0 && (
+            <ModuleShowGame
+              text="Tu Turno"
+              games={pendingGames}
+              type={ModuleType.your}
+              userId={playerId?.id}
+            />
+          )}
 
-        {waitingGames.length > 0 && (
-          <ModuleShowGame
-            text="Su Turno"
-            games={waitingGames}
-            type={ModuleType.their}
-            userId={playerId?.id}
-          />
-        )}
-        {finishedGames.length > 0 && (
-          <ModuleShowGame
-            text="Juegos Terminados"
-            games={finishedGames}
-            type={ModuleType.finished}
-            userId={playerId?.id}
-          />
-        )}
+          {waitingGames.length > 0 && (
+            <ModuleShowGame
+              text="Su Turno"
+              games={waitingGames}
+              type={ModuleType.their}
+              userId={playerId?.id}
+            />
+          )}
+          {finishedGames.length > 0 && (
+            <ModuleShowGame
+              text="Juegos Terminados"
+              games={finishedGames}
+              type={ModuleType.finished}
+              userId={playerId?.id}
+            />
+          )}
+        </div>
       </section>
     </main>
   );

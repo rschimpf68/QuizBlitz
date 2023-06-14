@@ -5,6 +5,11 @@ import Email from "next-auth/providers/email";
 import UserGameDescription from "../components/UserGameDescription";
 import { Game } from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
+import StartButton from "../components/B-Play";
+import "tailwindcss/tailwind.css";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../public/fonts/upheavtt.ttf" });
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -39,8 +44,6 @@ export default async function PreGame() {
       data: {
         idPlayer1: playerId?.id as string,
         TurnId: playerId?.id as string,
-        PointsP1: 0,
-        PointsP2: 0,
         Over: false,
       },
     });
@@ -54,32 +57,38 @@ export default async function PreGame() {
   const PlayerIsPlayer1 = game?.Player1.id == playerId?.id;
 
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-blue-200">
-      <section className="flex flex-col items-center justify-center bg-white w-4/12 min-h-screen">
-        <div className="h-auto w-auto mb-5">
+    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
+      <section className="flex flex-col items-center justify-center bg-customBlue w-4/12 min-h-screen">
+        <div className="h-auto w-2/3 mt-36">
           <UserGameDescription
             username={
               PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
+            font={myFont}
           />
         </div>
         <div>
-          <h1>VS</h1>
+          <Image src={"/images/VS.png"} alt="VS" width={112} height={112} />
         </div>
-        <div className="h-auto w-auto mt-5">
+        <div className="h-auto w-2/3 pb-16">
           <UserGameDescription
             username={
               !PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
+            font={myFont}
           />
         </div>
-        <Link
-          href={`/game/${game?.id}`}
-          className=" flex w-40 h-auto justify-center text-lg bg-red-500 items-center"
-        >
-          {" "}
-          Empezar
-        </Link>
+
+        <div className="flex-grow" />
+
+        <div className="mt-auto mb-16">
+          <StartButton
+            unpressedImageUrl="/images/StartN.png"
+            pressedImageUrl="/images/StartP.png"
+            href={`/game/${game?.id}`}
+            useLink={false}
+          />
+        </div>
       </section>
     </main>
   );

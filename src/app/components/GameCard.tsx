@@ -5,8 +5,8 @@ import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
 import Link from "next/link";
-import { Answer, Game, Question } from "@prisma/client";
-import { time } from "console";
+import { Answer, Game, Question, Round } from "@prisma/client";
+import { updateGame } from "../game/[id]/action";
 
 interface Props {
   questions: {
@@ -17,9 +17,8 @@ interface Props {
     }[];
     id: string;
   }[];
-  updateTurn: (game: Game, points: number) => Promise<void>;
-  checkAnswer: (idAnswer: string) => Promise<boolean>;
-  game: Game;
+
+  game: Game & { Rounds: Round[] };
 }
 interface AnsweredQuestion {
   question: string;
@@ -29,9 +28,8 @@ interface AnsweredQuestion {
 
 const GameCard: React.FC<Props> = ({
   questions,
-  updateTurn,
+
   game,
-  checkAnswer,
 }) => {
   //React States
   //Current question
@@ -65,6 +63,7 @@ const GameCard: React.FC<Props> = ({
     if (questionCounter == questions.length - 1) {
       //NO more questions? -> Finish game
       setFinished(true);
+      gameOver();
     } else {
       // Go to the next Question
       setQuestionCounter((questionCounter) => questionCounter + 1);
@@ -72,16 +71,17 @@ const GameCard: React.FC<Props> = ({
   };
   const gameOver = () => {
     setFinished(true);
-    updateTurn(game, playerPoints);
+    setTimeout(() => updateGame(game, playerPoints), 100);
   };
 
   return (
     <>
       {!finished ? (
         <div className="flex min-h-screen w-4/12 flex-col  bg-white px-10">
-          <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5">
-            <div className="h-auto w-full border-lime-100 bg-red-200 flex justify-center text-6xl text-white">
+          <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5 ">
+            <div className="h-auto w-full border-lime-100 flex flex-col justify-center items-center  text-6xl text-black font-bold px-5">
               <Timer gameOver={gameOver} time={30} />
+              <h1 className=" mt-5 text-lg ">{playerPoints}</h1>
             </div>
           </div>
           <div className="w-full h-auto flex-col justify-center items-center mt-20 ">
@@ -89,7 +89,6 @@ const GameCard: React.FC<Props> = ({
               question={question.question}
               answers={question.answers}
               onAnswer={changeQuestion}
-              checkAnswer={checkAnswer}
             />
           </div>
         </div>
