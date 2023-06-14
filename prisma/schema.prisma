@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Question {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+
+  answers Answer[]
+}
+
+model Game {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1 String  @db.ObjectId
+  Player1   User    @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2 String? @db.ObjectId
+  Player2   User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
+  TurnId    String?
+
+  Over     Boolean
+  Rounds   Round[]
+  WinnerId String?
+}
+
+model Round {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  PointsP1 Int
+  PointsP2 Int
+  idGame   String @db.ObjectId
+  Game     Game   @relation(fields: [idGame], references: [id])
+}
+
+model Answer {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  answer     String
+  correct    Boolean
+  idQuestion String   @db.ObjectId
+  question   Question @relation(fields: [idQuestion], references: [id])
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+  GameAsPlay1    Game[]    @relation(name: "player1")
+  GameAsPlay2    Game[]    @relation(name: "player2")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
