@@ -47,8 +47,8 @@ export default async function PreGame() {
   //   (game) => game.TurnId !== playerId?.id
   // );
   return (
-    <main className="w-full  flex flex-col justify-center items-center bg-BlueBG h-screen">
-      <section className="min-h-screen w-4/12 bg-[url(/images/Background.gif)] md:w-4/12 flex flex-col">
+    <main className=" flex flex-col justify-center items-center bg-BlueBG h-screen">
+      <section className="min-h-screen w-full  bg-[url(/images/Background.gif)] md:w-4/12 flex flex-col">
         <section className=" px-2 flex flex-grow flex-col pt-3 overflow-auto">
           <div className="flex flex-1 flex-col justify-center items-center flex-grow">
             <AllModulesShowGame PlayerId={playerId?.id} />
