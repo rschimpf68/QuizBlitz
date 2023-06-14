@@ -19,7 +19,7 @@ const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
   }, []);
 
   return (
-    <div className={`${count < 5 ? " text-red-700" : "text-inherit"}`}>
+    <div className={`${count < 5 ? " text-red-700" : "text-white"}`}>
       {" "}
       {count}
     </div>
