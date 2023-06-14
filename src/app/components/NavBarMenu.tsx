@@ -9,20 +9,20 @@ const NavBarMenu: React.FC<Props> = ({}) => {
       <NavBarComponent
         href="/currentGames"
         imageSrc="/images/NavBar/note.png"
-        width={50}
-        height={50}
+        width={40}
+        height={40}
       />
       <NavBarComponent
         href="/"
         imageSrc="/images/NavBar/home1.png"
-        width={50}
-        height={50}
+        width={40}
+        height={40}
       />
       <NavBarComponent
         href="/currentGames"
         imageSrc="/images/NavBar/user1.png"
-        width={42}
-        height={50}
+        width={33}
+        height={40}
       />
     </main>
   );

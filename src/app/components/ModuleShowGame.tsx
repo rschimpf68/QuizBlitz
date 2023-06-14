@@ -33,7 +33,7 @@ const ModuleShowGame: FunctionComponent<Props> = ({
 }) => {
   return (
     <div
-      className={`${classes[type]} h-full  w-full  flex flex-col justify-center items-center px-2 pb-2 rounded-lg my-3`}
+      className={`${classes[type]} h-auto  w-full  flex flex-col justify-center items-center px-2 pb-2 rounded-lg my-3`}
     >
       <div className="text-white flex justify-center text-lg items-center font-bold">
         {text}
