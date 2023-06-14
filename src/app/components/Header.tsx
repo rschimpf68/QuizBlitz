@@ -10,13 +10,10 @@ import { SessionProvider } from "next-auth/react";
 const Header =  () => {
    
    const { data: session } = useSession()
-   
   return (
     <header className="bg-white py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
         <div className="flex flex-wrap items-center">
-          
-          
 
           <div className="flex items-center space-x-2 ml-auto">
             
@@ -54,7 +51,8 @@ const Header =  () => {
               <div className="flex items-center mb-4 space-x-3 mt-4 cursor-pointer">
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={session.user?.image}
+                  
+                  src={session.user?.image || "/img.png"} 
                 />
                 <div className="space-y-1 font-medium">
                   <p>

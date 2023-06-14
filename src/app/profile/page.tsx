@@ -1,30 +1,25 @@
 'use client'
 
 import { getServerSession } from "next-auth";
+import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import UserSession from "../components/UserSession";
 import Header from "../components/Header";
 import Link from "next/link";
 
-export default async function Profile() {
-  const { data: session } = useSession()
-  console.log(session?.user?.name);
-  let update = false;
-  const updateData = (e: any) => {
-    e.preventDefault();
-    update = !update;
-    console.log(update)
-  }
-  return (
+export default function Profile() {
+  
+  const [ update, setUpdate ] = useState(false)
+   return (
     <section>
-
+      
       <Header />
       {/* <pre>{JSON.stringify(session)}</pre> */}
         
           <button
             className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            onClick={updateData}
+            onClick={() => setUpdate(!update)}
             >
             Update profile
           </button>
@@ -95,7 +90,7 @@ export default async function Profile() {
                 Sign in
               </button>
               ) : (
-                <a href=""></a>
+                <br />
               )}
             </div>
           </form>
