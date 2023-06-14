@@ -8,12 +8,12 @@ export async function updateGame(
    points: number
 ) {
 
-
    if (game?.TurnId == game?.idPlayer1) {
+      const idPlayer2 = game.idPlayer2 ? game.idPlayer2 : null;
       const update = await client.game.update({
          where: { id: game?.id },
          data: {
-            TurnId: game?.idPlayer2,
+            TurnId: idPlayer2,
             Rounds: {
                create: {
                   PointsP1: points,
