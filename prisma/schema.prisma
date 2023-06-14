@@ -25,7 +25,7 @@ model Game {
   Player1   User    @relation(fields: [idPlayer1], references: [id], name: "player1")
   idPlayer2 String? @db.ObjectId
   Player2   User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
-  TurnId    String?
+  Turn      Int
 
   Over     Boolean
   Rounds   Round[]

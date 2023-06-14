@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import client from "../libs/prismadb";
 import Email from "next-auth/providers/email";
-import UserGameDescription from "../components/UserGameDescription";
+import UserGameDescription from "../components/(GameComponents)/UserGameDescription";
 import { Game } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
@@ -21,7 +21,7 @@ export default async function PreGame() {
   const availableGame = await client.game.findFirst({
     where: {
       Player2: null,
-      TurnId: null,
+      Turn: 0,
       NOT: {
         idPlayer1: playerId?.id,
       },
@@ -37,13 +37,14 @@ export default async function PreGame() {
       where: { id: availableGame.id },
       data: {
         idPlayer2: playerId?.id,
+        Turn: 2,
       },
     });
   } else {
     const newGame = await client.game.create({
       data: {
         idPlayer1: playerId?.id as string,
-        TurnId: playerId?.id as string,
+        Turn: 1,
         Over: false,
       },
     });

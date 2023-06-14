@@ -12,7 +12,7 @@ import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-import NavBarMenu from "./components/NavBarMenu";
+import NavBarMenu from "./components/(NavBar)/NavBarMenu";
 
 export default async function Home() {
   return (
@@ -44,6 +44,7 @@ export default async function Home() {
               unpressedImageUrl="/images/Normal.png"
               pressedImageUrl="/images/Push.png"
               href="/game"
+              useLink={false}
             />
           </div>
           <section className="h-1/4  w-full flex items-end">

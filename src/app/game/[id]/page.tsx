@@ -1,11 +1,10 @@
 import { Answer, Category, Game, Round } from "@prisma/client";
-import QuestionAndAnswers from "../../components/QuestionAndAnswers";
+import QuestionAndAnswers from "../../components/(GameComponents)/QuestionAndAnswers";
 import client from "../../libs/prismadb";
-import GameCard from "../../components/GameCard";
+import GameCard from "../../components/(GameComponents)/GameCard";
 import { Randomize } from "../../../utils/utils";
 import { useParams } from "next/navigation";
 import React from "react";
-
 
 export const dynamic = "force-dynamic";
 
@@ -15,8 +14,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
     include: { Rounds: true },
   });
 
-  const idPlayer =
-    game?.TurnId == game?.idPlayer1 ? game?.idPlayer1 : game?.idPlayer2;
+  const idPlayer = game?.Turn == 1 ? game?.idPlayer1 : game?.idPlayer2;
 
   const QuestionsPerGame = 10;
   const questions = await client.question.findMany({

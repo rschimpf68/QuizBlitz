@@ -2,14 +2,16 @@ import { User, getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import client from "../libs/prismadb";
 import Email from "next-auth/providers/email";
-import UserGameDescription from "../components/UserGameDescription";
+import UserGameDescription from "../components/(GameComponents)/UserGameDescription";
 import { Game, Round } from "@prisma/client";
 import Link from "next/link";
-import ModuleShowGame, { ModuleType } from "../components/ModuleShowGame";
+import ModuleShowGame, {
+  ModuleType,
+} from "../components/(ShowCurrentGames))/ModuleShowGame";
 import { Module } from "module";
 import Image from "next/image";
-import AllModulesShowGame from "../components/AllModulesShowGame";
-import NavBarMenu from "../components/NavBarMenu";
+import AllModulesShowGame from "../components/(ShowCurrentGames))/AllModulesShowGame";
+import NavBarMenu from "../components/(NavBar)/NavBarMenu";
 import { GetGamesByPlayerId } from "./action";
 import { SWRConfig } from "swr";
 

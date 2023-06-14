@@ -1,4 +1,4 @@
-import NavBarMenu from "../components/NavBarMenu";
+import NavBarMenu from "../components/(NavBar)/NavBarMenu";
 import Image from "next/image";
 import Link from "next/link";
 
