@@ -9,11 +9,11 @@ export async function updateGame(
 ) {
 
    if (game?.TurnId == game?.idPlayer1) {
-
+      const player2Id = game?.idPlayer2 ? game.idPlayer2 : null;
       const update = await client.game.update({
-         where: { id: game?.id },
+         where: { id: game.id },
          data: {
-            TurnId: game?.idPlayer2,
+            TurnId: player2Id,
             Rounds: {
                create: {
                   PointsP1: points,
@@ -22,7 +22,7 @@ export async function updateGame(
             },
          },
       });
-      console.log(update);
+
    } else {
 
       game.Rounds[game.Rounds.length - 1].PointsP2 = points;
