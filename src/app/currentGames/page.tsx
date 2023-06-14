@@ -9,6 +9,7 @@ import ModuleShowGame, { ModuleType } from "../components/ModuleShowGame";
 import { Module } from "module";
 import Image from "next/image";
 import AllModulesShowGame from "../components/AllModulesShowGame";
+import NavBarMenu from "../components/NavBarMenu";
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -45,23 +46,28 @@ export default async function PreGame() {
   );
   return (
     <main className="w-full  flex flex-col justify-center items-center bg-BlueBG min-h-screen">
-      <section className="min-h-screen w-4/12 bg-[url(/images/Background.gif)] px-2 flex flex-col  py-5">
-        <div className="w-full h-auto flex justify-start">
-          <Link
-            href={"/"}
-            className=" w-auto h-auto  items-center hover:scale-105  "
-          >
-            <Image
-              src={"/images/LeftArrow.png"}
-              width={40}
-              height={60}
-              alt="arrow"
-            />
-          </Link>
-        </div>
-        <div className="flex flex-1 flex-col justify-center items-center">
-          <AllModulesShowGame PlayerId={playerId?.id} />
-        </div>
+      <section className="min-h-screen w-4/12 bg-[url(/images/Background.gif)]">
+        <section className=" px-2 flex flex-col pt-3 max-h-[75%] overflow-auto ">
+          <div className="w-full h-auto flex justify-start ">
+            <Link
+              href={"/"}
+              className=" w-auto h-auto  items-center hover:scale-105  "
+            >
+              <Image
+                src={"/images/leftArrow.png"}
+                width={63}
+                height={40}
+                alt="arrow"
+              />
+            </Link>
+          </div>
+          <div className="flex flex-1 flex-col justify-center items-center">
+            <AllModulesShowGame PlayerId={playerId?.id} />
+          </div>
+        </section>
+        <section className="w-full flex items-end h-auto">
+          <NavBarMenu />
+        </section>
       </section>
     </main>
   );

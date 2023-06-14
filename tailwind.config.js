@@ -7,7 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-
+      minHeight: {
+        '3/4': '75%',
+        '5/6': '83%',
+      },
       fontFamily: {
         pixel: ['upheavtt', 'sans-serif'],
       },

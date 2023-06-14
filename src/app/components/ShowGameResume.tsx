@@ -26,21 +26,31 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
     ),
     [ModuleType.their]: (
       <Image
-        src={"/clock.png"}
+        src={"/images/clock.png"}
         alt=""
         width={20}
         height={20}
         className="mr-2"
       ></Image>
     ),
-    [ModuleType.finished]: (
-      <Link
-        href={`/game/${game.id}`}
-        className="mr-2 bg-red-600 text-lg rounded-md font-bold text-white px-2"
-      >
-        Revancha
-      </Link>
-    ),
+    [ModuleType.finished]:
+      game.WinnerId == userId ? (
+        <Image
+          src={"/images/checked.png"}
+          alt=""
+          width={20}
+          height={20}
+          className="mr-2"
+        />
+      ) : (
+        <Image
+          src={"/images/close.png"}
+          alt=""
+          width={20}
+          height={20}
+          className="mr-2"
+        />
+      ),
   };
   const isPlayerOne = game.Player1.id === userId ? true : false;
   const OtherPlayer = isPlayerOne ? game.Player2 : game.Player1;
