@@ -63,7 +63,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
       <div>
         {game.Rounds.map((round, index) => {
           return (
-            <section className="flex flex-col" id={`${index}`}>
+            <section className="flex flex-col" key={index}>
               <div className="text-center">{`R${index + 1}`}</div>
               <div>
                 {isPlayerOne
