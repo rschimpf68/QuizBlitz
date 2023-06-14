@@ -15,7 +15,7 @@ const classes = {
 };
 
 type Props = {
-  games: (Game & {
+  games?: (Game & {
     Player1: User;
     Player2: User | null;
     Rounds: Round[];
@@ -40,7 +40,7 @@ const ModuleShowGame: FunctionComponent<Props> = ({
       </div>
 
       <div className={"w-full h-full bg-white rounded-lg"}>
-        {games.map((game, key) => {
+        {games?.map((game, key) => {
           return (
             <ShowGameResume key={key} game={game} userId={userId} type={type} />
           );
