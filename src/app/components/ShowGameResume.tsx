@@ -62,7 +62,11 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
       </div>
       <div>
         {game.Rounds.map((round, key) => {
-          return <>{` (${round.PointsP1}-${round.PointsP2}) `}</>;
+          return isPlayerOne ? (
+            <>{` (${round.PointsP1}-${round.PointsP2}) `}</>
+          ) : (
+            <>{` (${round.PointsP2}-${round.PointsP1}) `}</>
+          );
         })}
       </div>
       {classes[type]}
