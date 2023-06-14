@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function Example() {
   const session = useSession();
@@ -15,14 +16,18 @@ export default function Example() {
 
   useEffect(() => {
     if (session?.status === "authenticated") {
-      router.push("/");
-    }
+      toast.success("Logeado exitosamente!")
+      router.push("/profile");
+    } 
   });
+
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signIn("credentials", { ...data }).then(() =>
-      alert("[+] User has been logged!")
-    );
+    signIn("credentials", { ...data }).then((callback) => {
+      if (callback?.error) {
+        toast.error(callback.error)
+      }
+    });
   };
 
   return (

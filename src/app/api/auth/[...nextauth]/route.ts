@@ -6,6 +6,9 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
+import { JWT } from "next-auth/jwt";
+import { use } from "react";
+import { getMaxAge } from "next/dist/server/image-optimizer";
 // import bcrypt from 'bcrypt'
 
 
@@ -33,6 +36,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
+        
         if (!credentials?.email || !credentials.password) {
           throw new Error("Please enter an email and password");
         }
@@ -64,11 +68,27 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 24,
   },
   debug: process.env.NODE_ENV === "development",
+  pages: {
+    signIn: '/login',
+    error: '/login', // Error code passed in query string as ?error=
+  },
+  callbacks: {
+    // jwt: async ({token}) => {
+    //   token.role = "admin";
+    //   return token;
+    // },
+    // session: async ({session, token}) => {
+    //   session.user = token
+    //   return session;
+    // }
+  }
+
 };
 const handler = NextAuth(authOptions);
 export { handler as POST, handler as GET };

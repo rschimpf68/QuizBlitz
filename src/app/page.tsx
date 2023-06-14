@@ -10,19 +10,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
+import { toast } from "react-hot-toast";
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect("/login");
-  }
-  // const deleteGame = await client.game.deleteMany({
-  //   where: { idPlayer1: "6483752c70bbd538d654c6f9" },
-  // // });
-  // const deleteG = await client.game.deleteMany({});
-
+  
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
       <div className="relative bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">

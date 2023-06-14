@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -16,8 +17,11 @@ export default function Register() {
     e.preventDefault();
     axios
       .post("/api/register", data)
-      .then(() => router.push("/login"))
-      .catch(() => alert("[-] An error occurred"));
+      .then(() => {
+        toast.success("Usuario correctamente registrado!")
+        router.push("/login")
+      })
+      .catch(() => toast.error("Algo salió mal..."));
   };
 
   return (
