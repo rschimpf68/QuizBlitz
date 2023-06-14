@@ -8,6 +8,7 @@ import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 import { JWT } from "next-auth/jwt";
 import { use } from "react";
+import { getMaxAge } from "next/dist/server/image-optimizer";
 // import bcrypt from 'bcrypt'
 
 
@@ -70,8 +71,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 60 * 60 * 24, 
-    updateAge: 86400, 
+    maxAge: 60 * 60 * 24,
   },
   debug: process.env.NODE_ENV === "development",
   pages: {
@@ -79,8 +79,7 @@ export const authOptions: NextAuthOptions = {
     error: '/login', // Error code passed in query string as ?error=
   },
   callbacks: {
-    // jwt: async ({token, user}) => {
-      
+    // jwt: async ({token}) => {
     //   token.role = "admin";
     //   return token;
     // },

@@ -13,10 +13,10 @@ export async function middleware(req: NextRequest) {
   if (!token) {
     return NextResponse.rewrite(new URL('/login', req.url))
   }
-  console.log(token)
+  
   return NextResponse.next()
 }
 
 export const config = {
-   matcher: ['/', '/ShowSession']
+   matcher: ['/', '/profile']
 }
