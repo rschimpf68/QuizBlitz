@@ -98,6 +98,7 @@ const GameCard: React.FC<Props> = ({
               alt="Imagen de fondo"
               width={750}
               height={1000}
+              fill
             />
             <div className="absolute top-4 left-0 w-full h-full flex-col justify-center items-center">
               <QuestionAndAnswers
