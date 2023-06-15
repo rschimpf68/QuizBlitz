@@ -109,7 +109,7 @@ const GameCard: React.FC<Props> = ({
           </div>
         </div>
       ) : (
-        <div className="flex min-h-screen w-4/12 bg-white px-10 justify-center items-center relative">
+        <div className="flex min-h-screen w-full md:w-4/12 bg-white px-10 justify-center items-center relative">
           <div className="inset-0 relative">
             <Image
               src="/images/FinalRes.png"
