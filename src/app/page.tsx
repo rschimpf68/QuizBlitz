@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
-        <section className="1/2 w-full flex flex-col flex-1 flex-grow ">
+        <section className="h-1/2 w-full flex flex-col">
           <div className="w-full p-4 flex justify-end items-start ">
             <SoundButton
               initialImageUrl="/images/MusicOn.png"
@@ -27,7 +27,7 @@ export default async function Home() {
             />
           </div>
 
-          <div className="flex justify-center   items-center  w-full flex-1 flex-grow  ">
+          <div className="flex justify-center  items-center  w-full flex-1 flex-grow  ">
             <Image
               src="/images/QBTitle.png"
               alt="QuizBlitz"
