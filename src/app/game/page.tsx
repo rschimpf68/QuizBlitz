@@ -9,7 +9,7 @@ import Image from "next/image";
 import StartButton from "../components/B-Play";
 import "tailwindcss/tailwind.css";
 import localFont from "next/font/local";
-const myFont = localFont({ src: "../../../public/fonts/upheavtt.ttf" });
+const myFont = localFont({ src: "../../../public/fonts/font.ttf" });
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -59,7 +59,7 @@ export default async function PreGame() {
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
-      <section className="flex flex-col items-center justify-center bg-customBlue w-4/12 min-h-screen">
+      <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen">
         <div className="h-auto w-2/3 mt-36">
           <UserGameDescription
             username={

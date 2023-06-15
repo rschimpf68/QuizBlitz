@@ -50,7 +50,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
+    <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
       {
         <GameCard
           questions={finalQuestions}
