@@ -1,7 +1,7 @@
 import { Game, Round, User } from "@prisma/client";
 import { type } from "os";
 import { FunctionComponent } from "react";
-import ShowGameResume from "./ShowGameResume";
+import ShowGameResume from "./ComponentShowGameResume";
 
 export enum ModuleType {
   your,

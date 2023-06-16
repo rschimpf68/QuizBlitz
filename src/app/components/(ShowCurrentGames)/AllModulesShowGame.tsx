@@ -2,10 +2,10 @@
 import { Game, Round, User } from "@prisma/client";
 
 import { FunctionComponent } from "react";
-import ShowGameResume from "./ShowGameResume";
+import ShowGameResume from "./ComponentShowGameResume";
 import ModuleShowGame, { ModuleType } from "./ModuleShowGame";
 import useSWR, { Fetcher } from "swr";
-import { GetGamesByPlayerId } from "../currentGames/action";
+import { GetGamesByPlayerId } from "../../currentGames/action";
 
 type Props = {
   PlayerId?: string;
@@ -36,10 +36,14 @@ const AllModulesShowGame: FunctionComponent<Props> = ({ PlayerId }) => {
   const finishedGames = data?.filter((game) => game.Over === true);
   const unFinishedGames = data?.filter((game) => game.Over === false);
   const pendingGames = unFinishedGames?.filter(
-    (game) => game.TurnId === PlayerId
+    (game) =>
+      (game.Turn == 1 && game.idPlayer1 == PlayerId) ||
+      (game.Turn == 2 && game.idPlayer2 == PlayerId)
   );
   const waitingGames = unFinishedGames?.filter(
-    (game) => game.TurnId !== PlayerId
+    (game) =>
+      (game.Turn == 1 && game.idPlayer2 == PlayerId) ||
+      (game.Turn == 2 && game.idPlayer1 == PlayerId)
   );
   return (
     <>

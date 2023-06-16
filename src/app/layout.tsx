@@ -1,8 +1,7 @@
-import { Inter } from "next/font/google";
 import Provider from "./context/AuthConext";
 import "./globals.css";
 import ToasterContext from "./context/ToasterContext";
-const inter = Inter({ subsets: ["latin"] });
+import localFont from "next/font/local";
 
 export const metadata = {
   title: "QuizBlitz",
@@ -15,9 +14,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Provider>
-          {" "}
           <ToasterContext />
           {children}
         </Provider>

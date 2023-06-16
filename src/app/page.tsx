@@ -12,25 +12,22 @@ import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-import NavBarMenu from "./components/NavBarMenu";
+import NavBarMenu from "./components/(NavBar)/NavBarMenu";
 
 export default async function Home() {
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
-        <div className="w-full p-4 flex justify-end items-start">
-          {/* <DropdownMenu
-            collapsedImageUrl="/images/MenuClose.png"
-            expandedImageUrl="/images/MenuOpen.png"
-          /> */}
-          <SoundButton
-            initialImageUrl="/images/MusicOn.png"
-            transitionImageUrl="/images/MusicTransition2.png"
-            finalImageUrl="/images/MusicOff.png"
-          />
-        </div>
-        <section className="flex  flex-col w-full  items-center  flex-grow">
-          <div className="flex justify-center h-1/2 items-center w-full  ">
+        <section className="h-1/2 w-full flex flex-col">
+          <div className="w-full p-4 flex justify-end items-start ">
+            <SoundButton
+              initialImageUrl="/images/MusicOn.png"
+              transitionImageUrl="/images/MusicTransition2.png"
+              finalImageUrl="/images/MusicOff.png"
+            />
+          </div>
+
+          <div className="flex justify-center  items-center  w-full flex-1 flex-grow  ">
             <Image
               src="/images/QBTitle.png"
               alt="QuizBlitz"
@@ -39,16 +36,17 @@ export default async function Home() {
               draggable="false"
             />
           </div>
-          <div className="flex justify-center h-1/4 items-center w-full  ">
-            <PlayButton
-              unpressedImageUrl="/images/Normal.png"
-              pressedImageUrl="/images/Push.png"
-              href="/game"
-            />
-          </div>
-          <section className="h-1/4  w-full flex items-end">
-            <NavBarMenu />
-          </section>
+        </section>
+        <div className="flex justify-center h-1/4 items-center w-full  ">
+          <PlayButton
+            unpressedImageUrl="/images/Normal.png"
+            pressedImageUrl="/images/Push.png"
+            href="/game"
+            useLink={false}
+          />
+        </div>
+        <section className="h-1/4  w-full flex items-end">
+          <NavBarMenu />
         </section>
       </div>
     </div>

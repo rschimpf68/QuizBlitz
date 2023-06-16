@@ -60,12 +60,17 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
       <div className="font-bold">
         {OtherPlayer ? OtherPlayer.name : "Random Oponent"}
       </div>
-      <div>
-        {game.Rounds.map((round, key) => {
-          return isPlayerOne ? (
-            <>{` (${round.PointsP1}-${round.PointsP2}) `}</>
-          ) : (
-            <>{` (${round.PointsP2}-${round.PointsP1}) `}</>
+      <div className="flex flex-row  ">
+        {game.Rounds.map((round, index) => {
+          return (
+            <section className="flex flex-col mx-1" key={index}>
+              <div className="text-center font-bold">{`R${index + 1}`}</div>
+              <div>
+                {isPlayerOne
+                  ? ` (${round.PointsP1}-${round.PointsP2}) `
+                  : ` (${round.PointsP2}-${round.PointsP1}) `}
+              </div>
+            </section>
           );
         })}
       </div>
