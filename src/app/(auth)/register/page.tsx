@@ -49,7 +49,7 @@ export default function Register() {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="name"
                   name="name"
                   type="text"
                   value={data.name}
