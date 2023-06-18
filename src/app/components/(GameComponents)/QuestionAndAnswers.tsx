@@ -4,13 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import { Answer } from "@prisma/client";
+import { QuestionWithAnswers } from "@/app/game/[id]/action";
 interface Props {
   question: string;
   answers: {
     answer: string;
     id: string;
   }[];
-  onAnswer: (arg1: number, arg2: boolean) => void;
+  onAnswer: (arg1: number, arg2: boolean, arg3: QuestionWithAnswers) => void;
 }
 const QuestionAndAnswers: React.FC<Props> = ({
   question,

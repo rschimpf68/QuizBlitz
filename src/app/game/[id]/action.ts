@@ -1,8 +1,18 @@
 "use server";
 import client from "@/app/libs/prismadb";
-import { Game, Round } from "@prisma/client";
+import { Randomize } from "@/utils/utils";
+import { Answer, Game, Round } from "@prisma/client";
+import next from "next/types";
 
+export interface QuestionWithAnswers {
+   question: string;
+   id: string;
+   answers: {
+      answer: string;
+      id: string;
+   }[];
 
+}
 export async function updateGame(
    game: Game & { Rounds: Round[] },
    points: number
@@ -66,14 +76,37 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
       return null;
    }
 }
-export async function checkAnswer(answerId: string) {
-   const answerIsCorrect = await client.answer.findUnique({
-      select: {
-         correct: true,
-      },
-      where: {
-         id: answerId as string,
-      },
-   });
-   return answerIsCorrect?.correct as boolean;
+export async function checkAnswer(answerId: string): Promise<[
+   boolean, QuestionWithAnswers]> {
+   const NumberQuestions = 95
+   const randomIndex = Math.floor(Math.random() * NumberQuestions);
+   const [answerIsCorrect, nextQuestion] = await Promise.all([
+      await client.answer.findUnique({
+         select: {
+            correct: true,
+         },
+         where: {
+            id: answerId as string,
+         },
+      }),
+      await client.question.findFirst({
+         skip: randomIndex,
+         select: {
+            id: true,
+            question: true,
+
+            answers: {
+               select: {
+                  id: true,
+                  answer: true,
+               },
+            },
+         },
+      })
+
+   ]);
+   if (nextQuestion?.answers) nextQuestion.answers = Randomize(nextQuestion.answers as Answer[], 4);
+
+   const result = answerIsCorrect?.correct as boolean;
+   return [result, nextQuestion as QuestionWithAnswers]
 }

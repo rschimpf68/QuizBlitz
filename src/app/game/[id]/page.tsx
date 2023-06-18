@@ -5,6 +5,7 @@ import GameCard from "../../components/(GameComponents)/GameCard";
 import { Randomize } from "../../../utils/utils";
 import { useParams } from "next/navigation";
 import React from "react";
+import { QuestionWithAnswers } from "./action";
 
 export const dynamic = "force-dynamic";
 
@@ -27,11 +28,10 @@ export default async function GamePage({ params }: { params: { id: string } }) {
     questions.map((x) => x.id),
     QuestionsPerGame
   );
-
-  const finalQuestions = await client.question.findMany({
-    where: {
-      id: { in: questionsId },
-    },
+  const NumberQuestions = 95;
+  const randomIndex = Math.floor(Math.random() * NumberQuestions);
+  const firstQuesiton = await client.question.findFirst({
+    skip: randomIndex,
     select: {
       id: true,
       question: true,
@@ -44,16 +44,15 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       },
     },
   });
-
-  for (const q of finalQuestions) {
-    q.answers = Randomize(q.answers, 4);
-  }
+  if (firstQuesiton?.answers)
+    firstQuesiton.answers = Randomize(firstQuesiton.answers as Answer[], 4);
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
       {
         <GameCard
-          questions={finalQuestions}
+          firstQuestion={firstQuesiton as QuestionWithAnswers}
+          QuestionsPerGame={QuestionsPerGame}
           game={game as Game & { Rounds: Round[] }}
         />
       }
