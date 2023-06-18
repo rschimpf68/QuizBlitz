@@ -6,67 +6,53 @@ import Timer from "./Timer";
 import QuestionAndAnswers from "./QuestionAndAnswers";
 import Link from "next/link";
 import { Answer, Game, Question, Round } from "@prisma/client";
-import { updateGame } from "../../game/[id]/action";
+import { QuestionWithAnswers, updateGame } from "../../game/[id]/action";
 import Image from "next/image";
 interface Props {
-  questions: {
-    question: string;
-    answers: {
-      answer: string;
-      id: string;
-    }[];
-    id: string;
-  }[];
+  firstQuestion: QuestionWithAnswers;
 
   game: Game & { Rounds: Round[] };
-}
-interface AnsweredQuestion {
-  question: string;
-  selectedAnswer: string;
-  correct: boolean;
+  QuestionsPerGame: Number;
 }
 
 const GameCard: React.FC<Props> = ({
-  questions,
-
+  firstQuestion,
+  QuestionsPerGame,
   game,
 }) => {
   //React States
-  //Current question
-  const [questionCounter, setQuestionCounter] = useState(0);
+
   //GameOver
   const [finished, setFinished] = useState(false);
-  //Array of Answered questions by player
+  //Questions Answered correctly by player
   const [playerPoints, setPlayerPoints] = useState(0);
-  const [AnsweredQuestions, setAnsweredQuestions] = useState(
-    Array(questions.length).fill(null)
-  );
+  //Array of Answered questions by player
+  const [AnsweredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   //Question currently displayed
-  const question = questions[questionCounter];
+  const [question, setQuestion] = useState(firstQuestion);
 
   //Function ejectued when player selects an answer
-  const changeQuestion = async (index: number, correct: boolean) => {
+  const changeQuestion = async (
+    index: number,
+    correct: boolean,
+    nextQuesiton: QuestionWithAnswers
+  ) => {
     //Add Answer to the Answer Array
     if (correct) {
       setPlayerPoints((playerPoints) => playerPoints + 1);
     }
-    const answeredQuestion: AnsweredQuestion = {
-      question: question.question,
-      selectedAnswer: question.answers[index].answer,
-      correct: correct,
-    };
-    //Copy of the original Array.
+    //Adding Question to Answered Questions.
     const newAnsweredQuestion = [...AnsweredQuestions];
-    newAnsweredQuestion[questionCounter] = answeredQuestion;
+    newAnsweredQuestion.push(question.id);
     setAnsweredQuestions(newAnsweredQuestion);
 
-    if (questionCounter == questions.length - 1) {
+    if (AnsweredQuestions.length == 9) {
       //NO more questions? -> Finish game
       setFinished(true);
       gameOver();
     } else {
       // Go to the next Question
-      setQuestionCounter((questionCounter) => questionCounter + 1);
+      setQuestion(nextQuesiton);
     }
   };
   const gameOver = () => {
@@ -98,7 +84,6 @@ const GameCard: React.FC<Props> = ({
               alt="Imagen de fondo"
               width={750}
               height={1000}
-              fill
             />
             <div className="absolute top-4 left-0 w-full h-full flex-col justify-center items-center">
               <QuestionAndAnswers
