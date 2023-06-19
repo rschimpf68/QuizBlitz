@@ -1,11 +1,15 @@
 "use client";
 import { useCallback, useState } from "react";
-import { QuestionWithAnswers, checkAnswer } from "../../game/[id]/action";
+import {
+  QuestionWithAnswers,
+  checkAnswerGetNextQuestion,
+} from "../../game/[id]/action";
 
 interface Props {
   index: number;
   idAnswer: string;
   text: string;
+  idAnsweredQuestions: string[];
 
   onAnswered: (arg1: number, arg2: boolean, arg3: QuestionWithAnswers) => void;
 }
@@ -14,6 +18,7 @@ const AnswerComponent: React.FC<Props> = ({
   idAnswer,
   text,
   onAnswered,
+  idAnsweredQuestions,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState(false);
@@ -21,7 +26,10 @@ const AnswerComponent: React.FC<Props> = ({
   const handleSubmit = async () => {
     //Check if Answer is the correct one
 
-    const [isCorrect, nextQuestion] = await checkAnswer(idAnswer);
+    const [isCorrect, nextQuestion] = await checkAnswerGetNextQuestion(
+      idAnswer,
+      idAnsweredQuestions
+    );
 
     setCorrect(isCorrect);
     setAnswered(true);

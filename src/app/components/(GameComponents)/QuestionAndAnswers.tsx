@@ -6,6 +6,7 @@ import Timer from "./Timer";
 import { Answer } from "@prisma/client";
 import { QuestionWithAnswers } from "@/app/game/[id]/action";
 interface Props {
+  idAnsweredQuestions: string[];
   question: string;
   answers: {
     answer: string;
@@ -17,6 +18,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
   question,
   answers,
   onAnswer,
+  idAnsweredQuestions,
 }) => {
   return (
     <main>
@@ -31,6 +33,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
               index={index}
               idAnswer={answer.id}
               text={answer.answer}
+              idAnsweredQuestions={idAnsweredQuestions}
               onAnswered={onAnswer}
             />
           );

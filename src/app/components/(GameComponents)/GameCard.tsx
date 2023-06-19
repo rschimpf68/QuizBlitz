@@ -46,7 +46,7 @@ const GameCard: React.FC<Props> = ({
     newAnsweredQuestion.push(question.id);
     setAnsweredQuestions(newAnsweredQuestion);
 
-    if (AnsweredQuestions.length == 9) {
+    if (AnsweredQuestions.length == QuestionsPerGame) {
       //NO more questions? -> Finish game
       setFinished(true);
       gameOver();
@@ -63,7 +63,7 @@ const GameCard: React.FC<Props> = ({
   return (
     <>
       {!finished ? (
-        <div className="flex min-h-screen flex-col  w-full md:w-4/12    bg-customBlue px-10">
+        <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
           <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5 relative">
             <div className="absolute top-0 left-0 w-full h-full z-0">
               <Image
@@ -78,18 +78,20 @@ const GameCard: React.FC<Props> = ({
             </div>
           </div>
 
-          <div className="w-full h-auto flex-col justify-center items-center mt-8 relative">
+          <div className="w-full h-auto flex-col justify-center items-center mt-8 relative overflow-hidden">
             <Image
               src="/images/GameCard.png"
               alt="Imagen de fondo"
-              width={750}
+              width={650}
               height={1000}
+              quality={5}
             />
             <div className="absolute top-4 left-0 w-full h-full flex-col justify-center items-center">
               <QuestionAndAnswers
                 question={question.question}
                 answers={question.answers}
                 onAnswer={changeQuestion}
+                idAnsweredQuestions={AnsweredQuestions}
               />
             </div>
           </div>

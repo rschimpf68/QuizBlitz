@@ -76,9 +76,9 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
       return null;
    }
 }
-export async function checkAnswer(answerId: string): Promise<[
+export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae34295a400fe34", IdQuestionsAnswered: string[] = []): Promise<[
    boolean, QuestionWithAnswers]> {
-   const NumberQuestions = 95
+   const NumberQuestions = 94
    const randomIndex = Math.floor(Math.random() * NumberQuestions);
    const [answerIsCorrect, nextQuestion] = await Promise.all([
       await client.answer.findUnique({
@@ -91,6 +91,11 @@ export async function checkAnswer(answerId: string): Promise<[
       }),
       await client.question.findFirst({
          skip: randomIndex,
+         where: {
+            NOT: {
+               id: { in: IdQuestionsAnswered },
+            }
+         },
          select: {
             id: true,
             question: true,
