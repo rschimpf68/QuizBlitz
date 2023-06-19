@@ -43,7 +43,8 @@ const AllModulesShowGame: FunctionComponent<Props> = ({ PlayerId }) => {
   const waitingGames = unFinishedGames?.filter(
     (game) =>
       (game.Turn == 1 && game.idPlayer2 == PlayerId) ||
-      (game.Turn == 2 && game.idPlayer1 == PlayerId)
+      (game.Turn == 2 && game.idPlayer1 == PlayerId) ||
+      (game.Turn == 0 && game.idPlayer1 == PlayerId)
   );
   return (
     <>

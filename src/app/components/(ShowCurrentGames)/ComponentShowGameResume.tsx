@@ -31,6 +31,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
         width={20}
         height={20}
         className="mr-2"
+        quality={1}
       ></Image>
     ),
     [ModuleType.finished]:
@@ -41,6 +42,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
           width={20}
           height={20}
           className="mr-2"
+          quality={1}
         />
       ) : (
         <Image
@@ -49,6 +51,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
           width={20}
           height={20}
           className="mr-2"
+          quality={1}
         />
       ),
   };
@@ -58,7 +61,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
     <div className="h-16 w-full flex flex-row justify-between items-center bg-slate-100 rounded-md  ">
       <div className="h-10 w-10 bg-gray-200 rounded-3xl ml-2"></div>
       <div className="font-bold">
-        {OtherPlayer ? OtherPlayer.name : "Random Oponent"}
+        {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}
       </div>
       <div className="flex flex-row  ">
         {game.Rounds.map((round, index) => {

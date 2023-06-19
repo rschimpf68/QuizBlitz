@@ -69,7 +69,14 @@ export default async function PreGame() {
           />
         </div>
         <div>
-          <Image src={"/images/VS.png"} alt="VS" width={112} height={112} />
+          <Image
+            src={"/images/VS.png"}
+            alt="VS"
+            width={112}
+            height={112}
+            quality={1}
+            sizes="100vh"
+          />
         </div>
         <div className="h-auto w-2/3 pb-16">
           <UserGameDescription

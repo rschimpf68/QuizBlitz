@@ -16,11 +16,18 @@ const UserGameDescription: FunctionComponent<Props> = ({
   return (
     <div className="flex w-auto h-20 items-center justify-center">
       <div className="relative">
-        <Image src={image} width={500} height={100} alt="" />
+        <Image
+          src={image}
+          width={500}
+          height={100}
+          alt=""
+          quality={1}
+          sizes="100vh"
+        />
         <h1
           className={`${font.className} text-2xl absolute inset-0 flex items-center justify-center text-white top-[-25%]`}
         >
-          {username ? username : "Random Opponent"}
+          {username ? username : "Oponente Aleatorio"}
         </h1>
       </div>
     </div>
