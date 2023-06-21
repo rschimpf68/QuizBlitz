@@ -44,6 +44,7 @@ export default async function Home() {
             href="/game"
             useLink={false}
           />
+          <Link href="/inviteUser"> Jugar con un amigo</Link>
         </div>
         <section className="h-1/4  w-full flex  items-end sticky bottom-0 z-50">
           <NavBarMenu />
