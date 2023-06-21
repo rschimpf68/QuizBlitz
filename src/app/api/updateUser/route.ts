@@ -9,12 +9,12 @@ export async function POST(request: NextRequest) {
     console.log(session)
 
     const body = await request.json();
-    const { name, email, password } = body;
+    const { name, email } = body;
 
 
     const updatedUser = await client.user.update({
         where: {
-            // id: session?.user.id
+            email: email
         },
         data : {
             name: name,
