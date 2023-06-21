@@ -19,16 +19,15 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
     setUsers(resultUsers);
   };
 
-  const handleSubmit = async (e:React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(selectedUser) {
-      const gameId = await newGame(idPlayer1, selectedUser?.id as string);       
-    
+    if (selectedUser) {
+      const gameId = await newGame(idPlayer1, selectedUser?.id as string);
+
       router.push(`/game/${gameId}`);
-     }    
+    }
   };
-  
-  
+
   return (
     <>
       <div className="w-full bg-blue-600 rounded-xl min-h-full py-2 px-2 flex flex-col">
@@ -42,12 +41,20 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
             placeholder="Buscar oponente"
             onChange={onChange}
           />
-          <form  onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="overflow-auto h-96 ">
               <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 ">
                 {users.length > 0 &&
                   users.map((user, index) => {
-                    return <ShowUser key={index} userSelected = {selectedUser} setUsuario= {setSelectedUser}  index= {index} user={user} />;
+                    return (
+                      <ShowUser
+                        key={index}
+                        userSelected={selectedUser}
+                        setUsuario={setSelectedUser}
+                        index={index}
+                        user={user}
+                      />
+                    );
                   })}
               </div>
             </div>
