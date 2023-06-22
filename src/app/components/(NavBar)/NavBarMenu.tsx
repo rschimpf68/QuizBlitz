@@ -1,30 +1,49 @@
 import Link from "next/link";
-import Image from "next/image";
-import NavBarComponent from "./NavBarComponent";
+import Image from "next/legacy/image";
+import MenuButton from "../../components/B-Menu";
 
-interface Props {}
+interface Props { }
 const NavBarMenu: React.FC<Props> = ({}) => {
   return (
-    <main className="w-full h-auto  flex  justify-center flex-row ">
-      <NavBarComponent
-        href="/currentGames"
-        imageSrc="/images/NavBar/note.png"
-        width={40}
-        height={40}
-      />
-      <NavBarComponent
-        href="/"
-        imageSrc="/images/NavBar/home1.png"
-        width={40}
-        height={40}
-      />
-      <NavBarComponent
-        href="/currentGames"
-        imageSrc="/images/NavBar/user1.png"
-        width={33}
-        height={40}
-      />
+    <main className="w-full h-auto flex justify-center flex-row relative bg-cover bg-center relative z-10">
+      <div className="w-full flex justify-center">
+        <Image
+          src="/images/NavBar/NavBarBackground.png"
+          alt="Imagen de fondo"
+          layout="fill"
+          objectFit="cover"
+          className="absolute z-0"
+        />
+  
+        <div className="w-full flex justify-center relative z-10">
+          <div className="flex-1 flex justify-center items-center">
+            <MenuButton
+              href="/currentGames"
+              unpressedImageUrl="/images/NavBar/HomePush.png"
+              pressedImageUrl="/images/NavBar/HomePush.png"
+              useLink={false}
+            />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <MenuButton
+              href="/"
+              unpressedImageUrl="/images/NavBar/HomePush.png"
+              pressedImageUrl="/images/NavBar/HomeP.png"
+              useLink={false}
+            />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <MenuButton
+              href="/currentGames"
+              unpressedImageUrl="/images/NavBar/HomePush.png"
+              pressedImageUrl="/images/NavBar/HomeP.png"
+              useLink={false}
+            />
+          </div>
+        </div>
+      </div>
     </main>
   );
+  
 };
 export default NavBarMenu;

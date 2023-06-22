@@ -45,9 +45,11 @@ export default async function Home() {
             useLink={false}
           />
         </div>
-        <section className="h-1/4  w-full flex  items-end sticky bottom-0 z-50">
-          <NavBarMenu />
-        </section>
+        <section className="h-screen w-full flex flex-col justify-end items-end relative">
+  <NavBarMenu />
+</section>
+
+
       </div>
     </div>
   );
