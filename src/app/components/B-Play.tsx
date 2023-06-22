@@ -21,7 +21,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   const [isPressed, setIsPressed] = useState(false);
   const body = () => {
     return (
-      <div className="w-full h-5/6 flex items-center">
+      <div className="w-full h-full flex items-center">
         <Image
           src={isPressed ? pressedImageUrl : unpressedImageUrl}
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}

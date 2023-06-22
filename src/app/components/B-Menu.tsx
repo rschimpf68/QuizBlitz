@@ -1,59 +1,91 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-interface DropdownMenuProps {
-  collapsedImageUrl: string;
-  expandedImageUrl: string;
+interface PlayButtonProps {
+  unpressedImageUrl: string;
+  pressedImageUrl: string;
+  href: string;
+  onClick?: () => void;
+  useLink?: boolean;
 }
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({
-  collapsedImageUrl,
-  expandedImageUrl,
+const PlayButton: React.FC<PlayButtonProps> = ({
+  unpressedImageUrl,
+  pressedImageUrl,
+  href,
+  onClick,
+  useLink = true,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [clientSide, setClientSide] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const body = () => {
+    return (
+      <div className="w-16 h-16 flex items-center">
+        <Image
+          src={isPressed ? pressedImageUrl : unpressedImageUrl}
+          alt={isPressed ? "Pressed Button" : "Unpressed Button"}
+          width={144}
+          height={75}
+          className="mt-22"
+        />
+      </div>
+    );
+  };
+  const handleMouseDown = () => {
+    setIsPressed(true);
+  };
 
-  useEffect(() => {
-    setClientSide(true);
-  }, []);
+  const handleMouseUp = () => {
+    setIsPressed(false);
+  };
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  const handleDragStart = (event: React.DragEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+  };
+
+  const handleMouseLeave = () => {
+    setIsPressed(false);
   };
 
   return (
-    <div className="relative inline-block">
-      <button
-        className="bg-transparent border-none outline-none cursor-pointer"
-        onClick={toggleMenu}
-      >
-        <Image
-          src={isOpen ? expandedImageUrl : collapsedImageUrl}
-          alt="Menu desplegable"
-          width={80}
-          height={40}
+    <>
+      {useLink ? (
+        <Link
+          href={href}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onClick={handleClick}
+          onDragStart={handleDragStart}
+          onMouseLeave={handleMouseLeave}
           draggable="false"
-        />
-      </button>
-
-      {clientSide && isOpen && (
-        <div className=" z-10 left-0  bg-indigo-900 rounded shadow-lg">
-          <button className="block w-full py-2 px-4 text-left text-white hover:bg-indigo-800 transition-colors duration-300">
-            Botón 1
-          </button>
-          <div className="border-t border-gray-400"></div>
-          <button className="block w-full py-2 px-4 text-left text-white hover:bg-indigo-800 transition-colors duration-300">
-            Botón 2
-          </button>
-          <div className="border-t border-gray-400"></div>
-          <button className="block w-full py-2 px-4 text-left text-white hover:bg-indigo-800 transition-colors duration-300">
-            Botón 3
-          </button>
-        </div>
+          prefetch={true}
+          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+        >
+          {body()}
+        </Link>
+      ) : (
+        <a
+          href={href}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onClick={handleClick}
+          onDragStart={handleDragStart}
+          onMouseLeave={handleMouseLeave}
+          draggable="false"
+          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+        >
+          {body()}
+        </a>
       )}
-    </div>
+    </>
   );
 };
 
-export default DropdownMenu;
+export default PlayButton;
