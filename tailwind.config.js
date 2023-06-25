@@ -22,6 +22,8 @@ module.exports = {
       colors: {
         customBlue: '#c8ecfc',
         BlueBG: '#0c4c8c',
+        QBGreen: '#8fde5d',
+        QBDarkGreen: '#6fc839',
       },
     },
   },

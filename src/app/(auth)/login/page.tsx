@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import Image from "next/image";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 export default function Example() {
   const session = useSession();
@@ -31,15 +34,26 @@ export default function Example() {
   };
 
   return (
+    <div className="flex items-start justify-center h-screen bg-BlueBG">
+    <div className={`${myFont.className}bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center`}>
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
+        <div className="flex w-auto h-20 items-center justify-center">
+      <div className="relative">
+        <Image
+          src="/images/Login-SignIn.png"
+          width={200}
+          height={100}
+          alt=""
+          quality={1}
+          sizes="100vh"
+        />
+          </div>
+          </div>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
             className="space-y-6"
             action="#"
@@ -49,7 +63,7 @@ export default function Example() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className={`${myFont.className}block text-sm font-medium leading-6 text-gray-900`}
               >
                 Email address
               </label>
@@ -103,14 +117,14 @@ export default function Example() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-QBDarkGreen px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-QBGreen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 mb-2 text-center text-sm text-gray-500">
             No estás registrado?{" "}
             <a
               href="/register"
@@ -138,7 +152,7 @@ export default function Example() {
           </button>
 
           <button
-            className="bg-red-600 text-white hover:bg-red-500 py-2 px-4 rounded w-full flex items-center justify-center"
+            className="bg-red-600 text-white hover:bg-red-500 py-2 px-4 mt-4 rounded w-full flex items-center justify-center"
             onClick={() => signIn("google")}
           >
             <svg
@@ -160,5 +174,7 @@ export default function Example() {
         </div>
       </div>
     </>
+    </div>
+  </div>
   );
 }
