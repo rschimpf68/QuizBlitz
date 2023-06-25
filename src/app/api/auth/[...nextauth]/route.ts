@@ -79,14 +79,11 @@ export const authOptions: NextAuthOptions = {
     error: '/login', // Error code passed in query string as ?error=
   },
   callbacks: {
-  //   session: async ({session, user}) => {
-  //     if (session?.user) {
-  //       session.user.id = user.id
-  //     }
-  //     return session;
-  // },
-  // jwt: async ({token}) => {
-  //   return token;
+  //   async session({ session, user, token }) {
+  //     return session
+  //   },
+  // jwt: async ({token, user, trigger, session}) => {
+  //   return token
   // }
 }
 
