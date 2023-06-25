@@ -11,13 +11,21 @@ export async function POST(request: NextRequest) {
     return new NextResponse("Missing Fields", { status: 400 });
   }
 
-  const exist = await prisma.user.findUnique({
+  const existEmail = await prisma.user.findUnique({
     where: {
-      email,
+      email
     },
   });
-
-  if (exist) {
+  const existName = await prisma.user.findFirst({
+    where: {
+      name,
+    },
+  });
+  
+  if (existEmail) {
+    throw new Error("Email already exists");
+  }
+  if (existName) {
     throw new Error("Email already exists");
   }
 

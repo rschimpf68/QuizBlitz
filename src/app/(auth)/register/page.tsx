@@ -4,8 +4,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { error } from "console";
+
 
 export default function Register() {
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -21,7 +24,7 @@ export default function Register() {
         toast.success("Usuario correctamente registrado!")
         router.push("/login")
       })
-      .catch(() => toast.error("Algo salió mal..."));
+      .catch(() => toast.error("Email o usuario ya existente"))
   };
 
   return (
@@ -49,7 +52,7 @@ export default function Register() {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="name"
                   name="name"
                   type="text"
                   value={data.name}
