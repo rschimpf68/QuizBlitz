@@ -79,15 +79,13 @@ export const authOptions: NextAuthOptions = {
     error: '/login', // Error code passed in query string as ?error=
   },
   callbacks: {
-    // jwt: async ({token}) => {
-    //   token.role = "admin";
-    //   return token;
-    // },
-    // session: async ({session, token}) => {
-    //   session.user = token
-    //   return session;
-    // }
-  }
+  //   async session({ session, user, token }) {
+  //     return session
+  //   },
+  // jwt: async ({token, user, trigger, session}) => {
+  //   return token
+  // }
+}
 
 };
 const handler = NextAuth(authOptions);
