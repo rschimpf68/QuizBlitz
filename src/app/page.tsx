@@ -41,10 +41,9 @@ export default async function Home() {
           <PlayButton
             unpressedImageUrl="/images/Normal.png"
             pressedImageUrl="/images/Push.png"
-            href="/game"
+            href="/inviteUser"
             useLink={false}
           />
-          <Link href="/inviteUser"> Jugar con un amigo</Link>
         </div>
         <section className="h-screen w-full flex flex-col justify-end items-end relative">
           <NavBarMenu />
