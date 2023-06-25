@@ -32,9 +32,9 @@ export default function Loading() {
               Cargando
             </div>
             <div className="w-4/5 justify-center mx-auto">
-              {arr.map(() => {
+              {arr.map((key) => {
                 return (
-                  <div>
+                  <div key={key}>
                     <button
                       className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${"bg-white"}`}
                     >
