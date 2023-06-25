@@ -45,25 +45,25 @@ const ShowUser: React.FC<Props> = ({
             className={`${
               isClicked
                 ? "bg-green-200 hover:green-100"
-                : "bg-black hover:bg-gray-900"
+                : "bg-black hover:bg-purple-900"
             } rounded-full `}
           />
         ) : (
           <img
-            src="https://api.dicebear.com/6.x/pixel-art/svg?seed=Rocky"
+            src="/images/Random.png"
             alt="Random"
             width={80}
             height={80}
             className={`${
               isClicked
                 ? "bg-green-200 hover:green-100"
-                : "bg-black hover:bg-gray-900"
+                : "bg-black hover:bg-purple-900"
             } rounded-full `}
           />
         )}
 
-        <h1 className="text-lg text-center">
-          {user ? user?.name : "Random Oponent"}
+        <h1 className="text-base text-center truncate max-w-full">
+          {user ? user?.name : "Random"}
         </h1>
       </label>
     </div>

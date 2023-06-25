@@ -33,6 +33,7 @@ export async function updateGame(
          },
       });
 
+
    } else {
 
       game.Rounds[game.Rounds.length - 1].PointsP2 = points;
@@ -78,10 +79,10 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
 }
 export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae34295a400fe34", IdQuestionsAnswered: string[] = []): Promise<[
    boolean, QuestionWithAnswers]> {
-   const NumberQuestions = 94
-   const randomIndex = Math.floor(Math.random() * NumberQuestions);
+   const NumberQuestions = 90
+   const randomIndex = Math.floor(Math.random() * (NumberQuestions - IdQuestionsAnswered.length));
    const [answerIsCorrect, nextQuestion] = await Promise.all([
-      await client.answer.findUnique({
+      client.answer.findUnique({
          select: {
             correct: true,
          },
@@ -89,13 +90,14 @@ export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae
             id: answerId as string,
          },
       }),
-      await client.question.findFirst({
-         skip: randomIndex,
+      client.question.findFirst({
          where: {
             NOT: {
                id: { in: IdQuestionsAnswered },
             }
          },
+         skip: randomIndex,
+
          select: {
             id: true,
             question: true,

@@ -21,11 +21,10 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedUser) {
-      const gameId = await newGame(idPlayer1, selectedUser?.id as string);
 
-      router.push(`/game/${gameId}`);
-    }
+    const gameId = await newGame(idPlayer1, selectedUser?.id as string);
+
+    router.push(`/game/${gameId}`);
   };
 
   return (
