@@ -11,7 +11,7 @@ export default async function Profile() {
   console.log(session?.user?.email)
   const user = await client.user.findUnique({
     where: {
-      email: session?.user?.email
+      email: session?.user?.email as string
     },
     select: {
       name: true
