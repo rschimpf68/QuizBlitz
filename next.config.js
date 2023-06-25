@@ -6,8 +6,20 @@ const nextConfig = {
       serverActions: true,
    },
    env: {
-      NEXTAUTH_SECRET : "CONTRASEÑAXD"
-   }
+      NEXTAUTH_SECRET: "CONTRASEÑAXD"
+   },
+   images: {
+
+      remotePatterns: [
+         {
+            protocol: 'https',
+            hostname: 'api.dicebear.com',
+            pathname: '/6.x/pixel-art/**'
+
+
+         },
+      ],
+   },
 
 }
 

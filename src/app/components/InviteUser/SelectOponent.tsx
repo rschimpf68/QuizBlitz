@@ -12,7 +12,7 @@ interface Props {
 const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
   const router = useRouter();
   const [users, setUsers] = useState(firstUsers);
-  const [selectedUser, setSelectedUser] = useState<User>();
+  const [selectedUser, setSelectedUser] = useState<User | undefined>();
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const resultUsers = await findUser(e.target.value.toString());
@@ -44,6 +44,11 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
           <form onSubmit={handleSubmit}>
             <div className="overflow-auto h-96 ">
               <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 ">
+                <ShowUser
+                  userSelected={selectedUser}
+                  setUsuario={setSelectedUser}
+                  index={1}
+                />
                 {users.length > 0 &&
                   users.map((user, index) => {
                     return (
