@@ -47,10 +47,8 @@ export default async function Home() {
           <Link href="/inviteUser"> Jugar con un amigo</Link>
         </div>
         <section className="h-screen w-full flex flex-col justify-end items-end relative">
-  <NavBarMenu />
-</section>
-
-
+          <NavBarMenu />
+        </section>
       </div>
     </div>
   );
