@@ -24,7 +24,7 @@ export default async function Home() {
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center justify-center">
         <Link href={"../"} className="w-10 h-10">
           <Image
-            src={"/images/leftArrow.png"}
+            src={"/images/LeftArrow.png"}
             alt=""
             width={40}
             height={40}

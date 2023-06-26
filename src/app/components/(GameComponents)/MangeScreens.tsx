@@ -18,16 +18,17 @@ interface Props {
     | null;
   loggedPlayer: User;
   firstQuestion: QuestionWithAnswers;
-
-  QuestionsPerGame: Number;
+  gameState: number;
+  QuestionsPerGame: number;
 }
 const ManageScreens: React.FC<Props> = ({
   game,
   loggedPlayer,
   firstQuestion,
   QuestionsPerGame,
+  gameState,
 }) => {
-  const [GameState, SetGameState] = useState(0);
+  const [GameState, SetGameState] = useState(gameState);
   const [PlayerPoints, setPlayerPoints] = useState(0);
 
   return (

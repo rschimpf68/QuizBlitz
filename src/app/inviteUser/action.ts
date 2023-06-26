@@ -1,5 +1,7 @@
 "use server";
 import client from "@/app/libs/prismadb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export async function findUser(
    userName: string
@@ -38,6 +40,7 @@ export async function newGame(idPlayer1: string, idPlayer2?: string) {
 }
 async function findRandomGame(playerId: string) {
    let gameId;
+
    const availableGame = await client.game.findFirst({
       where: {
          Player2: null,
@@ -58,6 +61,7 @@ async function findRandomGame(playerId: string) {
          data: {
             idPlayer2: playerId,
             Turn: 2,
+            TurnIsOver: true,
          },
       });
    } else {
@@ -66,6 +70,7 @@ async function findRandomGame(playerId: string) {
             idPlayer1: playerId as string,
             Turn: 1,
             Over: false,
+            TurnIsOver: true
          },
       });
 

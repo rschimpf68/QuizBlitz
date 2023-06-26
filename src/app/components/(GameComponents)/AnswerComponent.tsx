@@ -4,12 +4,16 @@ import {
   QuestionWithAnswers,
   checkAnswerGetNextQuestion,
 } from "../../game/[id]/action";
+import { Game, Round } from "@prisma/client";
 
 interface Props {
   index: number;
   idAnswer: string;
   text: string;
   idAnsweredQuestions: string[];
+  game: Game & {
+    Rounds: Round[];
+  };
 
   onAnswered: (arg1: number, arg2: boolean, arg3: QuestionWithAnswers) => void;
 }
@@ -19,6 +23,7 @@ const AnswerComponent: React.FC<Props> = ({
   text,
   onAnswered,
   idAnsweredQuestions,
+  game,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState(false);
@@ -28,7 +33,8 @@ const AnswerComponent: React.FC<Props> = ({
 
     const [isCorrect, nextQuestion] = await checkAnswerGetNextQuestion(
       idAnswer,
-      idAnsweredQuestions
+      idAnsweredQuestions,
+      game
     );
 
     setCorrect(isCorrect);
