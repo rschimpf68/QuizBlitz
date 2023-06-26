@@ -4,14 +4,9 @@ import client from "./libs/prismadb";
 import Image from "next/image";
 import PlayButton from "./components/buttons/B-Play";
 import SoundButton from "./components/buttons/B-Mute";
-import DropdownMenu from "./components/buttons/B-Menu";
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import NextAuth from "next-auth/next";
 import { redirect } from "next/navigation";
-import { toast } from "react-hot-toast";
-import Link from "next/link";
 import NavBarMenu from "./components/(NavBar)/NavBarMenu";
 
 export default async function Home() {

@@ -26,41 +26,25 @@ const ShowUser: React.FC<Props> = ({
     : user
     ? false
     : true;
-
+  const src = user ? user.image : "/images/Random.png";
   return (
     <div
-      className="w-full h-full flex flex-col justify-center items-center"
+      className="w-full h-full flex flex-col justify-center items-center hover:scale-105 "
       onClick={() => setUsuario(user)}
     >
       <label
         htmlFor={user?.id}
         className="w-full h-full flex flex-col justify-center items-center"
       >
-        {user ? (
-          <img
-            src={user.image as string}
-            alt={user.name as string}
-            width={80}
-            height={80}
-            className={`${
-              isClicked
-                ? "bg-green-200 hover:green-100"
-                : "bg-black hover:bg-purple-900"
-            } rounded-full `}
-          />
-        ) : (
-          <img
-            src="/images/Random.png"
-            alt="Random"
-            width={80}
-            height={80}
-            className={`${
-              isClicked
-                ? "bg-green-200 hover:green-100"
-                : "bg-black hover:bg-purple-900"
-            } rounded-full `}
-          />
-        )}
+        <img
+          src={src as string}
+          alt="Opponent"
+          width={80}
+          height={80}
+          className={`${
+            isClicked ? "border-8 border-green-200" : ""
+          } rounded-full `}
+        />
 
         <h1 className="text-base text-center truncate max-w-full">
           {user ? user?.name : "Random"}

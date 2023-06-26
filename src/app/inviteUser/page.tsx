@@ -6,11 +6,13 @@ import { newGame } from "./action";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Link from "next/link";
 import Image from "next/image";
+import { Create, Delete } from "../libs/CreateQuestion";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   const loggedUser = await client.user.findUnique({
     where: { email: session?.user?.email as string },
   });
+
   const users = await client.user.findMany({
     take: 12,
     where: {

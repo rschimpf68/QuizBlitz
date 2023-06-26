@@ -25,15 +25,18 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
       <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen">
-        <div className="h-auto w-2/3 mt-36">
+        <div className="h-1/3 w-5/6 flex justify-center items-center">
           <UserGameDescription
             username={
               PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
             font={myFont}
+            userImage={
+              PlayerIsPlayer1 ? game?.Player1.image : game?.Player2?.image
+            }
           />
         </div>
-        <div>
+        <div className="w-full h-1/6 flex justify-center ">
           <Image
             src={"/images/VS.png"}
             alt="VS"
@@ -43,18 +46,20 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
             sizes="100vh"
           />
         </div>
-        <div className="h-auto w-2/3 pb-16">
+        <div className=" h-1/3  w-5/6">
           <UserGameDescription
             username={
               !PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
             }
             font={myFont}
+            userImage={
+              !PlayerIsPlayer1 ? game?.Player1.image : game?.Player2?.image
+            }
+            second={true}
           />
         </div>
 
-        <div className="flex-grow" />
-
-        <div className="mt-auto mb-16">
+        <div className="h-1/6 mt-10 w-full flex items-center justify-center">
           <StartButton
             unpressedImageUrl="/images/StartN.png"
             pressedImageUrl="/images/StartP.png"
