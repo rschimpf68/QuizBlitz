@@ -68,7 +68,7 @@ export default async function Home() {
             useLink={false}
           />
         </div>
-        <section className="h-screen w-full flex flex-col justify-end items-end relative">
+        <section className="mt-24 w-full flex flex-col justify-end items-end relative">
           <NavBarMenu />
         </section>
       </div>
