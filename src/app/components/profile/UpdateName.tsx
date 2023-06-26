@@ -2,19 +2,35 @@
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function UpdateName() {
+interface Props {
+  username : string
+}
+
+
+const UpdateName: React.FC<Props> = ({username}) => {
   const { data: session, update } = useSession();
   const [data, setData] = useState({
     name: "",
     email: "",
   });
+
+  async function updateSession() {
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        name: username
+      }
+    })
+  }
+  
   const router = useRouter();
+
   const updateUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     axios
       .post("/api/updateUser", data)
       .then(() => {
@@ -30,7 +46,7 @@ export default function UpdateName() {
           className="space-y-6"
           action="#"
           method="POST"
-          onSubmit={updateUser}
+          onSubmit={() => {updateUser }}
         >
           <div>
             <div className="flex items-center justify-between">
@@ -71,3 +87,5 @@ export default function UpdateName() {
     </div>
   );
 }
+
+export default UpdateName;

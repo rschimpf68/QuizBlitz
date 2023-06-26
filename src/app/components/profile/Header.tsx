@@ -13,8 +13,9 @@ interface Props {
 }
 
 const Header: React.FC<Props> =  ({username}) => {
-  const { data: session, status } = useSession()
+  const { data: session, status, update } = useSession()
 
+ 
   return (
     <header className="bg-white py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -36,7 +37,7 @@ const Header: React.FC<Props> =  ({username}) => {
                 />
                 <div className="space-y-1 font-medium">
                   <p>
-                    {username}
+                    {session.user?.name}
                     <time className="block text-sm text-gray-500 dark:text-gray-400">
                     {session.user?.email}
                     </time>

@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
+import { use } from "react";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -72,7 +73,12 @@ export const authOptions: NextAuthOptions = {
     error: '/login', // Error code passed in query string as ?error=
   },
   callbacks: {
-  
+    async jwt({token, user, trigger, session}) {
+      if (trigger == "update") {
+        return {...token, ...session.user}
+      }
+      return {...token, ...user}
+    }
 }
 
 };
