@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { UpdateAvatar } from "@/app/profile/action";
 
-const auth = (req: Request) => ({ id:  "session?.user?.name"}); // Fake auth function
+const auth = (req: Request) => ({ id: "session?.user?.name" }); // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -22,11 +22,11 @@ export const ourFileRouter = {
          return { userId: user.id };
       })
       .onUploadComplete(async ({ metadata, file }) => {
-         
-         
+
+
          // This code RUNS ON YOUR SERVER after upload
          // axios.post("http://localhost:3000/api/updateAvatar", {imageUrl: file.url})
-         UpdateAvatar(file.url)
+
 
       }),
 } satisfies FileRouter;
