@@ -24,14 +24,10 @@ export async function updateGame(
          where: { id: game.id },
          data: {
             Turn: turn,
-            Rounds: {
-               create: {
-                  PointsP1: points,
-                  PointsP2: 0,
-               },
-            },
+            TurnIsOver: true
          },
       });
+
 
    } else {
 
@@ -45,13 +41,13 @@ export async function updateGame(
       const isOver = winner ? true : false;
 
       const [UpdateRound, UpdateGame] = await Promise.all([
-         await client.round.update({
+         client.round.update({
             where: { id: currentRound.id },
-            data: { PointsP2: points },
+            data: {},
          }),
-         await client.game.update({
+         client.game.update({
             where: { id: game?.id },
-            data: { Turn: 1, Over: isOver, WinnerId: winner },
+            data: { Turn: 1, Over: isOver, WinnerId: winner, TurnIsOver: true },
          }),
       ]);
    }
@@ -76,12 +72,13 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
       return null;
    }
 }
-export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae34295a400fe34", IdQuestionsAnswered: string[] = []): Promise<[
+export async function checkAnswerGetNextQuestion(answerId: string, IdQuestionsAnswered: string[], game: Game & { Rounds: Round[] }): Promise<[
    boolean, QuestionWithAnswers]> {
-   const NumberQuestions = 94
-   const randomIndex = Math.floor(Math.random() * NumberQuestions);
+   const NumberQuestions = 90;
+   const currentRound = game.Rounds[game.Rounds.length - 1];
+   const randomIndex = Math.floor(Math.random() * (NumberQuestions - IdQuestionsAnswered.length));
    const [answerIsCorrect, nextQuestion] = await Promise.all([
-      await client.answer.findUnique({
+      client.answer.findUnique({
          select: {
             correct: true,
          },
@@ -89,17 +86,17 @@ export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae
             id: answerId as string,
          },
       }),
-      await client.question.findFirst({
-         skip: randomIndex,
+      client.question.findFirst({
          where: {
             NOT: {
                id: { in: IdQuestionsAnswered },
             }
          },
+         skip: randomIndex,
+
          select: {
             id: true,
             question: true,
-
             answers: {
                select: {
                   id: true,
@@ -111,6 +108,15 @@ export async function checkAnswerGetNextQuestion(answerId: string = "64740ac38ae
 
    ]);
    if (nextQuestion?.answers) nextQuestion.answers = Randomize(nextQuestion.answers as Answer[], 4);
+
+   const IsPlayer1 = game.Turn == 1;
+   const increment = answerIsCorrect?.correct ? 1 : 0;
+   if (IsPlayer1) {
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP1: { increment: increment } } })])
+   }
+   else {
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP2: { increment: increment } } })])
+   }
 
    const result = answerIsCorrect?.correct as boolean;
    return [result, nextQuestion as QuestionWithAnswers]

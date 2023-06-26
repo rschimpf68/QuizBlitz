@@ -1,6 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from "react";
-import { findUser, newGame } from "../../inviteUser/action";
+import { findUser, newGame } from "../../selectOpponent/action";
 import { User } from "@prisma/client";
 import ShowUser from "./ShowUser";
 import { GenericHTMLFormElement } from "axios";
@@ -12,7 +12,7 @@ interface Props {
 const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
   const router = useRouter();
   const [users, setUsers] = useState(firstUsers);
-  const [selectedUser, setSelectedUser] = useState<User>();
+  const [selectedUser, setSelectedUser] = useState<User | undefined>();
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const resultUsers = await findUser(e.target.value.toString());
@@ -21,11 +21,10 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedUser) {
-      const gameId = await newGame(idPlayer1, selectedUser?.id as string);
 
-      router.push(`/game/${gameId}`);
-    }
+    const gameId = await newGame(idPlayer1, selectedUser?.id as string);
+
+    router.push(`/game/${gameId}`);
   };
 
   return (
@@ -43,7 +42,12 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
           />
           <form onSubmit={handleSubmit}>
             <div className="overflow-auto h-96 ">
-              <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 ">
+              <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 p-2 overflow-x-hidden">
+                <ShowUser
+                  userSelected={selectedUser}
+                  setUsuario={setSelectedUser}
+                  index={1}
+                />
                 {users.length > 0 &&
                   users.map((user, index) => {
                     return (

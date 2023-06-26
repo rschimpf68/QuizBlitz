@@ -1,35 +1,105 @@
-import { Answer, Category, Game, Round } from "@prisma/client";
-import QuestionAndAnswers from "../../components/(GameComponents)/QuestionAndAnswers";
+import { Game, Round, User } from "@prisma/client";
 import client from "../../libs/prismadb";
-import GameCard from "../../components/(GameComponents)/GameCard";
-import { Randomize } from "../../../utils/utils";
-import { useParams } from "next/navigation";
 import React from "react";
 import { QuestionWithAnswers, checkAnswerGetNextQuestion } from "./action";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import ManageScreens from "@/app/components/(GameComponents)/MangeScreens";
 
 export const dynamic = "force-dynamic";
 
 export default async function GamePage({ params }: { params: { id: string } }) {
-  const game = await client.game.findUnique({
-    where: { id: params.id },
-    include: { Rounds: true },
-  });
-
-  const idPlayer = game?.Turn == 1 ? game?.idPlayer1 : game?.idPlayer2;
-
   const QuestionsPerGame = 10;
+  const session = await getServerSession(authOptions);
+  let [game, loggedUser] = await Promise.all([
+    client.game.findUnique({
+      where: { id: params.id },
+      include: { Rounds: true, Player1: true, Player2: true },
+    }),
+    client.user.findUnique({
+      where: { email: session?.user?.email as string },
+    }),
+  ]);
 
-  const [notIntereted, firstQuestion] = await checkAnswerGetNextQuestion();
+  const PlayerIsPlayer1 = game?.Player1.id == loggedUser?.id;
+  if (
+    (loggedUser?.id != game?.Player1.id &&
+      loggedUser?.id! != game?.Player2?.id) ||
+    (PlayerIsPlayer1 && game?.Turn != 1) ||
+    (!PlayerIsPlayer1 && game?.Turn != 2)
+  ) {
+    redirect("/");
+  }
+
+  if (PlayerIsPlayer1 && game?.TurnIsOver) {
+    const GameNewRoundAdded = await client.game.update({
+      where: { id: game?.id },
+      data: {
+        Rounds: {
+          create: {
+            PointsP1: 0,
+            PointsP2: 0,
+          },
+        },
+      },
+      include: {
+        Rounds: true,
+      },
+    });
+    game?.Rounds.push(
+      GameNewRoundAdded.Rounds[GameNewRoundAdded.Rounds.length - 1]
+    );
+  }
+
+  //Solving reloading/ exiting game problem
+  let firstQuestion: QuestionWithAnswers;
+  let gameState: number;
+  let playerPoints: number;
+  if (game?.TurnIsOver) {
+    const [notIntereted, question] = await checkAnswerGetNextQuestion(
+      "64740ac48ae34295a400fe35",
+      [],
+      game as Game & { Rounds: Round[] }
+    );
+    const update = await client.game.update({
+      where: {
+        id: game?.id as string,
+      },
+      data: {
+        TurnIsOver: false,
+      },
+    });
+    firstQuestion = question;
+    gameState = 0;
+  } else {
+    const question = await client.question.findUnique({
+      where: { id: game?.CurrentQuestionId as string },
+      select: {
+        id: true,
+        question: true,
+
+        answers: {
+          select: {
+            id: true,
+            answer: true,
+          },
+        },
+      },
+    });
+    firstQuestion = question as QuestionWithAnswers;
+    gameState = 1;
+  }
 
   return (
-    <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
-      {
-        <GameCard
-          firstQuestion={firstQuestion as QuestionWithAnswers}
-          QuestionsPerGame={QuestionsPerGame}
-          game={game as Game & { Rounds: Round[] }}
-        />
-      }
-    </main>
+    <>
+      <ManageScreens
+        game={game}
+        gameState={gameState}
+        loggedPlayer={loggedUser as User}
+        QuestionsPerGame={QuestionsPerGame}
+        firstQuestion={firstQuestion}
+      />
+    </>
   );
 }
