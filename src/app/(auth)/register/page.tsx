@@ -22,7 +22,7 @@ export default function Register() {
         toast.success("Usuario correctamente registrado!");
         router.push("/login");
       })
-      .catch(() => toast.error("Algo salió mal..."));
+      .catch(() => toast.error("Revisa los campos antes de registrarte"));
   };
 
   return (
