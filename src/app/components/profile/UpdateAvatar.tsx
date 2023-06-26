@@ -20,14 +20,15 @@ const UploadAvatar: React.FC<Props> = ({ email, setUrl }) => {
       <UploadButton<OurFileRouter>
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
-         update({
+         
+         res && update({
             ...session,
             user: {
               ...session?.user,
-              image: res[0].fileUrl 
+              image: res[0].fileUrl
             }
           })
-          setUrl(res[0].fileUrl)
+          res &&  setUrl(res[0].fileUrl)
           res && UpdateAvatar(res[0].fileUrl, email);
           
           toast.success("Avatar actualizado correctamente");
