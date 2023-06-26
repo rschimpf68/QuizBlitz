@@ -42,7 +42,7 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
           />
           <form onSubmit={handleSubmit}>
             <div className="overflow-auto h-96 ">
-              <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 ">
+              <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 p-2 overflow-x-hidden">
                 <ShowUser
                   userSelected={selectedUser}
                   setUsuario={setSelectedUser}

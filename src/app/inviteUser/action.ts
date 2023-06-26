@@ -30,6 +30,8 @@ export async function newGame(idPlayer1: string, idPlayer2?: string) {
          idPlayer2: idPlayer2,
          Turn: 1,
          Over: false,
+         TurnIsOver: true,
+
       }
 
    })

@@ -57,9 +57,14 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
   };
   const isPlayerOne = game.Player1.id === userId ? true : false;
   const OtherPlayer = isPlayerOne ? game.Player2 : game.Player1;
+  const src = OtherPlayer
+    ? OtherPlayer.image
+    : "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bella";
   return (
     <div className="h-16 w-full flex flex-row justify-between items-center bg-slate-100 rounded-md  ">
-      <div className="h-10 w-10 bg-gray-200 rounded-3xl ml-2"></div>
+      <div className="h-auto w-12   ml-2">
+        <img src={src as string} alt="" className="rounded-lg h-12 w-12" />
+      </div>
       <div className="font-bold">
         {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}
       </div>

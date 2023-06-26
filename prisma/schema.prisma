@@ -13,10 +13,9 @@ model Category {
 }
 
 model Question {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
-
-  answers Answer[]
+  answers  Answer[]
 }
 
 model Game {
