@@ -6,6 +6,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { name, email, password } = body;
+  const avatars = [
+    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Salem",
+    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Scooter",
+    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Coco",
+    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Leo",
+    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Muffin"
+  ]
+  var image = avatars[Math.floor(Math.random() * avatars.length)]; 
 
   if (!name || !email || !password) {
     return new NextResponse("Missing Fields", { status: 400 });
@@ -36,6 +44,7 @@ export async function POST(request: NextRequest) {
       email,
       name,
       hashedPassword,
+      image
     },
   });
 

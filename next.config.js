@@ -7,7 +7,7 @@ const nextConfig = {
    },
    env: {
       NEXTAUTH_SECRET : "CONTRASEÑAXD"
-   }
+   },
 
 }
 
