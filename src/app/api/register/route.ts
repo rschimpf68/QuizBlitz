@@ -19,6 +19,10 @@ export async function POST(request: NextRequest) {
     return new NextResponse("Missing Fields", { status: 400 });
   }
 
+  if(name.length > 10) {
+    return new NextResponse("Username too long", { status: 400 });
+  }
+
   const existEmail = await prisma.user.findUnique({
     where: {
       email
@@ -34,7 +38,7 @@ export async function POST(request: NextRequest) {
     throw new Error("Email already exists");
   }
   if (existName) {
-    throw new Error("Email already exists");
+    throw new Error("Name already exists");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
