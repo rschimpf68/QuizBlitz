@@ -20,6 +20,7 @@ interface Props {
   firstQuestion: QuestionWithAnswers;
   gameState: number;
   QuestionsPerGame: number;
+  IdAnsweredQuestions: string[];
 }
 const ManageScreens: React.FC<Props> = ({
   game,
@@ -27,6 +28,7 @@ const ManageScreens: React.FC<Props> = ({
   firstQuestion,
   QuestionsPerGame,
   gameState,
+  IdAnsweredQuestions,
 }) => {
   const [GameState, SetGameState] = useState(gameState);
   const [PlayerPoints, setPlayerPoints] = useState(0);
@@ -41,6 +43,7 @@ const ManageScreens: React.FC<Props> = ({
           setGameState={SetGameState}
           setPlayerPoints={setPlayerPoints}
           playerPoints={PlayerPoints}
+          idAnsweredQuestions={IdAnsweredQuestions}
         />
       ) : GameState == 0 ? (
         <Versus

@@ -19,18 +19,18 @@ model Question {
 }
 
 model Game {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  idPlayer1         String  @db.ObjectId
-  Player1           User    @relation(fields: [idPlayer1], references: [id], name: "player1")
-  idPlayer2         String? @db.ObjectId
-  Player2           User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
-  Turn              Int
-  Over              Boolean
-  Rounds            Round[]
-  WinnerId          String?
-  CurrentQuestionId String?
-
-  TurnIsOver Boolean?
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1           String   @db.ObjectId
+  Player1             User     @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2           String?  @db.ObjectId
+  Player2             User?    @relation(fields: [idPlayer2], references: [id], name: "player2")
+  Turn                Int
+  Over                Boolean
+  Rounds              Round[]
+  WinnerId            String?
+  CurrentQuestionId   String?
+  IdAnsweredQuestions String[]
+  TurnIsOver          Boolean?
 }
 
 model Round {

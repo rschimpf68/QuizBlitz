@@ -10,7 +10,6 @@ import ManageScreens from "@/app/components/(GameComponents)/MangeScreens";
 export const dynamic = "force-dynamic";
 
 export default async function GamePage({ params }: { params: { id: string } }) {
-  const QuestionsPerGame = 10;
   const session = await getServerSession(authOptions);
   let [game, loggedUser] = await Promise.all([
     client.game.findUnique({
@@ -54,8 +53,10 @@ export default async function GamePage({ params }: { params: { id: string } }) {
 
   //Solving reloading/ exiting game problem
   let firstQuestion: QuestionWithAnswers;
+  let AnsweredQuestions = new Array<string>();
+
   let gameState: number;
-  let playerPoints: number;
+
   if (game?.TurnIsOver) {
     const [notIntereted, question] = await checkAnswerGetNextQuestion(
       "64740ac48ae34295a400fe35",
@@ -88,8 +89,10 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       },
     });
     firstQuestion = question as QuestionWithAnswers;
+    AnsweredQuestions = game?.IdAnsweredQuestions as string[];
     gameState = 1;
   }
+  const QuestionsPerGame = 10 - AnsweredQuestions.length;
 
   return (
     <>
@@ -99,6 +102,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
         loggedPlayer={loggedUser as User}
         QuestionsPerGame={QuestionsPerGame}
         firstQuestion={firstQuestion}
+        IdAnsweredQuestions={AnsweredQuestions}
       />
     </>
   );
