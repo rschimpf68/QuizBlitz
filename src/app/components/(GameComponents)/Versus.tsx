@@ -45,15 +45,15 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
         <motion.div
           animate={{ x: 0 }}
           initial={{ x: -600 }}
-          className="w-full h-1/6 flex justify-center "
+          className="w-full py-8 h-1/6 flex justify-center "
         >
           <Image
-            src={"/images/VS.png"}
+            src={"/images/Vsus.png"}
             alt="VS"
             width={112}
             height={112}
-            quality={1}
-            sizes="100vh"
+            quality={100}
+            draggable="false"
           />
         </motion.div>
         <motion.div

@@ -25,6 +25,7 @@ const StartButton: React.FC<PlayButtonProps> = ({
           width={144}
           height={75}
           className="mt-22"
+          draggable="false"
         />
       </div>
     );

@@ -64,7 +64,7 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
             </div>
             <button
               type="submit"
-              className=" border-4 border-gray-200 flex justify-center items-center bg-orange-500 w-full h-10 rounded-xl text-2xl text-white font-bold hover:bg-orange-400"
+              className="py-6 border-4  flex justify-center items-center  w-full h-10 rounded-xl text-2xl text-white font-bold border-QBDarkGreen bg-QBGreen hover:bg-QBLightGreen duration-300"
             >
               Jugar
             </button>
