@@ -1,27 +1,41 @@
 "use client";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "../../api/uploadthing/core";
 import { toast } from "react-hot-toast";
 import { UpdateAvatar } from "@/app/profile/action";
-
+import "@uploadthing/react/styles.css";
+import { useSession } from "next-auth/react";
 interface Props {
-  email: string;
+   email: string
+   setUrl : Dispatch<SetStateAction<string>>
 }
 
-const UploadAvatar: React.FC<Props> = ({ email }) => {
+const UploadAvatar: React.FC<Props> = ({ email, setUrl }) => {
+   const { data: session, update  } = useSession()
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <UploadButton<OurFileRouter>
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
+         update({
+            ...session,
+            user: {
+              ...session?.user,
+              image: res[0].fileUrl 
+            }
+          })
+          setUrl(res[0].fileUrl)
           res && UpdateAvatar(res[0].fileUrl, email);
+          
           toast.success("Avatar actualizado correctamente");
         }}
         onUploadError={(error: Error) => {
           toast.error("Error al actualizar el avatar");
         }}
+
       />
     </main>
 

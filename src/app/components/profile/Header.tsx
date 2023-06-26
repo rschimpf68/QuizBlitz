@@ -1,21 +1,30 @@
 'use client'
 import prisma from "../../libs/prismadb";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useEffect, useState, } from "react";
 import Link from "next/link";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import axios from "axios";
 import Image from "next/image";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
+import { useRouter } from 'next/navigation'
+import path from "path";
 
 interface Props {
   username : string
+  image : string
 }
 
-const Header: React.FC<Props> =  ({username}) => {
+const Header: React.FC<Props> =   ({username, image}) => {
   const { data: session, status, update } = useSession()
 
- 
+  // const router = useRouter()
+  // const [username, setUsername] = useState(session?.user?.name)
+  
+  // useEffect(() => {
+  //   setUsername(session?.user?.name)
+  // }, [session])
+
   return (
     <header className="bg-white py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -33,11 +42,11 @@ const Header: React.FC<Props> =  ({username}) => {
                 <img
                   className="w-10 h-10 rounded-full"
                   
-                  src={session.user?.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT48Ke_Q2uphy_MQect9sVe9j0zRyea2Kp26g"} 
+                  src={image} 
                 />
                 <div className="space-y-1 font-medium">
                   <p>
-                    {session.user?.name}
+                    {username}
                     <time className="block text-sm text-gray-500 dark:text-gray-400">
                     {session.user?.email}
                     </time>
