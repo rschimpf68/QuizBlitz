@@ -82,22 +82,14 @@ const GameCard: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="w-full h-auto flex-col justify-center items-center mt-8 relative overflow-hidden">
-          <Image
-            src="/images/GameCard.png"
-            alt="Imagen de fondo"
-            width={650}
-            height={1000}
-            quality={5}
+        <div className="flex bg-[#D3AB6E] border-8  border-[#97605E] w-full h-full flex-col justify-center items-center mt-10 rounded-lg">
+          <QuestionAndAnswers
+            question={question.question}
+            answers={question.answers}
+            onAnswer={changeQuestion}
+            idAnsweredQuestions={AnsweredQuestions}
+            game={game}
           />
-          <div className="absolute top-4 left-0 w-full h-full flex-col justify-center items-center">
-            <QuestionAndAnswers
-              question={question.question}
-              answers={question.answers}
-              onAnswer={changeQuestion}
-              idAnsweredQuestions={AnsweredQuestions}
-            />
-          </div>
         </div>
       </div>
     </>

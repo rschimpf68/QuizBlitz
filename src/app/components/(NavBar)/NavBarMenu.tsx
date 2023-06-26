@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/legacy/image";
-import MenuButton from "../../components/B-Menu";
+import MenuButton from "../buttons/B-Menu";
 
-interface Props { }
+interface Props {}
 const NavBarMenu: React.FC<Props> = ({}) => {
   return (
-    <main className="w-full h-auto flex justify-center flex-row relative bg-cover bg-center relative z-10">
+    <main className="w-full h-auto flex justify-center flex-row relative bg-cover bg-center z-10">
       <div className="w-full flex justify-center">
         <Image
           src="/images/NavBar/NavBarBackground.png"
@@ -14,7 +14,7 @@ const NavBarMenu: React.FC<Props> = ({}) => {
           objectFit="cover"
           className="absolute z-0"
         />
-  
+
         <div className="w-full flex justify-center relative z-10">
           <div className="flex-1 flex justify-center items-center">
             <MenuButton
@@ -44,6 +44,5 @@ const NavBarMenu: React.FC<Props> = ({}) => {
       </div>
     </main>
   );
-  
 };
 export default NavBarMenu;

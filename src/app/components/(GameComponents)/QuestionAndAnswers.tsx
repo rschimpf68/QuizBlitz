@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
-import { Answer } from "@prisma/client";
+import { Answer, Game, Round } from "@prisma/client";
 import { QuestionWithAnswers } from "@/app/game/[id]/action";
 interface Props {
   idAnsweredQuestions: string[];
@@ -13,12 +13,16 @@ interface Props {
     id: string;
   }[];
   onAnswer: (arg1: number, arg2: boolean, arg3: QuestionWithAnswers) => void;
+  game: Game & {
+    Rounds: Round[];
+  };
 }
 const QuestionAndAnswers: React.FC<Props> = ({
   question,
   answers,
   onAnswer,
   idAnsweredQuestions,
+  game,
 }) => {
   return (
     <main>
@@ -35,6 +39,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
               text={answer.answer}
               idAnsweredQuestions={idAnsweredQuestions}
               onAnswered={onAnswer}
+              game={game}
             />
           );
         })}
