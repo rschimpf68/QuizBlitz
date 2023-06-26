@@ -20,7 +20,7 @@ export default function Example() {
   useEffect(() => {
     if (session?.status === "authenticated") {
       toast.success("Logeado exitosamente!")
-      router.push("/profile");
+      // router.push("/profile");
     } 
   });
 
