@@ -29,7 +29,7 @@ const ShowUser: React.FC<Props> = ({
   const src = user ? user.image : "/images/Random.png";
   return (
     <div
-      className="w-full h-full flex flex-col justify-center items-center hover:scale-105 "
+      className="w-full h-full flex flex-col justify-center items-center hover:scale-105 duration-200"
       onClick={() => setUsuario(user)}
     >
       <label
@@ -42,7 +42,7 @@ const ShowUser: React.FC<Props> = ({
           width={80}
           height={80}
           className={`${
-            isClicked ? "border-8 border-green-200" : ""
+            isClicked ? "border-8 border-blue-500 duration-200" : ""
           } rounded-full `}
         />
 

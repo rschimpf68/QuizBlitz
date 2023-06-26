@@ -24,6 +24,7 @@ module.exports = {
         BlueBG: '#0c4c8c',
         QBGreen: '#8fde5d',
         QBDarkGreen: '#6fc839',
+        QBLightGreen: '#9cef67',
       },
     },
   },

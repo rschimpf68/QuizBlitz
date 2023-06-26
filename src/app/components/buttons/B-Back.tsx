@@ -26,8 +26,8 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           src={isPressed ? pressedImageUrl : unpressedImageUrl}
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}
           width={140}
-          height={110}
-          className="mt-22"
+          height={78}
+          className=""
         />
       </div>
     );

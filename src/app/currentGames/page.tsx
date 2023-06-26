@@ -14,6 +14,7 @@ import AllModulesShowGame from "../components/(ShowCurrentGames)/AllModulesShowG
 import NavBarMenu from "../components/(NavBar)/NavBarMenu";
 import { GetGamesByPlayerId } from "./action";
 import { SWRConfig } from "swr";
+import BackButton from "../components/buttons/B-Back";
 
 export default async function PreGame() {
   const session = await getServerSession(authOptions);
@@ -51,6 +52,14 @@ export default async function PreGame() {
   return (
     <main className=" flex flex-col justify-center items-center bg-BlueBG h-screen">
       <section className="min-h-screen w-full  bg-[url(/images/Background.gif)] md:w-4/12 flex flex-col">
+      <div className="fabsolute ml-6 top-0 left-0 right-0">
+          <BackButton
+            unpressedImageUrl="/images/BackUnpressed.png"
+            pressedImageUrl="/images/BackPressed.png"
+            href="/"
+            useLink={false}
+          />
+        </div>
         <section className=" px-2 flex flex-grow flex-col pt-3 overflow-auto">
           <div className="flex flex-1 flex-col justify-center items-center flex-grow">
             <AllModulesShowGame PlayerId={playerId?.id} />
