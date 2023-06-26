@@ -2,29 +2,40 @@
 import { signIn, useSession } from "next-auth/react";
 import { toast } from 'react-hot-toast';
 import axios from "axios";
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useState } from 'react';
+import Router from 'next/router';
 
-
-export default function UpdateName() {
+interface Props {
+  setUser : Dispatch<SetStateAction<string>>
+}
+const UpdateName: React.FC<Props> = ({setUser}) => {
+  // const router = useRouter()
    const { data: session, update  } = useSession()
    const [data, setData] = useState({
       name: "",
       email: ""
     });
-    const router = useRouter()
-   const updateUser = (e: React.FormEvent<HTMLFormElement>) => {
+
+   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      
-   
+       
       axios.post('/api/updateUser', data)
         .then(() => {
-            router.refresh();
+          update({
+            ...session,
+            user: {
+              ...session?.user,
+              name: data.name
+            }
+          })
+          setUser(data.name)
           toast.success("Nombre correctamente actualizado")
         })
         .catch(() => toast.error("Algo salió mal..."));
+        
     }
    return (
+    
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -65,3 +76,5 @@ export default function UpdateName() {
       </div>
    )
 }
+
+export default UpdateName;

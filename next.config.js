@@ -5,9 +5,6 @@ const nextConfig = {
    experimental: {
       serverActions: true,
    },
-   env: {
-      NEXTAUTH_SECRET: "CONTRASEÑAXD"
-   },
    images: {
 
       remotePatterns: [
