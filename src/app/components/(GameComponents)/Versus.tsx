@@ -4,6 +4,7 @@ import UserGameDescription from "./UserGameDescription";
 import Image from "next/image";
 import StartButton from "../buttons/B-Start";
 import { Dispatch, SetStateAction } from "react";
+import { motion } from "framer-motion";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 export interface Props {
@@ -24,8 +25,13 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
   };
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
-      <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen">
-        <div className="h-1/3 w-5/6 flex justify-center items-center">
+      <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen overflow-hidden">
+        <motion.div
+          initial={{ y: -600 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="h-1/3 w-5/6 flex justify-center items-center"
+        >
           <UserGameDescription
             username={
               PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
@@ -35,8 +41,12 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
               PlayerIsPlayer1 ? game?.Player1.image : game?.Player2?.image
             }
           />
-        </div>
-        <div className="w-full h-1/6 flex justify-center ">
+        </motion.div>
+        <motion.div
+          animate={{ x: 0 }}
+          initial={{ x: -600 }}
+          className="w-full h-1/6 flex justify-center "
+        >
           <Image
             src={"/images/VS.png"}
             alt="VS"
@@ -45,8 +55,13 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
             quality={1}
             sizes="100vh"
           />
-        </div>
-        <div className=" h-1/3  w-5/6">
+        </motion.div>
+        <motion.div
+          animate={{ y: 0 }}
+          initial={{ y: 600 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className=" h-1/3  w-5/6"
+        >
           <UserGameDescription
             username={
               !PlayerIsPlayer1 ? game?.Player1.name : game?.Player2?.name
@@ -57,15 +72,19 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
             }
             second={true}
           />
-        </div>
+        </motion.div>
 
-        <div className="h-1/6 mt-10 w-full flex items-center justify-center">
+        <motion.div
+          animate={{ x: 0 }}
+          initial={{ x: 600 }}
+          className="h-1/6 mt-10 w-full flex items-center justify-center"
+        >
           <StartButton
             unpressedImageUrl="/images/StartN.png"
             pressedImageUrl="/images/StartP.png"
             onClick={onClick}
           />
-        </div>
+        </motion.div>
       </section>
     </main>
   );

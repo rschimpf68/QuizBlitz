@@ -1,12 +1,13 @@
 import { getServerSession } from "next-auth";
-import SelectOponent from "../components/InviteUser/SelectOponent";
+import SelectOponent from "../components/selectOponent/SelectOponent";
 
 import client from "../libs/prismadb";
-import { newGame } from "./action";
+
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Link from "next/link";
 import Image from "next/image";
 import { Create, Delete } from "../libs/CreateQuestion";
+import { newGame } from "./action";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   const loggedUser = await client.user.findUnique({

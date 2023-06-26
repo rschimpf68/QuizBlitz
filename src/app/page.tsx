@@ -57,9 +57,9 @@ export default async function Home() {
         </section>
         <div className="flex justify-center h-1/4 items-center w-full  ">
           <PlayButton
-            unpressedImageUrl="/images/Normal.png"
-            pressedImageUrl="/images/Push.png"
-            href="/inviteUser"
+            unpressedImageUrl="/images/Normal1.png"
+            pressedImageUrl="/images/Push1.png"
+            href="/selectOpponent"
             useLink={false}
           />
         </div>

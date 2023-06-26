@@ -1,6 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from "react";
-import { findUser, newGame } from "../../inviteUser/action";
+import { findUser, newGame } from "../../selectOpponent/action";
 import { User } from "@prisma/client";
 import ShowUser from "./ShowUser";
 import { GenericHTMLFormElement } from "axios";

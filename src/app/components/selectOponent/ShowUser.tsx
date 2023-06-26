@@ -6,7 +6,7 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { findUser } from "../../inviteUser/action";
+import { findUser } from "../../selectOpponent/action";
 import { User } from "@prisma/client";
 import Image from "next/image";
 interface Props {

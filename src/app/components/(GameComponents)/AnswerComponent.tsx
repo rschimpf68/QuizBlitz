@@ -5,6 +5,7 @@ import {
   checkAnswerGetNextQuestion,
 } from "../../game/[id]/action";
 import { Game, Round } from "@prisma/client";
+import { motion } from "framer-motion";
 
 interface Props {
   index: number;
@@ -26,17 +27,18 @@ const AnswerComponent: React.FC<Props> = ({
   game,
 }) => {
   const [answered, setAnswered] = useState(false);
+  const [displayAnimation, setDisplayAnimation] = useState(false);
   const [correct, setCorrect] = useState(false);
 
   const handleSubmit = async () => {
     //Check if Answer is the correct one
 
-    const [isCorrect, nextQuestion] = await checkAnswerGetNextQuestion(
-      idAnswer,
-      idAnsweredQuestions,
-      game
-    );
-
+    const [returns, a] = await Promise.all([
+      checkAnswerGetNextQuestion(idAnswer, idAnsweredQuestions, game),
+      trigerAnimation(),
+    ]);
+    const isCorrect = returns[0];
+    const nextQuestion = returns[1];
     setCorrect(isCorrect);
     setAnswered(true);
     setTimeout(() => {
@@ -44,9 +46,19 @@ const AnswerComponent: React.FC<Props> = ({
       onAnswered(index, isCorrect, nextQuestion);
     }, 200);
   };
+  const trigerAnimation = async () => {
+    setDisplayAnimation(true);
+    setTimeout(() => {
+      setDisplayAnimation(false);
+    }, 1000);
+    return "a";
+  };
 
   return (
-    <div>
+    <motion.div
+      animate={{ rotate: displayAnimation ? [2, 0, -2] : 0 }}
+      transition={{ duration: 0.2, times: [0.5, 1, 1.5] }}
+    >
       <button
         onClick={handleSubmit}
         className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
@@ -55,7 +67,7 @@ const AnswerComponent: React.FC<Props> = ({
       >
         {text}
       </button>
-    </div>
+    </motion.div>
   );
 };
 export default AnswerComponent;

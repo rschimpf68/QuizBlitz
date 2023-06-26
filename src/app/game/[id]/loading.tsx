@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
       <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
-        <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5 relative">
+        {/* <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5 relative">
           <div className="absolute top-0 left-0 w-full h-full z-0">
             <Image
               src="/images/Tempo.png"
@@ -45,7 +45,7 @@ export default function Loading() {
               })}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
