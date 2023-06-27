@@ -6,16 +6,7 @@ const nextConfig = {
       serverActions: true,
    },
    images: {
-
-      remotePatterns: [
-         {
-            protocol: 'https',
-            hostname: 'api.dicebear.com',
-            pathname: '/6.x/pixel-art/**'
-
-
-         },
-      ],
+      domains: ['api.dicebear.com', 'avatars.githubusercontent.com', 'lh3.googleusercontent.com', 'localhost'],
    },
 
 }

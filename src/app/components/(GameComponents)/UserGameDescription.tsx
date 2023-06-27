@@ -25,10 +25,14 @@ const UserGameDescription: FunctionComponent<Props> = ({
     <div className="flex w-full h-auto items-center justify-center flex-col">
       {!second && (
         <div className="w-full ml-auto  mb-2">
-          <img
+          <Image
             src={src}
             alt=""
-            className="h-24 w-24 rounded-lg border-4 border-black"
+            width={96}
+            height={96}
+            priority
+            sizes="100vh"
+            className="rounded-lg border-4 border-black"
           />
         </div>
       )}
@@ -50,10 +54,15 @@ const UserGameDescription: FunctionComponent<Props> = ({
       </div>
       {second && (
         <div className="w-full flex justify-end mr-auto mt-2">
-          <img
+          <Image
             src={src}
             alt=""
-            className="h-24 w-24 rounded-lg border-4 border-black "
+            width={96}
+            height={96}
+            sizes="100vh"
+            quality={5}
+            priority
+            className="rounded-lg border-4 border-black "
           />
         </div>
       )}
