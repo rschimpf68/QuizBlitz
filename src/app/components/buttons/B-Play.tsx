@@ -60,7 +60,6 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLAnchorElement>) => {
-    
     event.preventDefault();
   };
 
