@@ -33,6 +33,8 @@ const ManageScreens: React.FC<Props> = ({
 }) => {
   const [GameState, SetGameState] = useState(gameState);
   const [PlayerPoints, setPlayerPoints] = useState(0);
+  const [musicSound, setMusicSound] = useState(false)
+  
   
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
