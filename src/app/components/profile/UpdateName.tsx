@@ -35,45 +35,36 @@ const UpdateName: React.FC<Props> = ({ setUser }) => {
       .catch(() => toast.error("Algo salió mal..."));
   };
   return (
-    <div className="flex h-auto flex-col  px-6">
-      <div className="">
+    <div className="flex flex-col px-6">
+            <label className="font-bold">Actualizar Nombre</label>
         <form className="" action="#" method="POST" onSubmit={updateUser}>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Name
-            </label>
-
-            <div className="mt-2">
+            <div className="">
               <input
                 id="name"
                 name="name"
                 onChange={function (e) {
                   setData({ ...data, name: e.target.value });
                 }}
-                placeholder={session?.user?.name as string}
+                placeholder="Nuevo nombre..."
                 type="text"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className=" w-full rounded-md border-0 text-gray-900 placeholder:text-gray-400"
               />
-            </div>
           </div>
 
-          <div>
+
+        </form>
+        <div>
             <button
               type="submit"
               onClick={() =>
                 setData({ ...data, email: session?.user?.email as string })
               }
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full border-4 mt-2 justify-center items-center h-auto rounded-xl text-white font-bold border-QBDarkGreen bg-green-200 hover:bg-QBLightGreen duration-300"
             >
-              Update User
+              Actualizar Nombre
             </button>
           </div>
-        </form>
       </div>
-    </div>
   );
 };
 
