@@ -60,9 +60,8 @@ const GameCard: React.FC<Props> = ({
     newAnsweredQuestion.push(question.id);
     setAnsweredQuestions(newAnsweredQuestion);
 
-    if (AnsweredQuestions.length > QuestionsPerGame) {
+    if (AnsweredQuestions.length + 1 >= QuestionsPerGame) {
       //NO more questions? -> Finish game
-      setFinished(true);
       gameOver(true);
     } else {
       // Go to the next Question
