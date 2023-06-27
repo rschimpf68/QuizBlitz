@@ -15,7 +15,7 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const resultUsers = await findUser(e.target.value.toString());
+    const resultUsers = await findUser(e.target.value.toString(), idPlayer1);
     setUsers(resultUsers);
   };
 
