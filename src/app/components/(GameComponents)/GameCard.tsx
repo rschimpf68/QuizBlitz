@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Answer, Game, Question, Round } from "@prisma/client";
 import { QuestionWithAnswers, updateGame } from "../../game/[id]/action";
 import Image from "next/image";
+import SoundButton from "../buttons/B-Mute";
 interface Props {
   firstQuestion: QuestionWithAnswers;
   setGameState: Dispatch<SetStateAction<number>>;
@@ -80,7 +81,14 @@ const GameCard: React.FC<Props> = ({
   return (
     <>
       <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
-        <div className="mb-5 flex h-1/4 w-full justify-center items-center mt-5 relative">
+        <div className="flex justify-end w-full mt-2">
+          <SoundButton
+            initialImageUrl="/images/MusicOn.png"
+            transitionImageUrl="/images/MusicTransition2.png"
+            finalImageUrl="/images/MusicOff.png"
+          />
+        </div>
+        <div className="mb-5 flex h-1/4 w-full justify-center items-center relative">
           <div className="absolute top-0 left-0 w-full h-full z-0">
             <Image
               src="/images/Tempo.png"
@@ -89,8 +97,9 @@ const GameCard: React.FC<Props> = ({
               height={231}
             />
           </div>
+
           <div className="h-auto w-full border-lime-100 flex flex-col justify-center items-center text-6xl text-black font-bold mt-6 px-5 relative z-10">
-            <Timer gameOver={gameOver} time={30} />
+            <Timer gameOver={gameOver} time={45} />
           </div>
         </div>
 

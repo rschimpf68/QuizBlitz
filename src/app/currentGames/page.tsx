@@ -24,42 +24,9 @@ export default async function PreGame() {
     select: { id: true },
   });
 
-  // const games = await client.game.findMany({
-  //   where: {
-  //     OR: [
-  //       {
-  //         idPlayer1: playerId?.id,
-  //       },
-  //       {
-  //         idPlayer2: playerId?.id,
-  //       },
-  //     ],
-  //   },
-  //   include: {
-  //     Player1: true,
-  //     Player2: true,
-  //     Rounds: true,
-  //   },
-  // });
-  // const finishedGames = games.filter((game) => game.Over === true);
-  // const unFinishedGames = games.filter((game) => game.Over === false);
-  // const pendingGames = unFinishedGames.filter(
-  //   (game) => game.TurnId === playerId?.id
-  // );
-  // const waitingGames = unFinishedGames.filter(
-  //   (game) => game.TurnId !== playerId?.id
-  // );
   return (
     <main className=" flex flex-col justify-center items-center bg-BlueBG h-screen">
       <section className="min-h-screen w-full  bg-[url(/images/Background.gif)] md:w-4/12 flex flex-col">
-      <div className="fabsolute ml-6 top-0 left-0 right-0">
-          <BackButton
-            unpressedImageUrl="/images/BackUnpressed.png"
-            pressedImageUrl="/images/BackPressed.png"
-            href="/"
-            useLink={false}
-          />
-        </div>
         <section className=" px-2 flex flex-grow flex-col pt-3 overflow-auto">
           <div className="flex flex-1 flex-col justify-center items-center flex-grow">
             <AllModulesShowGame PlayerId={playerId?.id} />
