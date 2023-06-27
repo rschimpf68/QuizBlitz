@@ -29,6 +29,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.4.1
     version: 2.4.1
+  '@types/howler':
+    specifier: ^2.2.7
+    version: 2.2.7
   '@types/node':
     specifier: ^15.14.1
     version: 15.14.1
@@ -53,6 +56,9 @@ dependencies:
   fs:
     specifier: 0.0.1-security
     version: 0.0.1-security
+  howler:
+    specifier: ^2.2.3
+    version: 2.2.3
   next:
     specifier: ^13.4.3
     version: 13.4.3(react-dom@18.2.0)(react@18.2.0)
@@ -62,6 +68,9 @@ dependencies:
   react:
     specifier: 18.2.0
     version: 18.2.0
+  react-audio-player:
+    specifier: ^0.17.0
+    version: 0.17.0(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -74,6 +83,9 @@ dependencies:
   react-hot-toast:
     specifier: ^2.4.0
     version: 2.4.0(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
+  react-howler:
+    specifier: ^5.2.0
+    version: 5.2.0
   react-spinners:
     specifier: ^0.13.8
     version: 0.13.8(react-dom@18.2.0)(react@18.2.0)
@@ -106,6 +118,9 @@ devDependencies:
   '@types/react-dom':
     specifier: 18.0.10
     version: 18.0.10
+  '@types/react-howler':
+    specifier: ^5.2.0
+    version: 5.2.0
   autoprefixer:
     specifier: ^10.4.13
     version: 10.4.13(postcss@8.4.21)
@@ -546,6 +561,9 @@ packages:
       '@types/node': 15.14.1
     dev: true
 
+  /@types/howler@2.2.7:
+    resolution: {integrity: sha512-PEZldwZqJJw1PWRTpupyC7ajVTZA8aHd8nB/Y0n6zRZi5u8ktYDntsHj13ltEiBRqWwF06pASxBEvCTxniG8eA==}
+
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
@@ -564,6 +582,13 @@ packages:
   /@types/react-dom@18.0.10:
     resolution: {integrity: sha512-E42GW/JA4Qv15wQdqJq8DL4JhNpB3prJgjgapN3qJT9K2zO5IIAQh4VXvCEDupoqAwnz0cY4RlXeC/ajX5SFHg==}
     dependencies:
+      '@types/react': 18.0.27
+    dev: true
+
+  /@types/react-howler@5.2.0:
+    resolution: {integrity: sha512-KyJTU/TjL/5RdnNgd02YZtP8ucJ9UsIXtvXIg66lGo9ECgIQXR8OZVQQm8/gAjOFLFjT7PClPOAzITn3Ap+Olw==}
+    dependencies:
+      '@types/howler': 2.2.7
       '@types/react': 18.0.27
     dev: true
 
@@ -2139,6 +2164,10 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /howler@2.2.3:
+    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
+    dev: false
+
   /https-proxy-agent@5.0.1:
     resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
     engines: {node: '>= 6'}
@@ -3203,6 +3232,17 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /react-audio-player@0.17.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-aCZgusPxA9HK7rLZcTdhTbBH9l6do9vn3NorgoDZRxRxJlOy9uZWzPaKjd7QdcuP2vXpxGA/61JMnnOEY7NXeA==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -3246,6 +3286,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
       - csstype
+    dev: false
+
+  /react-howler@5.2.0:
+    resolution: {integrity: sha512-oDK+zML0MHf3nVNM4lMxh+re87NDa7fHowea2WK8197yqnMiZfPVHoMXtfb/PtuoOsWLO06vmEAtovwTRWpTFg==}
+    dependencies:
+      howler: 2.2.3
+      prop-types: 15.8.1
     dev: false
 
   /react-is@16.13.1:

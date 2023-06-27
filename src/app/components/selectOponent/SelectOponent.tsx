@@ -1,19 +1,26 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { findUser, newGame } from "../../selectOpponent/action";
 import { User } from "@prisma/client";
 import ShowUser from "./ShowUser";
 import { GenericHTMLFormElement } from "axios";
 import { useRouter } from "next/navigation";
+import { Howl } from "howler";
 interface Props {
   firstUsers: User[];
   idPlayer1: string;
 }
 const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
   const router = useRouter();
+  const [clicked, setClicked] = useState(false)
   const [users, setUsers] = useState(firstUsers);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
 
+
+  var sound = new Howl({
+    src: ['/sounds/Click.wav']
+  });
+  if (clicked) sound.play()
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const resultUsers = await findUser(e.target.value.toString());
     setUsers(resultUsers);
@@ -65,6 +72,7 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
             <button
               type="submit"
               className="py-6 border-4  flex justify-center items-center  w-full h-10 rounded-xl text-2xl text-white font-bold border-QBDarkGreen bg-QBGreen hover:bg-QBLightGreen duration-300"
+              onClick={() => setClicked(!clicked)}
             >
               Jugar
             </button>

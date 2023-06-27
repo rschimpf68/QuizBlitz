@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-
+import Howl  from 'react-howler'
 import client from "./libs/prismadb";
 import Image from "next/image";
 import PlayButton from "./components/buttons/B-Play";
@@ -8,8 +8,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import NavBarMenu from "./components/(NavBar)/NavBarMenu";
-
+import Sound from "./components/Sound";
 export default async function Home() {
+
   const session = await getServerSession(authOptions);
   const user = await client.user.findUnique({
     where: { email: session?.user?.email as string },
@@ -35,16 +36,20 @@ export default async function Home() {
   }
   //const game = await client.game.deleteMany({});
   return (
+    
     <div className="flex items-start justify-center h-screen bg-BlueBG">
+      
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
+      
+      
         <section className="h-1/2 w-full flex flex-col">
-          <div className="w-full p-4 flex justify-end items-start ">
+          {/* <div className="w-full p-4 flex justify-end items-start ">
             <SoundButton
               initialImageUrl="/images/MusicOn.png"
               transitionImageUrl="/images/MusicTransition2.png"
               finalImageUrl="/images/MusicOff.png"
             />
-          </div>
+          </div> */}
 
           <div className="flex justify-center  items-center  w-full flex-1 flex-grow  ">
             <Image
@@ -56,7 +61,7 @@ export default async function Home() {
             />
           </div>
         </section>
-        <div className="flex justify-center h-1/4 items-center w-full  ">
+        <div className="flex justify-center h-1/4 items-center w-full">
           <PlayButton
             unpressedImageUrl="/images/Normal1.png"
             pressedImageUrl="/images/Push1.png"

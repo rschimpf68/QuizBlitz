@@ -1,7 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Sound from "../Sound";
+import {Howl, Howler} from 'howler'
 
 interface PlayButtonProps {
   unpressedImageUrl: string;
@@ -19,8 +21,19 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   useLink = true,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
+  var sound = new Howl({
+    src: ['/sounds/Click.wav']
+  });
+  
+  useEffect(() => {
+    if (isPressed == true) {
+      sound.play();
+    }
+  }, [isPressed])
+
   const body = () => {
     return (
+      
       <div className="w-full h-full flex items-center">
         <Image
           src={isPressed ? pressedImageUrl : unpressedImageUrl}
@@ -47,6 +60,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLAnchorElement>) => {
+    
     event.preventDefault();
   };
 
@@ -70,6 +84,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
         >
           {body()}
         </Link>
+        
       ) : (
         <a
           href={href}
