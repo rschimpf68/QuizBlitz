@@ -28,7 +28,7 @@ const UserGameDescription: FunctionComponent<Props> = ({
           <img
             src={src}
             alt=""
-            className="h-32 w-32 rounded-lg border-4 border-black"
+            className="h-24 w-24 rounded-lg border-4 border-black"
           />
         </div>
       )}
@@ -41,6 +41,7 @@ const UserGameDescription: FunctionComponent<Props> = ({
           quality={1}
           sizes="100vh"
         />
+
         <h1
           className={`${font.className} text-2xl absolute inset-0 flex items-center justify-center text-white top-[-25%]`}
         >
@@ -52,7 +53,7 @@ const UserGameDescription: FunctionComponent<Props> = ({
           <img
             src={src}
             alt=""
-            className="h-32 w-32 rounded-lg border-4 border-black "
+            className="h-24 w-24 rounded-lg border-4 border-black "
           />
         </div>
       )}
