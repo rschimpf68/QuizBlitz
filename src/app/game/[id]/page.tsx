@@ -92,7 +92,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
     AnsweredQuestions = game?.IdAnsweredQuestions as string[];
     gameState = 1;
   }
-  const QuestionsPerGame = 1 - AnsweredQuestions.length;
+  const QuestionsPerGame = 10 - AnsweredQuestions.length;
 
   return (
     <>
