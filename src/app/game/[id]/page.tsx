@@ -6,8 +6,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ManageScreens from "@/app/components/(GameComponents)/MangeScreens";
-
 export const dynamic = "force-dynamic";
+import Sound from "../../components/Sound"
+
 
 export default async function GamePage({ params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -103,7 +104,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
         QuestionsPerGame={QuestionsPerGame}
         firstQuestion={firstQuestion}
         IdAnsweredQuestions={AnsweredQuestions}
-      />
+      />  
     </>
   );
 }
