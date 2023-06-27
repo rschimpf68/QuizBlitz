@@ -19,8 +19,10 @@ export default async function Profile() {
   });
 
   return (
-    <section>
+    <div className="flex items-start justify-center h-screen bg-BlueBG">
+      <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
       <Main username={session?.user?.name as string} email={session?.user?.email as string} image={user?.image as string}/>
-    </section>
+      </div>
+    </div>
   );
 }
