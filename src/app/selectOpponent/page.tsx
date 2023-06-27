@@ -26,8 +26,8 @@ export default async function Home() {
   });
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
-      <div className=" w-full md:w-4/12 flex-col h-screen bg-customBlue bg-cover bg-no-repeat bg-center justify-center">
-        <div className="fabsolute ml-6 top-0 left-0 right-0">
+      <div className="w-full md:w-4/12 flex-col h-screen bg-customBlue bg-cover bg-no-repeat bg-center justify-center">
+        <div className="ml-6 top-0 left-0 right-0">
           <BackButton
             unpressedImageUrl="/images/BackUnpressed.png"
             pressedImageUrl="/images/BackPressed.png"
