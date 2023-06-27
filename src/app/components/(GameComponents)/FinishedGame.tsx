@@ -15,7 +15,7 @@ const FinishedGame: React.FC<Props> = ({ playerPoints }) => {
           width={900}
           height={600}
         />
-        <div className="absolute inset-0 flex flex-col justify-center items-center">
+        <div className="absolute inset-0 flex flex-col justify-center mt-8 items-center">
         <Image
             src="/images/Result.png"
             width={200}
