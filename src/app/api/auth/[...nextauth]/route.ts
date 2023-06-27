@@ -6,12 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
-import { JWT } from "next-auth/jwt";
 import { use } from "react";
-import { getMaxAge } from "next/dist/server/image-optimizer";
-// import bcrypt from 'bcrypt'
-
-
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -36,7 +31,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        
         if (!credentials?.email || !credentials.password) {
           throw new Error("Please enter an email and password");
         }
@@ -79,15 +73,13 @@ export const authOptions: NextAuthOptions = {
     error: '/login', // Error code passed in query string as ?error=
   },
   callbacks: {
-    // jwt: async ({token}) => {
-    //   token.role = "admin";
-    //   return token;
-    // },
-    // session: async ({session, token}) => {
-    //   session.user = token
-    //   return session;
-    // }
-  }
+    async jwt({token, user, trigger, session}) {
+      if (trigger == "update") {
+        return {...token, ...session.user}
+      }
+      return {...token, ...user}
+    }
+}
 
 };
 const handler = NextAuth(authOptions);

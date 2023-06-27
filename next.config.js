@@ -5,9 +5,10 @@ const nextConfig = {
    experimental: {
       serverActions: true,
    },
-   env: {
-      NEXTAUTH_SECRET : "CONTRASEÑAXD"
-   }
+   images: {
+      dangerouslyAllowSVG: true,
+      domains: ['api.dicebear.com', 'avatars.githubusercontent.com', 'lh3.googleusercontent.com', 'localhost'],
+   },
 
 }
 

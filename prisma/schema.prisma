@@ -13,23 +13,24 @@ model Category {
 }
 
 model Question {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
-
-  answers Answer[]
+  answers  Answer[]
 }
 
 model Game {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  idPlayer1 String  @db.ObjectId
-  Player1   User    @relation(fields: [idPlayer1], references: [id], name: "player1")
-  idPlayer2 String? @db.ObjectId
-  Player2   User?   @relation(fields: [idPlayer2], references: [id], name: "player2")
-  TurnId    String?
-
-  Over     Boolean
-  Rounds   Round[]
-  WinnerId String?
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  idPlayer1           String   @db.ObjectId
+  Player1             User     @relation(fields: [idPlayer1], references: [id], name: "player1")
+  idPlayer2           String?  @db.ObjectId
+  Player2             User?    @relation(fields: [idPlayer2], references: [id], name: "player2")
+  Turn                Int
+  Over                Boolean
+  Rounds              Round[]
+  WinnerId            String?
+  CurrentQuestionId   String?
+  IdAnsweredQuestions String[]
+  TurnIsOver          Boolean?
 }
 
 model Round {
@@ -50,7 +51,7 @@ model Answer {
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
+  name           String?   @unique
   email          String?   @unique
   emailVerified  DateTime?
   image          String?

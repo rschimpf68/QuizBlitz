@@ -1,27 +1,35 @@
 "use server";
 import client from "@/app/libs/prismadb";
-import { Game, Round } from "@prisma/client";
+import { Randomize } from "@/utils/utils";
+import { Answer, Game, Round } from "@prisma/client";
+import next from "next/types";
 
+export interface QuestionWithAnswers {
+   question: string;
+   id: string;
+   answers: {
+      answer: string;
+      id: string;
+   }[];
 
+}
 export async function updateGame(
    game: Game & { Rounds: Round[] },
    points: number
 ) {
 
-
-   if (game?.TurnId == game?.idPlayer1) {
+   if (game?.Turn == 1) {
+      const turn = game?.idPlayer2 ? 2 : 0;
       const update = await client.game.update({
-         where: { id: game?.id },
+         where: { id: game.id },
          data: {
-            TurnId: game?.idPlayer2,
-            Rounds: {
-               create: {
-                  PointsP1: points,
-                  PointsP2: 0,
-               },
-            },
+            Turn: turn,
+            TurnIsOver: true,
+            IdAnsweredQuestions: [],
          },
       });
+
+
    } else {
 
       game.Rounds[game.Rounds.length - 1].PointsP2 = points;
@@ -34,13 +42,13 @@ export async function updateGame(
       const isOver = winner ? true : false;
 
       const [UpdateRound, UpdateGame] = await Promise.all([
-         await client.round.update({
+         client.round.update({
             where: { id: currentRound.id },
-            data: { PointsP2: points },
+            data: {},
          }),
-         await client.game.update({
+         client.game.update({
             where: { id: game?.id },
-            data: { TurnId: game.idPlayer1, Over: isOver, WinnerId: winner },
+            data: { Turn: 1, Over: isOver, WinnerId: winner, TurnIsOver: true, IdAnsweredQuestions: [] },
          }),
       ]);
    }
@@ -65,14 +73,53 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
       return null;
    }
 }
-export async function checkAnswer(answerId: string) {
-   const answerIsCorrect = await client.answer.findUnique({
-      select: {
-         correct: true,
-      },
-      where: {
-         id: answerId as string,
-      },
-   });
-   return answerIsCorrect?.correct as boolean;
+export async function checkAnswerGetNextQuestion(answerId: string, IdQuestionsAnswered: string[], game: Game & { Rounds: Round[] }): Promise<[
+   boolean, QuestionWithAnswers]> {
+   const NumberQuestions = 272;
+   const currentRound = game.Rounds[game.Rounds.length - 1];
+   const randomIndex = Math.floor(Math.random() * (NumberQuestions - IdQuestionsAnswered.length));
+   const [answerIsCorrect, nextQuestion] = await Promise.all([
+      client.answer.findUnique({
+         select: {
+            correct: true,
+         },
+         where: {
+            id: answerId as string,
+         },
+      }),
+      client.question.findFirst({
+         where: {
+            NOT: {
+               id: { in: IdQuestionsAnswered },
+            }
+         },
+         skip: randomIndex,
+
+         select: {
+            id: true,
+            question: true,
+            answers: {
+               select: {
+                  id: true,
+                  answer: true,
+               },
+            },
+         },
+      })
+
+   ]);
+   if (nextQuestion?.answers) nextQuestion.answers = Randomize(nextQuestion.answers as Answer[], 4);
+
+   const IsPlayer1 = game.Turn == 1;
+   const increment = answerIsCorrect?.correct ? 1 : 0;
+
+   if (IsPlayer1) {
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id, IdAnsweredQuestions: { push: nextQuestion?.id } } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP1: { increment: increment } } })])
+   }
+   else {
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id, IdAnsweredQuestions: { push: nextQuestion?.id } } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP2: { increment: increment } } })])
+   }
+
+   const result = answerIsCorrect?.correct as boolean;
+   return [result, nextQuestion as QuestionWithAnswers]
 }
