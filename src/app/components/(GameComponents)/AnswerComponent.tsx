@@ -62,7 +62,7 @@ const AnswerComponent: React.FC<Props> = ({
       <button
         onClick={handleSubmit}
         className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
-          answered ? (correct ? "bg-green-200" : "bg-red-200") : "bg-white"
+          answered ? (correct ? "bg-green-200 border-green-300" : "bg-red-200 border-red-300") : "bg-white"
         }`}
       >
         {text}
