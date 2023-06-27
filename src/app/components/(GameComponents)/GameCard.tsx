@@ -68,12 +68,12 @@ const GameCard: React.FC<Props> = ({
       setQuestion(nextQuesiton);
     }
   };
-  const gameOver = (allAnswered = false) => {
+  const gameOver = async (allAnswered = false) => {
     const message = allAnswered
       ? "Contestaste todas las preguntas"
       : "Se te acabó el tiempo";
     setMessageEndGame(message);
-    updateGame(game, playerPoints);
+    await updateGame(game, playerPoints);
     setGameState(2);
   };
 

@@ -23,7 +23,12 @@ const FinishedGame: React.FC<Props> = ({ playerPoints, message }) => {
           </div>
           <div className="text-xl text-white mt-8 mx-4 font-bold">
             <h1>Se te acabó el tiempo</h1>
-            <h1>Respondiste {playerPoints} Preguntas correctas! </h1>
+            <h1>
+              Respondiste {playerPoints}
+              {playerPoints == 1
+                ? " Pregunta correcta"
+                : " Preguntas correctas"}{" "}
+            </h1>
           </div>
           <div className="w-full h-auto flex justify-center items-center">
             <MenuButton
