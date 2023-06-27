@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { Howl } from "howler";
 interface PlayButtonProps {
   unpressedImageUrl: string;
   pressedImageUrl: string;
@@ -16,6 +16,14 @@ const StartButton: React.FC<PlayButtonProps> = ({
   onClick,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
+  var sound = new Howl({
+    src: ['/sounds/Click.wav']
+  });
+  useEffect(() => {
+    if (isPressed == true) {
+      sound.play();
+    }
+  }, [isPressed])
   const body = () => {
     return (
       <div className="w-full h-full flex items-center">
