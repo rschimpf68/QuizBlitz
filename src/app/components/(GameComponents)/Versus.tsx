@@ -6,6 +6,7 @@ import StartButton from "../buttons/B-Start";
 import { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import localFont from "next/font/local";
+import SoundButton from "../buttons/B-Mute";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 export interface Props {
@@ -27,6 +28,13 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
   return (
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
       <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen overflow-hidden">
+        <div className="flex justify-end w-full mr-4">
+          <SoundButton
+            initialImageUrl="/images/MusicOn.png"
+            transitionImageUrl="/images/MusicTransition2.png"
+            finalImageUrl="/images/MusicOff.png"
+          />
+        </div>
         <motion.div
           initial={{ y: -600 }}
           animate={{ y: 0 }}
