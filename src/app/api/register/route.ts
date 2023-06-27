@@ -7,13 +7,13 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const { name, email, password } = body;
   const avatars = [
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Cleo",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Shadow",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Peanut",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bailey",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Tigger",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Casper",
-    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Dusty"
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Cleo",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Shadow",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Peanut",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Bailey",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Tigger",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Casper",
+    "https://api.dicebear.com/6.x/bottts-neutral/png?seed=Dusty"
 
   ]
   var image = avatars[Math.floor(Math.random() * avatars.length)];
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse("Missing Fields", { status: 400 });
   }
 
-  if(name.length > 10) {
+  if (name.length > 10) {
     return new NextResponse("Username too long", { status: 400 });
   }
 

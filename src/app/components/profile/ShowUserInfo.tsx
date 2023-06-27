@@ -1,4 +1,5 @@
 import { Game, User } from "@prisma/client";
+import Image from "next/image";
 import localFont from "next/font/local";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
@@ -31,7 +32,7 @@ const ShowUserInfo: React.FC<Props> = ({
   return (
     <div>
       <div>
-        <img src={image} alt="" className="h-32 w-32" />
+        <Image src={image} alt="" width={128} height={128} sizes="100vh" />
       </div>
       <div className={`${myFont.className} text-lg`}>{name}</div>
       <div className={`${myFont.className} text-lg`}>{email}</div>
@@ -43,10 +44,11 @@ const ShowUserInfo: React.FC<Props> = ({
           ? FavoriteOpponent.name
           : " No jugaste niguna partida aún"}
         {FavoriteOpponent && (
-          <img
+          <Image
             src={FavoriteOpponent.image as string}
             alt=""
-            className="h-12 w-12"
+            width={48}
+            height={48}
           />
         )}
       </div>
