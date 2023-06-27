@@ -7,7 +7,8 @@ import GameCard from "./GameCard";
 import Versus from "./Versus";
 import { useState } from "react";
 import FinishedGame from "./FinishedGame";
-
+import SoundButton from "../buttons/B-Mute";
+import Sound from "../Sound";
 interface Props {
   game:
     | (Game & {
@@ -38,9 +39,15 @@ const ManageScreens: React.FC<Props> = ({
   const [AnsweredQuestions, setAnsweredQuestions] =
     useState(IdAnsweredQuestions);
   const [Answers, setAnswers] = useState<boolean[]>(new Array());
+  const [musicSound, setMusicSound] = useState(false);
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
+      <SoundButton
+        initialImageUrl="/images/MusicOn.png"
+        transitionImageUrl="/images/MusicTransition2.png"
+        finalImageUrl="/images/MusicOff.png"
+      />
       {GameState == 1 ? (
         <GameCard
           firstQuestion={firstQuestion as QuestionWithAnswers}

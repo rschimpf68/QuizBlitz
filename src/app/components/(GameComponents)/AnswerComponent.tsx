@@ -1,11 +1,21 @@
 "use client";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {
+  use,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   QuestionWithAnswers,
   checkAnswerGetNextQuestion,
 } from "../../game/[id]/action";
 import { Game, Round } from "@prisma/client";
 import { motion } from "framer-motion";
+
+import Sound from "../Sound";
+import { Howl, Howler } from "howler";
 import { rejects } from "assert";
 
 interface Props {
@@ -30,9 +40,30 @@ const AnswerComponent: React.FC<Props> = ({
   setAnswerSelected,
   answerSelected,
 }) => {
+  const [firstTime, setFirstTime] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [displayAnimation, setDisplayAnimation] = useState(false);
   const [correct, setCorrect] = useState(false);
+
+  var incorrectSound = new Howl({
+    src: ["/sounds/WrongAnswer.wav"],
+    volume: 0.4,
+  });
+  var correctSound = new Howl({
+    src: ["/sounds/CorrectAnswer.wav"],
+    volume: 0.4,
+  });
+
+  useEffect(() => {
+    if (firstTime) {
+      if (correct && answered) {
+        correctSound.play();
+      } else if (!correct && !answered) {
+        incorrectSound.play();
+      }
+    }
+    setFirstTime(true);
+  }, [answered]);
 
   const handleSubmit = async () => {
     //Check if Answer is the correct one

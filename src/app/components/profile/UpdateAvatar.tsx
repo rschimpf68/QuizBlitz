@@ -16,7 +16,8 @@ const UploadAvatar: React.FC<Props> = ({ email, setUrl }) => {
   const { data: session, update } = useSession();
 
   return (
-    <main className="flex ">
+    <main className="flex flex-col">
+      <label className="font-bold">Actualizar Avatar</label>
       <UploadButton<OurFileRouter>
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
