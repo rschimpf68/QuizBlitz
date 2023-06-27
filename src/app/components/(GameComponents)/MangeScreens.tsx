@@ -33,16 +33,20 @@ const ManageScreens: React.FC<Props> = ({
 }) => {
   const [GameState, SetGameState] = useState(gameState);
   const [PlayerPoints, setPlayerPoints] = useState(0);
-  const [musicSound, setMusicSound] = useState(false)
-  
-  
+  const [MessageEndGame, setMessageEndGame] = useState(
+    "¡Se te acabó el tiempo!"
+  );
+  const [AnsweredQuestions, setAnsweredQuestions] =
+    useState(IdAnsweredQuestions);
+  const [Answers, setAnswers] = useState<boolean[]>(new Array());
+  const [musicSound, setMusicSound] = useState(false);
+
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
-      
       <SoundButton
-              initialImageUrl="/images/MusicOn.png"
-              transitionImageUrl="/images/MusicTransition2.png"
-              finalImageUrl="/images/MusicOff.png"
+        initialImageUrl="/images/MusicOn.png"
+        transitionImageUrl="/images/MusicTransition2.png"
+        finalImageUrl="/images/MusicOff.png"
       />
       {GameState == 1 ? (
         <GameCard
@@ -52,7 +56,11 @@ const ManageScreens: React.FC<Props> = ({
           setGameState={SetGameState}
           setPlayerPoints={setPlayerPoints}
           playerPoints={PlayerPoints}
-          idAnsweredQuestions={IdAnsweredQuestions}
+          setMessageEndGame={setMessageEndGame}
+          setAnsweredQuestions={setAnsweredQuestions}
+          AnsweredQuestions={AnsweredQuestions}
+          answer={Answers}
+          setAnswer={setAnswers}
         />
       ) : GameState == 0 ? (
         <Versus
@@ -61,7 +69,7 @@ const ManageScreens: React.FC<Props> = ({
           setGameState={SetGameState}
         />
       ) : (
-        <FinishedGame playerPoints={PlayerPoints} />
+        <FinishedGame playerPoints={PlayerPoints} message={MessageEndGame} />
       )}
     </main>
   );

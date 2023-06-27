@@ -94,6 +94,19 @@ export default async function GamePage({ params }: { params: { id: string } }) {
     gameState = 1;
   }
   const QuestionsPerGame = 10 - AnsweredQuestions.length;
+  //649adab354864bcddb7e77a2
+
+  // if (QuestionsPerGame < 0) {
+  //   const update = await client.game.update({
+  //     where: {
+  //       id: game?.id as string,
+  //     },
+  //     data: {
+  //       TurnIsOver: true,
+  //     },
+  //   });
+  //   gameState = 2;
+  // }
 
   return (
     <>
