@@ -7,8 +7,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ManageScreens from "@/app/components/(GameComponents)/MangeScreens";
 export const dynamic = "force-dynamic";
-import Sound from "../../components/Sound"
-
+import Sound from "../../components/Sound";
 
 export default async function GamePage({ params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -93,20 +92,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
     AnsweredQuestions = game?.IdAnsweredQuestions as string[];
     gameState = 1;
   }
-  const QuestionsPerGame = 10 - AnsweredQuestions.length;
-  //649adab354864bcddb7e77a2
-
-  // if (QuestionsPerGame < 0) {
-  //   const update = await client.game.update({
-  //     where: {
-  //       id: game?.id as string,
-  //     },
-  //     data: {
-  //       TurnIsOver: true,
-  //     },
-  //   });
-  //   gameState = 2;
-  // }
+  const QuestionsPerGame = 1 - AnsweredQuestions.length;
 
   return (
     <>
@@ -117,7 +103,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
         QuestionsPerGame={QuestionsPerGame}
         firstQuestion={firstQuestion}
         IdAnsweredQuestions={AnsweredQuestions}
-      />  
+      />
     </>
   );
 }

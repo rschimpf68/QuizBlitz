@@ -69,13 +69,14 @@ const AnswerComponent: React.FC<Props> = ({
     //Check if Answer is the correct one
     setAnswerSelected(true);
     setDisplayAnimation(true);
-    const [returns] = await Promise.all([
-      checkAnswerGetNextQuestion(idAnswer, idAnsweredQuestions, game),
-    ]).then();
+    const [isCorrect, nextQuestion] = await checkAnswerGetNextQuestion(
+      idAnswer,
+      idAnsweredQuestions,
+      game
+    );
+
     setDisplayAnimation(false);
 
-    const isCorrect = returns[0];
-    const nextQuestion = returns[1];
     setCorrect(isCorrect);
     setAnswered(true);
     setTimeout(() => {
