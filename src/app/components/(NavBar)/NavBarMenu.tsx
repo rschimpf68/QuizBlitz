@@ -13,7 +13,7 @@ const NavBarMenu: React.FC<Props> = ({}) => {
               href="/currentGames"
               unpressedImageUrl="/images/NavBar/ActivityUnpressed.png"
               pressedImageUrl="/images/NavBar/ActivityPressed.png"
-              useLink={false}
+              useLink={true}
             />
           </div>
           <div className="flex-1 flex justify-center items-center">
@@ -21,15 +21,15 @@ const NavBarMenu: React.FC<Props> = ({}) => {
               href="/"
               unpressedImageUrl="/images/NavBar/HomeUnpressed.png"
               pressedImageUrl="/images/NavBar/HomePressed.png"
-              useLink={false}
+              useLink={true}
             />
           </div>
           <div className="flex-1 flex justify-center items-center">
             <MenuButton
-              href="/currentGames"
+              href="/profile"
               unpressedImageUrl="/images/NavBar/ProfileUnpressed.png"
               pressedImageUrl="/images/NavBar/ProfilePressed.png"
-              useLink={false}
+              useLink={true}
             />
           </div>
         </div>

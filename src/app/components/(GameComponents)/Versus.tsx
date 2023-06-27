@@ -1,10 +1,11 @@
 import { Game, User } from "@prisma/client";
-import localFont from "next/font/local";
+
 import UserGameDescription from "./UserGameDescription";
 import Image from "next/image";
 import StartButton from "../buttons/B-Start";
 import { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
+import localFont from "next/font/local";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 export interface Props {

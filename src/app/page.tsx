@@ -33,7 +33,7 @@ export default async function Home() {
   if (notFinishedGames) {
     redirect(`game/${notFinishedGames.id}`);
   }
-  //const game = await client.game.deleteMany({});
+
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">

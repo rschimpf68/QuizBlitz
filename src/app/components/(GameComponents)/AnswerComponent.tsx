@@ -56,8 +56,8 @@ const AnswerComponent: React.FC<Props> = ({
 
   return (
     <motion.div
-      animate={{ rotate: displayAnimation ? [2, 0, -2] : 0 }}
-      transition={{ duration: 0.2, times: [0.5, 1, 1.5] }}
+      animate={{ rotate: displayAnimation ? [0, 1, 0, -1, 0] : 0 }}
+      transition={{ duration: 0.2, repeat: displayAnimation ? 5 : 0 }}
     >
       <button
         onClick={handleSubmit}
