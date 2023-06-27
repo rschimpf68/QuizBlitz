@@ -8,9 +8,14 @@ import { useRouter } from "next/navigation";
 import { Howl } from "howler";
 interface Props {
   firstUsers: User[];
+  usernamePlayer1: string;
   idPlayer1: string;
 }
-const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
+const SelectOponent: React.FC<Props> = ({
+  firstUsers,
+  usernamePlayer1,
+  idPlayer1,
+}) => {
   const router = useRouter();
   const [clicked, setClicked] = useState(false)
   const [users, setUsers] = useState(firstUsers);
@@ -22,7 +27,10 @@ const SelectOponent: React.FC<Props> = ({ firstUsers, idPlayer1 }) => {
   });
   if (clicked) sound.play()
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const resultUsers = await findUser(e.target.value.toString());
+    const resultUsers = await findUser(
+      e.target.value.toString(),
+      usernamePlayer1
+    );
     setUsers(resultUsers);
   };
 

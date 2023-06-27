@@ -64,7 +64,13 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
   return (
     <div className="h-16 w-full flex flex-row justify-between items-center bg-slate-100 rounded-md  ">
       <div className="h-auto w-12   ml-2">
-        <img src={src as string} alt="" className="rounded-lg h-12 w-12" />
+        <Image
+          src={src as string}
+          height={48}
+          width={48}
+          alt=""
+          className="rounded-lg"
+        />
       </div>
       <div className="font-bold">
         {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}

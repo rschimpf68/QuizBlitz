@@ -52,7 +52,7 @@ const ShowUser: React.FC<Props> = ({
         htmlFor={user?.id}
         className="w-full h-full flex flex-col justify-center items-center"
       >
-        <img
+        <Image
           src={src as string}
           alt="Opponent"
           width={80}

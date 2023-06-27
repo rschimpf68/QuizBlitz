@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export async function findUser(
-   userName: string
+   userName: string, loggedUser: string
 ) {
 
    const users = client.user.findMany({
@@ -12,7 +12,12 @@ export async function findUser(
       where: {
          name: {
             startsWith: userName
+         },
+         NOT: {
+            name: loggedUser
          }
+
+
 
       }
 
@@ -31,7 +36,6 @@ export async function newGame(idPlayer1: string, idPlayer2?: string) {
          Turn: 1,
          Over: false,
          TurnIsOver: true,
-
       }
 
    })

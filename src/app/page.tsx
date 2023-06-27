@@ -43,13 +43,7 @@ export default async function Home() {
       
       
         <section className="h-1/2 w-full flex flex-col">
-          {/* <div className="w-full p-4 flex justify-end items-start ">
-            <SoundButton
-              initialImageUrl="/images/MusicOn.png"
-              transitionImageUrl="/images/MusicTransition2.png"
-              finalImageUrl="/images/MusicOff.png"
-            />
-          </div> */}
+        
 
           <div className="flex justify-center  items-center  w-full flex-1 flex-grow  ">
             <Image

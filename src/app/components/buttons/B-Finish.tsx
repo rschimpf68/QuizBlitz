@@ -27,7 +27,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}
           width={140}
           height={110}
-          className="mt-22"
+          className="mt-8"
         />
       </div>
     );
