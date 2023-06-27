@@ -7,13 +7,16 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const { name, email, password } = body;
   const avatars = [
-    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Salem",
-    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Scooter",
-    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Coco",
-    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Leo",
-    "https://api.dicebear.com/6.x/pixel-art/svg?seed=Muffin"
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Cleo",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Shadow",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Peanut",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bailey",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Tigger",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Casper",
+    "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Dusty"
+
   ]
-  var image = avatars[Math.floor(Math.random() * avatars.length)]; 
+  var image = avatars[Math.floor(Math.random() * avatars.length)];
 
   if (!name || !email || !password) {
     return new NextResponse("Missing Fields", { status: 400 });
@@ -33,7 +36,7 @@ export async function POST(request: NextRequest) {
       name,
     },
   });
-  
+
   if (existEmail) {
     throw new Error("Email already exists");
   }
