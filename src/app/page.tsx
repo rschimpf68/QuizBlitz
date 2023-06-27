@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import Howl  from 'react-howler'
+import Howl from "react-howler";
 import client from "./libs/prismadb";
 import Image from "next/image";
 import PlayButton from "./components/buttons/B-Play";
@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 import NavBarMenu from "./components/(NavBar)/NavBarMenu";
 import Sound from "./components/Sound";
 export default async function Home() {
-
   const session = await getServerSession(authOptions);
   const user = await client.user.findUnique({
     where: { email: session?.user?.email as string },
@@ -36,15 +35,9 @@ export default async function Home() {
   }
   //const game = await client.game.deleteMany({});
   return (
-    
     <div className="flex items-start justify-center h-screen bg-BlueBG">
-      
       <div className=" bg-white w-full md:w-4/12 flex flex-col h-full bg-[url(/images/Background.gif)] bg-cover bg-no-repeat bg-center">
-      
-      
         <section className="h-1/2 w-full flex flex-col">
-        
-
           <div className="flex justify-center  items-center  w-full flex-1 flex-grow  ">
             <Image
               src="/images/QBTitle.png"
