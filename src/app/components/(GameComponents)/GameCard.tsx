@@ -15,7 +15,11 @@ interface Props {
   QuestionsPerGame: number;
   setPlayerPoints: Dispatch<SetStateAction<number>>;
   playerPoints: number;
-  idAnsweredQuestions: string[];
+  setMessageEndGame: Dispatch<SetStateAction<string>>;
+  setAnsweredQuestions: Dispatch<SetStateAction<string[]>>;
+  AnsweredQuestions: string[];
+  answer: boolean[];
+  setAnswer: Dispatch<SetStateAction<boolean[]>>;
 }
 
 const GameCard: React.FC<Props> = ({
@@ -25,7 +29,9 @@ const GameCard: React.FC<Props> = ({
   setGameState,
   setPlayerPoints,
   playerPoints,
-  idAnsweredQuestions,
+  AnsweredQuestions,
+  setAnsweredQuestions,
+  setMessageEndGame,
 }) => {
   //React States
 
@@ -34,8 +40,7 @@ const GameCard: React.FC<Props> = ({
   //Questions Answered correctly by player
 
   //Array of Answered questions by player
-  const [AnsweredQuestions, setAnsweredQuestions] =
-    useState(idAnsweredQuestions);
+
   //Question currently displayed
   const [question, setQuestion] = useState(firstQuestion);
 
@@ -57,13 +62,17 @@ const GameCard: React.FC<Props> = ({
     if (AnsweredQuestions.length > QuestionsPerGame) {
       //NO more questions? -> Finish game
       setFinished(true);
-      gameOver();
+      gameOver(true);
     } else {
       // Go to the next Question
       setQuestion(nextQuesiton);
     }
   };
-  const gameOver = () => {
+  const gameOver = (allAnswered = false) => {
+    const message = allAnswered
+      ? "Contestaste todas las preguntas"
+      : "Se te acabó el tiempo";
+    setMessageEndGame(message);
     updateGame(game, playerPoints);
     setGameState(2);
   };

@@ -72,7 +72,7 @@ const SelectOponent: React.FC<Props> = ({
             </div>
             <button
               type="submit"
-              className="py-6 border-4  flex justify-center items-center  w-full h-10 rounded-xl text-2xl text-white font-bold border-QBDarkGreen bg-QBGreen hover:bg-QBLightGreen duration-300"
+              className="py-6 border-4  flex justify-center items-center  w-full h-10 rounded-xl text-2xl  font-bold border-QBDarkGreen bg-QBGreen hover:bg-QBLightGreen duration-300 text-white"
             >
               Jugar
             </button>

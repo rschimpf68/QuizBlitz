@@ -32,6 +32,12 @@ const ManageScreens: React.FC<Props> = ({
 }) => {
   const [GameState, SetGameState] = useState(gameState);
   const [PlayerPoints, setPlayerPoints] = useState(0);
+  const [MessageEndGame, setMessageEndGame] = useState(
+    "¡Se te acabó el tiempo!"
+  );
+  const [AnsweredQuestions, setAnsweredQuestions] =
+    useState(IdAnsweredQuestions);
+  const [Answers, setAnswers] = useState<boolean[]>(new Array());
 
   return (
     <main className="flex min-h-screen flex-col justify-center items-center bg-BlueBG">
@@ -43,7 +49,11 @@ const ManageScreens: React.FC<Props> = ({
           setGameState={SetGameState}
           setPlayerPoints={setPlayerPoints}
           playerPoints={PlayerPoints}
-          idAnsweredQuestions={IdAnsweredQuestions}
+          setMessageEndGame={setMessageEndGame}
+          setAnsweredQuestions={setAnsweredQuestions}
+          AnsweredQuestions={AnsweredQuestions}
+          answer={Answers}
+          setAnswer={setAnswers}
         />
       ) : GameState == 0 ? (
         <Versus
@@ -52,7 +62,7 @@ const ManageScreens: React.FC<Props> = ({
           setGameState={SetGameState}
         />
       ) : (
-        <FinishedGame playerPoints={PlayerPoints} />
+        <FinishedGame playerPoints={PlayerPoints} message={MessageEndGame} />
       )}
     </main>
   );

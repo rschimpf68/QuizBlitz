@@ -24,6 +24,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
   idAnsweredQuestions,
   game,
 }) => {
+  const [AnswerSelected, setAnswerSelected] = useState(false);
   return (
     <main>
       <div className="mb-8 mt-4 flex h-auto w-4/5 mx-auto justify-center text-center text-2xl font-bold">
@@ -40,6 +41,8 @@ const QuestionAndAnswers: React.FC<Props> = ({
               idAnsweredQuestions={idAnsweredQuestions}
               onAnswered={onAnswer}
               game={game}
+              answerSelected={AnswerSelected}
+              setAnswerSelected={setAnswerSelected}
             />
           );
         })}
