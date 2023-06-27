@@ -12,9 +12,10 @@ interface Props {
   firstQuestion: QuestionWithAnswers;
   setGameState: Dispatch<SetStateAction<number>>;
   game: Game & { Rounds: Round[] };
-  QuestionsPerGame: Number;
+  QuestionsPerGame: number;
   setPlayerPoints: Dispatch<SetStateAction<number>>;
   playerPoints: number;
+  idAnsweredQuestions: string[];
 }
 
 const GameCard: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const GameCard: React.FC<Props> = ({
   setGameState,
   setPlayerPoints,
   playerPoints,
+  idAnsweredQuestions,
 }) => {
   //React States
 
@@ -32,7 +34,8 @@ const GameCard: React.FC<Props> = ({
   //Questions Answered correctly by player
 
   //Array of Answered questions by player
-  const [AnsweredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const [AnsweredQuestions, setAnsweredQuestions] =
+    useState(idAnsweredQuestions);
   //Question currently displayed
   const [question, setQuestion] = useState(firstQuestion);
 
@@ -51,7 +54,7 @@ const GameCard: React.FC<Props> = ({
     newAnsweredQuestion.push(question.id);
     setAnsweredQuestions(newAnsweredQuestion);
 
-    if (AnsweredQuestions.length == QuestionsPerGame) {
+    if (AnsweredQuestions.length > QuestionsPerGame) {
       //NO more questions? -> Finish game
       setFinished(true);
       gameOver();

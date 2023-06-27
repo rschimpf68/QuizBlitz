@@ -57,6 +57,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
   };
   const isPlayerOne = game.Player1.id === userId ? true : false;
   const OtherPlayer = isPlayerOne ? game.Player2 : game.Player1;
+  const rounds = game.Rounds.length > 3 ? game.Rounds.slice(-3) : game.Rounds;
   const src = OtherPlayer
     ? OtherPlayer.image
     : "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bella";

@@ -24,7 +24,8 @@ export async function updateGame(
          where: { id: game.id },
          data: {
             Turn: turn,
-            TurnIsOver: true
+            TurnIsOver: true,
+            IdAnsweredQuestions: [],
          },
       });
 
@@ -47,7 +48,7 @@ export async function updateGame(
          }),
          client.game.update({
             where: { id: game?.id },
-            data: { Turn: 1, Over: isOver, WinnerId: winner, TurnIsOver: true },
+            data: { Turn: 1, Over: isOver, WinnerId: winner, TurnIsOver: true, IdAnsweredQuestions: [] },
          }),
       ]);
    }
@@ -74,7 +75,7 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
 }
 export async function checkAnswerGetNextQuestion(answerId: string, IdQuestionsAnswered: string[], game: Game & { Rounds: Round[] }): Promise<[
    boolean, QuestionWithAnswers]> {
-   const NumberQuestions = 90;
+   const NumberQuestions = 272;
    const currentRound = game.Rounds[game.Rounds.length - 1];
    const randomIndex = Math.floor(Math.random() * (NumberQuestions - IdQuestionsAnswered.length));
    const [answerIsCorrect, nextQuestion] = await Promise.all([
@@ -111,11 +112,12 @@ export async function checkAnswerGetNextQuestion(answerId: string, IdQuestionsAn
 
    const IsPlayer1 = game.Turn == 1;
    const increment = answerIsCorrect?.correct ? 1 : 0;
+
    if (IsPlayer1) {
-      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP1: { increment: increment } } })])
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id, IdAnsweredQuestions: { push: nextQuestion?.id } } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP1: { increment: increment } } })])
    }
    else {
-      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP2: { increment: increment } } })])
+      const [updateGame, updateRound] = await Promise.all([client.game.update({ where: { id: game.id }, data: { CurrentQuestionId: nextQuestion?.id, IdAnsweredQuestions: { push: nextQuestion?.id } } }), client.round.update({ where: { id: currentRound.id }, data: { PointsP2: { increment: increment } } })])
    }
 
    const result = answerIsCorrect?.correct as boolean;
