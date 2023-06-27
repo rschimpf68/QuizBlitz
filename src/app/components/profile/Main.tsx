@@ -48,7 +48,7 @@ const Main: React.FC<Props> = ({
             />
           </div>
           <div className="flex flex-row w-full justify-center mt-2">
-            <UpdateName setUser={setUsername} />
+            {/* <UpdateName setUser={setUsername} /> */}
             <UploadAvatar email={loggedUser.email as string} setUrl={setUrl} />
           </div>
           <button
