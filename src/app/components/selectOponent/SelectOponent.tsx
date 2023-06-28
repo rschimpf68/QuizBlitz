@@ -1,11 +1,13 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { findUser, newGame } from "../../selectOpponent/action";
 import { User } from "@prisma/client";
 import ShowUser from "./ShowUser";
-import { GenericHTMLFormElement } from "axios";
+
 import { useRouter } from "next/navigation";
 import { Howl } from "howler";
+import { motion } from "framer-motion";
+import Image from "next/image";
 interface Props {
   firstUsers: User[];
   usernamePlayer1: string;
@@ -20,22 +22,31 @@ const SelectOponent: React.FC<Props> = ({
   const [clicked, setClicked] = useState(false);
   const [users, setUsers] = useState(firstUsers);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
+  const [displayeAnimation, setDisplayAnimation] = useState(false);
+
+  const debounceRef = useRef<NodeJS.Timeout>();
 
   var sound = new Howl({
     src: ["/sounds/Click.wav"],
   });
   if (clicked) sound.play();
+
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const resultUsers = await findUser(
-      e.target.value.toString(),
-      usernamePlayer1
-    );
-    setUsers(resultUsers);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = setTimeout(async () => {
+      const resultUsers = await findUser(
+        e.target.value.toString(),
+        usernamePlayer1
+      );
+      setUsers(resultUsers);
+    }, 700);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setDisplayAnimation(true);
     const gameId = await newGame(idPlayer1, selectedUser?.id as string);
 
     router.push(`/game/${gameId}`);
@@ -53,7 +64,9 @@ const SelectOponent: React.FC<Props> = ({
             className="w-full h-1/4  rounded-xl"
             placeholder="Buscar oponente"
             onChange={onChange}
+            disabled={displayeAnimation}
           />
+
           <form onSubmit={handleSubmit}>
             <div className="overflow-auto h-96 ">
               <div className="grid grid-cols-3 grid-flow-row w-full justify-center items-center gap-4 my-2 p-2 overflow-x-hidden">
@@ -84,6 +97,23 @@ const SelectOponent: React.FC<Props> = ({
               Jugar
             </button>
           </form>
+
+          {displayeAnimation && (
+            <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow">
+              <motion.div
+                animate={{ rotateY: 360 }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                <Image
+                  src={"/images/QBTitle.png"}
+                  alt="QuizBlitz"
+                  width={320}
+                  height={67}
+                  draggable="false"
+                />
+              </motion.div>
+            </div>
+          )}
         </section>
       </div>
     </>

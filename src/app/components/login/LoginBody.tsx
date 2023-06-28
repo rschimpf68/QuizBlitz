@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import localFont from "next/font/local";
+import { motion } from "framer-motion";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 const LoginBody = () => {
@@ -16,7 +17,7 @@ const LoginBody = () => {
     email: "",
     password: "",
   });
-  const [Loading, setLoading] = useState(false);
+  const [displayLoading, setDisplayLoading] = useState(false);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
@@ -27,13 +28,12 @@ const LoginBody = () => {
 
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setDisplayLoading(true);
     signIn("credentials", { ...data }).then((callback) => {
       if (callback?.error) {
         toast.error(callback.error);
       }
     });
-    setLoading(false);
   };
 
   return (
@@ -46,10 +46,6 @@ const LoginBody = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <div className="flex w-auto h-20 items-center justify-center">
                 <div className="relative">
-                  {Loading && (
-                    <div className="font-bold text-lg">Cargando...</div>
-                  )}
-
                   <Image
                     src="/images/Login-SignIn.png"
                     width={200}
@@ -156,6 +152,22 @@ const LoginBody = () => {
             </div>
           </div>
         </>
+        {displayLoading && (
+          <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow">
+            <motion.div
+              animate={{ rotateY: 360 }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              <Image
+                src={"/images/QBTitle.png"}
+                alt="QuizBlitz"
+                width={320}
+                height={67}
+                draggable="false"
+              />
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   );
