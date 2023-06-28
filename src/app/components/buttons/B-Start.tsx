@@ -17,13 +17,13 @@ const StartButton: React.FC<PlayButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
   var sound = new Howl({
-    src: ['/sounds/Click.wav']
+    src: ["/sounds/Click.wav"],
   });
   useEffect(() => {
     if (isPressed == true) {
       sound.play();
     }
-  }, [isPressed])
+  }, [isPressed]);
   const body = () => {
     return (
       <div className="w-full h-full flex items-center">

@@ -39,7 +39,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}
           width={144}
           height={75}
-          draggable={false}
+          draggable="false"
           className="mt-22 focus:outline-none"
         />
       </div>
