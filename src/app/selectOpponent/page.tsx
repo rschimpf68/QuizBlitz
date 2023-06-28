@@ -15,6 +15,7 @@ export default async function Home() {
   const loggedUser = await client.user.findUnique({
     where: { email: session?.user?.email as string },
   });
+  const games = await client.round.deleteMany({});
 
   const users = await client.user.findMany({
     take: 12,
