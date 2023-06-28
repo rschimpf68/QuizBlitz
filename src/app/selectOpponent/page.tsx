@@ -35,6 +35,7 @@ export default async function Home() {
             useLink={false}
           />
         </div>
+
         <section className="px-5 flex-1 justify-center items-center h-3/4">
           <SelectOponent
             firstUsers={users}

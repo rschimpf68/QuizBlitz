@@ -59,7 +59,7 @@ const Main: React.FC<Props> = ({
             Cerrar Sesión
           </button>
         </section>
-        <div className="flex w-full justify-center items-center mb-3">
+        <div className="flex w-full justify-center items-center">
           <NavBarMenu />
         </div>
       </div>

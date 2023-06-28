@@ -29,11 +29,7 @@ const LoginBody = () => {
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDisplayLoading(true);
-    signIn("credentials", { ...data }).then((callback) => {
-      if (callback?.error) {
-        toast.error(callback.error);
-      }
-    });
+    signIn("credentials", { ...data }).then((callback) => {});
   };
 
   return (

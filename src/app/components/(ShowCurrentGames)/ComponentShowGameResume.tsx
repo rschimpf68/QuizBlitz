@@ -19,7 +19,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
     [ModuleType.your]: (
       <Link
         href={`/game/${game.id}`}
-        className="mr-2 bg-orange-400 text-lg rounded-md font-bold text-white px-5"
+        className="bg-orange-400 text-lg rounded-md font-bold text-white px-4 mr-2"
       >
         Jugar
       </Link>
@@ -28,8 +28,8 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
       <Image
         src={"/images/clock.png"}
         alt=""
-        width={20}
-        height={20}
+        width={25}
+        height={25}
         className="mr-2"
         quality={1}
       ></Image>
@@ -39,8 +39,8 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
         <Image
           src={"/images/checked.png"}
           alt=""
-          width={20}
-          height={20}
+          width={25}
+          height={25}
           className="mr-2"
           quality={1}
         />
@@ -48,8 +48,8 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
         <Image
           src={"/images/close.png"}
           alt=""
-          width={20}
-          height={20}
+          width={25}
+          height={25}
           className="mr-2"
           quality={1}
         />
@@ -62,8 +62,8 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
     ? OtherPlayer.image
     : "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bella";
   return (
-    <div className="h-16 w-full flex flex-row justify-between items-center bg-slate-100 rounded-md  ">
-      <div className="h-auto w-12   ml-2">
+    <div className="h-16 w-full flex flex-row items-center bg-slate-100 rounded-md  ">
+      <div className="h-auto w-1/6">
         <Image
           src={src as string}
           height={48}
@@ -72,10 +72,10 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
           className="rounded-lg"
         />
       </div>
-      <div className="font-bold">
+      <div className="font-bold  flex-grow  p-1 ">
         {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}
       </div>
-      <div className="flex flex-row  ">
+      <div className="flex flex-row   w-1/3">
         {game.Rounds.map((round, index) => {
           return (
             <section className="flex flex-col mx-1" key={index}>
@@ -89,7 +89,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
           );
         })}
       </div>
-      {classes[type]}
+      <div className=" w-1/5 flex justify-center">{classes[type]}</div>
     </div>
   );
 };

@@ -22,6 +22,17 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   ]);
 
   const PlayerIsPlayer1 = game?.Player1.id == loggedUser?.id;
+  //Solve Bug constatly redirecting.
+  if (
+    (PlayerIsPlayer1 && game?.Turn != 1) ||
+    (!PlayerIsPlayer1 && game?.Turn != 2)
+  ) {
+    const games = await client.game.update({
+      where: { id: game?.id },
+      data: { TurnIsOver: true },
+    });
+  }
+  //Check if a user who's not the Player that has to play is tryng to play.
   if (
     (loggedUser?.id != game?.Player1.id &&
       loggedUser?.id! != game?.Player2?.id) ||
@@ -30,7 +41,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   ) {
     redirect("/");
   }
-
+  // Starting Turn
   if (PlayerIsPlayer1 && game?.TurnIsOver) {
     const GameNewRoundAdded = await client.game.update({
       where: { id: game?.id },
@@ -56,7 +67,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   let AnsweredQuestions = new Array<string>();
 
   let gameState: number;
-
+  //Si es la primera vez que está jugando.
   if (game?.TurnIsOver) {
     const [notIntereted, question] = await checkAnswerGetNextQuestion(
       "64740ac48ae34295a400fe35",

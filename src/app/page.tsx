@@ -55,7 +55,6 @@ export default async function Home() {
             href="/selectOpponent"
             useLink={false}
           />
-          <button className="h-10 w-10 bg-slate-600">HOLA</button>
         </div>
         <section className="w-full flex h-1/4 flex-col justify-end items-end relative ">
           <NavBarMenu />

@@ -98,7 +98,7 @@ const SelectOponent: React.FC<Props> = ({
             </button>
           </form>
 
-          {displayeAnimation && (
+          {/* {displayeAnimation && (
             <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow">
               <motion.div
                 animate={{ rotateY: 360 }}
@@ -113,7 +113,7 @@ const SelectOponent: React.FC<Props> = ({
                 />
               </motion.div>
             </div>
-          )}
+          )} */}
         </section>
       </div>
     </>
