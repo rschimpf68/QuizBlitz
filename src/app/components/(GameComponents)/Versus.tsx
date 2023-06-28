@@ -29,11 +29,11 @@ const Versus: React.FC<Props> = ({ game, loggedPlayer, setGameState }) => {
     <main className="flex min-h-screen flex-col justify-center items-center w-full bg-BlueBG">
       <section className="flex flex-col items-center justify-center bg-customBlue  w-full md:w-4/12  min-h-screen overflow-hidden">
         <div className="flex justify-end w-full mr-4">
-          <SoundButton
+          {/* <SoundButton
             initialImageUrl="/images/MusicOn.png"
             transitionImageUrl="/images/MusicTransition2.png"
             finalImageUrl="/images/MusicOff.png"
-          />
+          /> */}
         </div>
         <motion.div
           initial={{ y: -600 }}

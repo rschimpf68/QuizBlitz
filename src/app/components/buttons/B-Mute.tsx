@@ -64,7 +64,7 @@ const SoundButton: React.FC<SoundButtonProps> = ({
           }`}
           draggable="false"
         />
-        {/* <Sound playing={!isMuted} loop={false} src="/sounds/GoldensWind.wav" volume={0.4}/> */}
+        <Sound playing={!isMuted} loop={false} src="/sounds/GoldenWind.mp3" volume={0.4}/>
         <Image src={currentImageUrl} alt="Sound Mute" width={64} height={32} />
       </button>
     </section>
