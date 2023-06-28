@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import localFont from "next/font/local";
+import { motion } from "framer-motion";
 const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 const LoginBody = () => {
@@ -16,7 +17,7 @@ const LoginBody = () => {
     email: "",
     password: "",
   });
-  const [Loading, setLoading] = useState(false);
+  const [displayLoading, setDisplayLoading] = useState(false);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
@@ -27,13 +28,8 @@ const LoginBody = () => {
 
   const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    signIn("credentials", { ...data }).then((callback) => {
-      if (callback?.error) {
-        toast.error(callback.error);
-      }
-    });
-    setLoading(false);
+    setDisplayLoading(true);
+    signIn("credentials", { ...data }).then((callback) => {});
   };
 
   return (
@@ -46,10 +42,6 @@ const LoginBody = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <div className="flex w-auto h-20 items-center justify-center">
                 <div className="relative">
-                  {Loading && (
-                    <div className="font-bold text-lg">Cargando...</div>
-                  )}
-
                   <Image
                     src="/images/Login-SignIn.png"
                     width={200}
@@ -153,9 +145,45 @@ const LoginBody = () => {
                 </svg>
                 Iniciar sesión con GitHub
               </button>
+              <button
+                className="bg-red-600 text-white hover:bg-red-500 py-2 px-4 mt-4 rounded w-full flex items-center justify-center"
+                onClick={() => signIn("google")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-google"
+                  viewBox="0 0 16 16"
+                >
+                  {" "}
+                  <path
+                    d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"
+                    fill="white"
+                  ></path>{" "}
+                </svg>
+                &nbsp;&nbsp;Iniciar sesión con Google        
+              </button>
             </div>
           </div>
         </>
+        {displayLoading && (
+          <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow">
+            <motion.div
+              animate={{ rotateY: 360 }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              <Image
+                src={"/images/QBTitle.png"}
+                alt="QuizBlitz"
+                width={320}
+                height={67}
+                draggable="false"
+              />
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   );

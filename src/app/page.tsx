@@ -48,7 +48,7 @@ export default async function Home() {
             />
           </div>
         </section>
-        <div className="flex justify-center h-1/4 items-center w-full">
+        <div className="flex justify-center h-1/4 items-center w-full ">
           <PlayButton
             unpressedImageUrl="/images/Normal1.png"
             pressedImageUrl="/images/Push1.png"
@@ -56,7 +56,7 @@ export default async function Home() {
             useLink={false}
           />
         </div>
-        <section className="mt-24 w-full flex flex-col justify-end items-end relative">
+        <section className="w-full flex h-1/4 flex-col justify-end items-end relative ">
           <NavBarMenu />
         </section>
       </div>

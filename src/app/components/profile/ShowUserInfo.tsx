@@ -32,20 +32,36 @@ const ShowUserInfo: React.FC<Props> = ({
   return (
     <div>
       <div className=" py-2 rounded-xl flex mb-8">
-        <Image src={image} alt="" width={128} height={128} sizes="100vh" className="rounded-xl"/>
+        <Image
+          src={image}
+          alt=""
+          width={128}
+          height={128}
+          sizes="100vh"
+          className="rounded-xl"
+        />
         <div className=" py-2 rounded-xl flex flex-col justify-center items-center">
-          <div className={`${myFont.className} text-3xl text-white flex ml-4`}>Usuario: {name}</div>
+          <div className={`${myFont.className} text-3xl text-white flex ml-4`}>
+            Usuario: {name}
+          </div>
         </div>
       </div>
 
-      <div className={`${myFont.className} text-2xl text-white flex flex-col items-center`}>Partidas jugadas: {FinishedGames.length}</div>
-      <div className={`${myFont.className} text-2xl text-white flex flex-col items-center`}>% de Victorias: {VictoryPer} %</div>
-      <div className={`${myFont.className} text-2xl flex flex-col items-center mb-8 text-white`}>
+      <div
+        className={`${myFont.className} text-2xl text-white flex flex-col items-center`}
+      >
+        Partidas jugadas: {FinishedGames.length}
+      </div>
+      <div
+        className={`${myFont.className} text-2xl text-white flex flex-col items-center`}
+      >
+        % de Victorias: {VictoryPer} %
+      </div>
+      <div
+        className={`${myFont.className} text-2xl flex flex-col items-center mb-8 text-white`}
+      >
         Oponente Favorito: {"  "}
-        {FavoriteOpponent
-          ? FavoriteOpponent.name
-          : " No jugaste niguna partida aún"}
-          {" "}
+        {FavoriteOpponent ? FavoriteOpponent.name : " X "}{" "}
         {FavoriteOpponent && (
           <Image
             src={FavoriteOpponent.image as string}

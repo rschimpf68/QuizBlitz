@@ -6,6 +6,9 @@ import ShowGameResume from "./ComponentShowGameResume";
 import ModuleShowGame, { ModuleType } from "./ModuleShowGame";
 import useSWR, { Fetcher } from "swr";
 import { GetGamesByPlayerId } from "../../currentGames/action";
+import { finished } from "stream";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 type Props = {
   PlayerId?: string;
@@ -46,6 +49,7 @@ const AllModulesShowGame: FunctionComponent<Props> = ({ PlayerId }) => {
       (game.Turn == 2 && game.idPlayer1 == PlayerId) ||
       (game.Turn == 0 && game.idPlayer1 == PlayerId)
   );
+
   return (
     <>
       {pendingGames != undefined && pendingGames.length > 0 && (
@@ -73,6 +77,18 @@ const AllModulesShowGame: FunctionComponent<Props> = ({ PlayerId }) => {
           userId={PlayerId}
         />
       )}
+      {finishedGames != undefined &&
+        finishedGames.length == 0 &&
+        waitingGames != undefined &&
+        waitingGames.length == 0 &&
+        pendingGames != undefined &&
+        finishedGames.length == 0 && (
+          <div
+            className={`${myFont.className} w-1/2 h-1/8 text-2xl rounded-lg text-center  bg-[#8EDF5D] border-4 border-black px-2 text-black`}
+          >
+            No Jugaste ninguna partida todavía!
+          </div>
+        )}
     </>
   );
 };
