@@ -26,8 +26,8 @@ export default async function Home() {
   });
   return (
     <div className="flex items-start justify-center h-screen bg-BlueBG">
-      <div className="w-full md:w-4/12 flex-col h-screen bg-customBlue bg-cover bg-no-repeat bg-center justify-center">
-        <div className="fabsolute ml-6 top-0 left-0 right-0">
+      <div className="w-full md:w-4/12 flex-col h-screen bg-customBlue bg-cover bg-no-repeat bg-center justify-center px-5">
+        <div className="flex h-15 w-auto">
           <BackButton
             unpressedImageUrl="/images/BackUnpressed.png"
             pressedImageUrl="/images/BackPressed.png"
@@ -36,7 +36,7 @@ export default async function Home() {
           />
         </div>
 
-        <section className="px-5 flex-1 justify-center items-center h-3/4">
+        <section className="flex-1 justify-center items-center h-3/4">
           <SelectOponent
             firstUsers={users}
             usernamePlayer1={loggedUser?.name as string}

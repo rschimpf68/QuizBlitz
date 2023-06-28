@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { FunctionComponent, useEffect, useState } from "react";
 
 type Props = {
@@ -19,9 +20,14 @@ const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
   }, []);
 
   return (
-    <div className={`${count < 5 ? " text-red-700" : "text-white"}`}>
-      {" "}
-      {count}
+    <div>
+      <motion.div
+        animate={{ scale: count < 10 ? [1, 1.1, 1] : [1, 1, 1] }}
+        transition={{ duration: 1, repeat: Infinity }}
+        className={`${count < 10 ? " text-red-600" : "text-white"}`}
+      >
+        <div>{count}</div>
+      </motion.div>
     </div>
   );
 };
