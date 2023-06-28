@@ -70,7 +70,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   //Si es la primera vez que está jugando.
   if (game?.TurnIsOver) {
     const [notIntereted, question] = await checkAnswerGetNextQuestion(
-      "64740ac48ae34295a400fe35",
+      "647517fb27bec69b2550f9ba",
       [],
       game as Game & { Rounds: Round[] }
     );
