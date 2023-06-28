@@ -75,7 +75,7 @@ function checkWhoWon(rounds: Round[], p1: string, p2: string): string | null {
 }
 export async function checkAnswerGetNextQuestion(answerId: string, IdQuestionsAnswered: string[], game: Game & { Rounds: Round[] }): Promise<[
    boolean, QuestionWithAnswers]> {
-   const NumberQuestions = 272;
+   const NumberQuestions = 270;
    const currentRound = game.Rounds[game.Rounds.length - 1];
    const randomIndex = Math.floor(Math.random() * (NumberQuestions - IdQuestionsAnswered.length));
    const [answerIsCorrect, nextQuestion] = await Promise.all([
