@@ -5,8 +5,7 @@ import AnswerComponent from "./AnswerComponent";
 import Timer from "./Timer";
 import { Answer, Game, Round } from "@prisma/client";
 import { QuestionWithAnswers } from "@/app/game/[id]/action";
-import localFont from "next/font/local";
-const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
+
 interface Props {
   idAnsweredQuestions: string[];
   question: string;
@@ -30,7 +29,7 @@ const QuestionAndAnswers: React.FC<Props> = ({
   return (
     <main>
       <div
-        className={`${myFont.className} mb-8 mt-4 flex h-auto w-4/5 mx-auto justify-center text-center text-2xl`}
+        className={` mb-8 mt-4 flex h-auto w-4/5 mx-auto justify-center text-center text-2xl`}
       >
         {question}
       </div>
