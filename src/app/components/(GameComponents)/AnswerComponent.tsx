@@ -43,25 +43,25 @@ const AnswerComponent: React.FC<Props> = ({
   const [displayAnimation, setDisplayAnimation] = useState(false);
   const [correct, setCorrect] = useState(false);
 
-  // var incorrectSound = new Howl({
-  //   src: ["/sounds/WrongAnswer.wav"],
-  //   volume: 0.4,
-  // });
-  // var correctSound = new Howl({
-  //   src: ["/sounds/CorrectAnswer.wav"],
-  //   volume: 0.4,
-  // });
+  var incorrectSound = new Howl({
+    src: ["/sounds/WrongAnswer.wav"],
+    volume: 0.4,
+  });
+  var correctSound = new Howl({
+    src: ["/sounds/CorrectAnswer.wav"],
+    volume: 0.4,
+  });
 
-  // useEffect(() => {
-  //   if (firstTime) {
-  //     if (correct && answered) {
-  //       correctSound.play();
-  //     } else if (!correct && !answered) {
-  //       incorrectSound.play();
-  //     }
-  //   }
-  //   setFirstTime(true);
-  // }, [answered]);
+  useEffect(() => {
+    if (firstTime) {
+      if (correct && answered) {
+        correctSound.play();
+      } else if (!correct && !answered) {
+        incorrectSound.play();
+      }
+    }
+    setFirstTime(true);
+  }, [answered]);
 
   const handleSubmit = async () => {
     //Check if Answer is the correct one
