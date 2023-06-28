@@ -82,7 +82,7 @@ const AllModulesShowGame: FunctionComponent<Props> = ({ PlayerId }) => {
         waitingGames != undefined &&
         waitingGames.length == 0 &&
         pendingGames != undefined &&
-        finishedGames.length == 0 && (
+        pendingGames.length == 0 && (
           <div
             className={`${myFont.className} w-1/2 h-1/8 text-2xl rounded-lg text-center  bg-[#8EDF5D] border-4 border-black px-2 text-black`}
           >

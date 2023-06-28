@@ -57,7 +57,8 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
   };
   const isPlayerOne = game.Player1.id === userId ? true : false;
   const OtherPlayer = isPlayerOne ? game.Player2 : game.Player1;
-  const rounds = game.Rounds.length > 3 ? game.Rounds.slice(-3) : game.Rounds;
+  const rounds = game.Rounds;
+  console.log("ASads");
   const src = OtherPlayer
     ? OtherPlayer.image
     : "https://api.dicebear.com/6.x/bottts-neutral/svg?seed=Bella";
@@ -76,16 +77,20 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
         {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}
       </div>
       <div className="flex flex-row justify-start   w-1/3">
-        {game.Rounds.map((round, index) => {
+        {rounds.map((round, index) => {
           return (
-            <section className="flex flex-col mx-1" key={index}>
-              <div className="text-center font-bold">{`R${index + 1}`}</div>
-              <div>
-                {isPlayerOne
-                  ? ` (${round.PointsP1}-${round.PointsP2}) `
-                  : ` (${round.PointsP2}-${round.PointsP1}) `}
-              </div>
-            </section>
+            <>
+              {rounds.length - index < 4 && (
+                <section className="flex flex-col mx-1" key={index}>
+                  <div className="text-center font-bold">{`R${index + 1}`}</div>
+                  <div>
+                    {isPlayerOne
+                      ? ` (${round.PointsP1}-${round.PointsP2}) `
+                      : ` (${round.PointsP2}-${round.PointsP1}) `}
+                  </div>
+                </section>
+              )}
+            </>
           );
         })}
       </div>

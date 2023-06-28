@@ -77,7 +77,7 @@ const GameCard: React.FC<Props> = ({
     <>
       <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
         <div className="mb-5 flex h-1/4 w-full flex-col justify-center items-center relative">
-          <div className="flex justify-end w-full bg-black mt-2">
+          <div className="flex justify-end w-full  mt-2">
             <SoundButton
               initialImageUrl="/images/MusicOn.png"
               transitionImageUrl="/images/MusicTransition2.png"
@@ -86,7 +86,7 @@ const GameCard: React.FC<Props> = ({
                     
           </div>
 
-          <div className="h-auto w-auto bg-yellow-500  border-8 py-2  border-yellow-600 flex flex-col justify-center items-center text-6xl text-black mt-4 px-5 rounded-lg ">
+          <div className="h-24 w-24 bg-yellow-500  border-8 py-2  border-yellow-600 flex flex-col justify-center items-center text-6xl text-black mt-2 px-5 rounded-lg ">
             <Timer gameOver={gameOver} time={60} />
           </div>
         </div>
