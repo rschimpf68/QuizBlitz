@@ -14,9 +14,9 @@ import {
 import { Game, Round } from "@prisma/client";
 import { motion } from "framer-motion";
 
-import Sound from "../Sound";
 import { Howl, Howler } from "howler";
-import { rejects } from "assert";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 interface Props {
   index: number;
@@ -94,7 +94,9 @@ const AnswerComponent: React.FC<Props> = ({
       <button
         onClick={handleSubmit}
         disabled={answerSelected}
-        className={` my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
+        className={`${
+          myFont.className
+        } my-5 flex  w-full items-center justify-center rounded-md border-2 py-4 text-lg  text-black outline-none transition-all duration-200 hover:scale-105 disabled:pointer-events-none  ${
           answered
             ? correct
               ? "bg-green-200 border-green-300"

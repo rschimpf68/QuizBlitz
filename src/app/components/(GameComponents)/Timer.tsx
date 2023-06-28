@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { FunctionComponent, useEffect, useState } from "react";
+import localFont from "next/font/local";
+const myFont = localFont({ src: "../../../../public/fonts/font.ttf" });
 
 type Props = {
   gameOver: () => void;
@@ -26,7 +28,7 @@ const Timer: FunctionComponent<Props> = ({ gameOver, time }) => {
         transition={{ duration: 1, repeat: Infinity }}
         className={`${count < 10 ? " text-red-600" : "text-white"}`}
       >
-        <div>{count}</div>
+        <div className={`${myFont.className}`}>{count}</div>
       </motion.div>
     </div>
   );
