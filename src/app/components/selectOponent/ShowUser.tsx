@@ -5,7 +5,7 @@ import {
   FormEventHandler,
   SetStateAction,
   useState,
-  useEffect
+  useEffect,
 } from "react";
 import { Howl } from "howler";
 import { findUser } from "../../selectOpponent/action";
@@ -30,19 +30,19 @@ const ShowUser: React.FC<Props> = ({
     : true;
   const src = user ? user.image : "/images/Random.png";
 
-  const [firstRender, setFirstRender] = useState(true)
-  var sound = new Howl({
-    src: ['/sounds/SelectUser.wav'],
-    volume: 0.1
-  });
-  useEffect(() => {
-    if (!firstRender) {
-      if (isClicked) {
-        sound.play();
-      }
-    }
-    setFirstRender(false)
-  }, [isClicked])
+  const [firstRender, setFirstRender] = useState(true);
+  // var sound = new Howl({
+  //   src: ['/sounds/SelectUser.wav'],
+  //   volume: 0.1
+  // });
+  // useEffect(() => {
+  //   if (!firstRender) {
+  //     if (isClicked) {
+  //       sound.play();
+  //     }
+  //   }
+  //   setFirstRender(false)
+  // }, [isClicked])
   return (
     <div
       className="w-full h-full flex flex-col justify-center items-center hover:scale-105 duration-200"

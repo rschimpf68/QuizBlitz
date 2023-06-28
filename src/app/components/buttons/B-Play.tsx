@@ -21,15 +21,15 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   useLink = true,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
-  var sound = new Howl({
-    src: ["/sounds/Click.wav"],
-  });
+  // var sound = new Howl({
+  //   src: ["/sounds/Click.wav"],
+  // });
 
-  useEffect(() => {
-    if (isPressed == true) {
-      sound.play();
-    }
-  }, [isPressed]);
+  // useEffect(() => {
+  //   if (isPressed == true) {
+  //     sound.play();
+  //   }
+  // }, [isPressed]);
 
   const body = () => {
     return (
