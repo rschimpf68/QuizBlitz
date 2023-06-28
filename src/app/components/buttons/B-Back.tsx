@@ -22,14 +22,14 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  // var sound = new Howl({
-  //   src: ['/sounds/Click.wav']
-  // });
-  // useEffect(() => {
-  //   if (isPressed == true) {
-  //     sound.play();
-  //   }
-  // }, [isPressed])
+  var sound = new Howl({
+    src: ["/sounds/Click.wav"],
+  });
+  useEffect(() => {
+    if (isPressed == true) {
+      sound.play();
+    }
+  }, [isPressed]);
   const body = () => {
     return (
       <div className="w-16 h-16 flex items-center">
