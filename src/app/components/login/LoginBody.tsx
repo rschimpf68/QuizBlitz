@@ -175,10 +175,10 @@ const LoginBody = () => {
               transition={{ repeat: Infinity, duration: 1.5 }}
             >
               <Image
-                src={"/images/QBTitle.png"}
+                src={"/images/Icon.png"}
                 alt="QuizBlitz"
-                width={320}
-                height={67}
+                width={70}
+                height={70}
                 draggable="false"
               />
             </motion.div>

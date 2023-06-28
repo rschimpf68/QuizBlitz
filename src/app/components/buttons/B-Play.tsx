@@ -79,7 +79,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           onMouseLeave={handleMouseLeave}
           draggable="false"
           prefetch={true}
-          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+          className="relative bg-transparent select-none focus:outline-none text-center outline-none border-none cursor-pointer"
         >
           {body()}
         </Link>
@@ -92,7 +92,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
           onDragStart={handleDragStart}
           onMouseLeave={handleMouseLeave}
           draggable="false"
-          className="relative bg-transparent block text-center outline-none border-none cursor-pointer"
+          className="relative bg-transparent block select-none focus:outline-none text-center outline-none border-none cursor-pointer"
         >
           {body()}
         </a>

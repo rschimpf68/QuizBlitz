@@ -76,22 +76,22 @@ const GameCard: React.FC<Props> = ({
   return (
     <>
       <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
-        <div className="mb-5 flex h-1/4 w-full justify-center items-center relative">
-          <div className="absolute top-0 left-0 w-full h-full z-0">
-            <Image
-              src="/images/Tempo.png"
-              alt="Imagen"
-              width={750}
-              height={231}
+        <div className="mb-5 flex h-1/4 w-full flex-col justify-center items-center relative">
+          <div className="flex justify-end w-full mt-2">
+            <SoundButton
+              initialImageUrl="/images/MusicOn.png"
+              transitionImageUrl="/images/MusicTransition2.png"
+              finalImageUrl="/images/MusicOff.png"
             />
+                    
           </div>
 
-          <div className="h-auto w-full border-lime-100 flex flex-col justify-center items-center text-6xl text-black font-bold mt-6 px-5 relative z-10">
+          <div className="h-auto w-auto bg-yellow-500  border-8 py-2  border-yellow-600 flex flex-col justify-center items-center text-6xl text-black font-bold mt-4 px-5 rounded-lg ">
             <Timer gameOver={gameOver} time={60} />
           </div>
         </div>
 
-        <div className="flex bg-[#D3AB6E] border-8  border-[#97605E] w-full h-full flex-col justify-center items-center mt-10 rounded-lg">
+        <div className="flex bg-[#D3AB6E] border-8  border-[#97605E] w-full h-full flex-col justify-center items-center  rounded-lg">
           <QuestionAndAnswers
             question={question.question}
             answers={question.answers}

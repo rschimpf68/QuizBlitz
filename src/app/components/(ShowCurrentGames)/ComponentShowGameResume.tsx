@@ -75,7 +75,7 @@ const ShowGameResume: FunctionComponent<Props> = ({ game, userId, type }) => {
       <div className="font-bold  flex-grow  p-1 ">
         {OtherPlayer ? OtherPlayer.name : "Oponente Aleatorio"}
       </div>
-      <div className="flex flex-row   w-1/3">
+      <div className="flex flex-row justify-start   w-1/3">
         {game.Rounds.map((round, index) => {
           return (
             <section className="flex flex-col mx-1" key={index}>

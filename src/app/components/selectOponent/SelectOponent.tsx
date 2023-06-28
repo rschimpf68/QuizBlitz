@@ -98,22 +98,22 @@ const SelectOponent: React.FC<Props> = ({
             </button>
           </form>
 
-          {/* {displayeAnimation && (
-            <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow">
+          {displayeAnimation && (
+            <div className="w-full h-full fixed z-1 left-0 top-0  flex justify-center items-center flex-1 flex-grow ">
               <motion.div
                 animate={{ rotateY: 360 }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
                 <Image
-                  src={"/images/QBTitle.png"}
+                  src={"/images/Icon.png"}
                   alt="QuizBlitz"
-                  width={320}
-                  height={67}
+                  width={70}
+                  height={70}
                   draggable="false"
                 />
               </motion.div>
             </div>
-          )} */}
+          )}
         </section>
       </div>
     </>
