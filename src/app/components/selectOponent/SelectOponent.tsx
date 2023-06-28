@@ -26,10 +26,10 @@ const SelectOponent: React.FC<Props> = ({
 
   const debounceRef = useRef<NodeJS.Timeout>();
 
-  var sound = new Howl({
-    src: ["/sounds/Click.wav"],
-  });
-  if (clicked) sound.play();
+  // var sound = new Howl({
+  //   src: ["/sounds/Click.wav"],
+  // });
+  // if (clicked) sound.play();
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (debounceRef.current) {

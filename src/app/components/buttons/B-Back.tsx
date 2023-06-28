@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Sound from "../Sound";
-import {Howl, Howler} from 'howler'
-
+import { Howl, Howler } from "howler";
 
 interface PlayButtonProps {
   unpressedImageUrl: string;
@@ -21,19 +20,16 @@ const PlayButton: React.FC<PlayButtonProps> = ({
   onClick,
   useLink = true,
 }) => {
-  
-  
-  
   const [isPressed, setIsPressed] = useState(false);
 
-  var sound = new Howl({
-    src: ['/sounds/Click.wav']
-  });
-  useEffect(() => {
-    if (isPressed == true) {
-      sound.play();
-    }
-  }, [isPressed])
+  // var sound = new Howl({
+  //   src: ['/sounds/Click.wav']
+  // });
+  // useEffect(() => {
+  //   if (isPressed == true) {
+  //     sound.play();
+  //   }
+  // }, [isPressed])
   const body = () => {
     return (
       <div className="w-16 h-16 flex items-center">
