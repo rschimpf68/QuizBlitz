@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Sound from "../Sound";
-import {Howl, Howler} from 'howler'
+import { Howl, Howler } from "howler";
 
 interface PlayButtonProps {
   unpressedImageUrl: string;
@@ -22,25 +22,25 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
   var sound = new Howl({
-    src: ['/sounds/Click.wav']
+    src: ["/sounds/Click.wav"],
   });
-  
+
   useEffect(() => {
     if (isPressed == true) {
       sound.play();
     }
-  }, [isPressed])
+  }, [isPressed]);
 
   const body = () => {
     return (
-      
-      <div className="w-full h-full flex items-center">
+      <div className="w-full h-full flex items-center focus:outline-none select-none">
         <Image
           src={isPressed ? pressedImageUrl : unpressedImageUrl}
           alt={isPressed ? "Pressed Button" : "Unpressed Button"}
           width={144}
           height={75}
-          className="mt-22"
+          draggable={false}
+          className="mt-22 focus:outline-none"
         />
       </div>
     );
@@ -83,7 +83,6 @@ const PlayButton: React.FC<PlayButtonProps> = ({
         >
           {body()}
         </Link>
-        
       ) : (
         <a
           href={href}

@@ -36,12 +36,6 @@ const GameCard: React.FC<Props> = ({
 }) => {
   //React States
 
-  //GameOver
-  const [finished, setFinished] = useState(false);
-  //Questions Answered correctly by player
-
-  //Array of Answered questions by player
-
   //Question currently displayed
   const [question, setQuestion] = useState(firstQuestion);
 
@@ -68,6 +62,8 @@ const GameCard: React.FC<Props> = ({
       setQuestion(nextQuesiton);
     }
   };
+
+  //If Time Is Over or User Answered All Questions
   const gameOver = async (allAnswered = false) => {
     const message = allAnswered
       ? "Contestaste todas las preguntas"
@@ -80,13 +76,6 @@ const GameCard: React.FC<Props> = ({
   return (
     <>
       <div className="flex min-h-screen flex-col  w-full md:w-4/12   bg-customBlue px-10">
-        <div className="flex justify-end w-full mt-2">
-          <SoundButton
-            initialImageUrl="/images/MusicOn.png"
-            transitionImageUrl="/images/MusicTransition2.png"
-            finalImageUrl="/images/MusicOff.png"
-          />
-        </div>
         <div className="mb-5 flex h-1/4 w-full justify-center items-center relative">
           <div className="absolute top-0 left-0 w-full h-full z-0">
             <Image
@@ -98,7 +87,7 @@ const GameCard: React.FC<Props> = ({
           </div>
 
           <div className="h-auto w-full border-lime-100 flex flex-col justify-center items-center text-6xl text-black font-bold mt-6 px-5 relative z-10">
-            <Timer gameOver={gameOver} time={45} />
+            <Timer gameOver={gameOver} time={60} />
           </div>
         </div>
 
